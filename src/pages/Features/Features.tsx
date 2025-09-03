@@ -4,40 +4,7 @@ const Features = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   // Hero Section Component
-  const HeroSection = () => (
-    <section className="relative py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
-      </div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-          Powerful Features for
-          <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-            Digital Payments
-          </span>
-        </h1>
-        <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto">
-          Experience seamless, secure, and lightning-fast digital transactions with our comprehensive suite of financial tools
-        </p>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          {[
-            { number: '50M+', label: 'Active Users' },
-            { number: '₹2B+', label: 'Daily Transactions' },
-            { number: '99.9%', label: 'Uptime' },
-            { number: '24/7', label: 'Support' }
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
-              <div className="text-blue-200 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+
 
   // Feature Categories
   const categories = [
@@ -75,7 +42,7 @@ const Features = () => {
       color: 'from-purple-500 to-violet-500',
       benefits: ['Bulk processing', 'CSV upload', 'Business tools']
     },
-    
+
     // Payment Features
     {
       category: 'payment',
@@ -101,7 +68,7 @@ const Features = () => {
       color: 'from-pink-500 to-rose-500',
       benefits: ['One-click pay', 'Exclusive offers', 'Buyer protection']
     },
-    
+
     // Security Features
     {
       category: 'security',
@@ -127,7 +94,7 @@ const Features = () => {
       color: 'from-yellow-500 to-orange-500',
       benefits: ['SMS OTP', 'App authenticator', 'Email verification']
     },
-    
+
     // Utility Features
     {
       category: 'utility',
@@ -155,14 +122,14 @@ const Features = () => {
     }
   ];
 
-  const filteredFeatures = activeCategory === 'all' 
-    ? allFeatures 
+  const filteredFeatures = activeCategory === 'all'
+    ? allFeatures
     : allFeatures.filter(feature => feature.category === activeCategory);
 
   return (
     <div className="min-h-screen">
       <HeroSection />
-      
+
       {/* Feature Categories */}
       <section className="py-12 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,15 +173,15 @@ const Features = () => {
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   <span className="text-2xl">{feature.icon}</span>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-                
+
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   {feature.description}
                 </p>
-                
+
                 <div className="space-y-2">
                   {feature.benefits.map((benefit, idx) => (
                     <div key={idx} className="flex items-center text-sm text-gray-500">
@@ -223,7 +190,7 @@ const Features = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="mt-6 pt-6 border-t border-gray-100">
                   <button className="text-blue-600 font-medium hover:text-blue-700 transition-colors flex items-center group">
                     Learn More
