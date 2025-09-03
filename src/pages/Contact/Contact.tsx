@@ -393,7 +393,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      {/* <HeroSection /> */}
+      <HeroSection />
       <InquiryForm />
       <SupportInfo />
     </div>

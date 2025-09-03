@@ -1,61 +1,222 @@
+import { useState, useEffect } from 'react';
+
 const HeroBanner = () => {
+  const [stats, setStats] = useState({ users: 0, transactions: 0, countries: 0 });
+
+  useEffect(() => {
+    const animateStats = () => {
+      const targets = { users: 50, transactions: 2000, countries: 15 };
+      const duration = 2000;
+      const steps = 60;
+      const stepTime = duration / steps;
+      
+      let step = 0;
+      const timer = setInterval(() => {
+        step++;
+        const progress = step / steps;
+        setStats({
+          users: Math.floor(targets.users * progress),
+          transactions: Math.floor(targets.transactions * progress),
+          countries: Math.floor(targets.countries * progress)
+        });
+        
+        if (step >= steps) clearInterval(timer);
+      }, stepTime);
+    };
+    
+    animateStats();
+  }, []);
+
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-800 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-        <div className="absolute -bottom-8 left-20 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-10 w-80 h-80 bg-green-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-pink-400/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col lg:flex-row items-center min-h-screen">
         {/* Text Content */}
         <div className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+          <div className="mb-6">
+            <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-4 py-2 rounded-full text-sm font-semibold">
+              🚀 Bangladesh's #1 Digital Wallet
+            </span>
+          </div>
+          
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            Build Your
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"> Dream </span>
-            Future
+            Send Money
+            <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent"> Instantly </span>
+            Anywhere
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0">
-            Transform your ideas into reality with cutting-edge technology and innovative solutions that drive success.
+          
+          <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">
+            Send money, pay bills, and manage your finances securely with PayWallet. Trusted by millions across Bangladesh.
           </p>
           
+          {/* Features List */}
+          <div className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start">
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+              <span className="text-green-400">✓</span>
+              <span className="text-white text-sm">Instant Transfer</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+              <span className="text-green-400">✓</span>
+              <span className="text-white text-sm">Bank Level Security</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+              <span className="text-green-400">✓</span>
+              <span className="text-white text-sm">24/7 Support</span>
+            </div>
+          </div>
+          
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-full hover:from-cyan-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
-              Get Started
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+            <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
+              Download App
             </button>
             <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300">
-              Learn More
+              Create Account
             </button>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0">
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-yellow-400">{stats.users}M+</div>
+              <div className="text-blue-200 text-sm">Users</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-green-400">₹{stats.transactions}B+</div>
+              <div className="text-blue-200 text-sm">Transactions</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-orange-400">{stats.countries}+</div>
+              <div className="text-blue-200 text-sm">Countries</div>
+            </div>
           </div>
         </div>
 
-        {/* Visual Element */}
+        {/* Visual Element - Mobile Phone Mockup */}
         <div className="lg:w-1/2 flex justify-center">
           <div className="relative">
-            <div className="w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-3xl transform rotate-6 shadow-2xl"></div>
-            <div className="absolute inset-0 w-80 h-80 md:w-96 md:h-96 bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 rounded-3xl transform -rotate-6 shadow-2xl opacity-80"></div>
-            <div className="absolute inset-4 bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-              <div className="text-center text-white">
-                <div className="w-20 h-20 mx-auto mb-4 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                  <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
+            {/* Floating Cards */}
+            <div className="absolute -top-10 -left-10 bg-white rounded-2xl p-4 shadow-2xl animate-bounce">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm">✓</span>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Innovation</h3>
-                <p className="text-sm opacity-80">Leading the future</p>
+                <div>
+                  <div className="text-sm font-semibold text-gray-900">Payment Sent</div>
+                  <div className="text-xs text-gray-500">₹2,500 to John</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -top-5 -right-10 bg-white rounded-2xl p-4 shadow-2xl animate-pulse delay-1000">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm">💳</span>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-gray-900">Bill Paid</div>
+                  <div className="text-xs text-gray-500">Electricity ₹1,200</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Phone Mockup */}
+            <div className="relative w-64 h-96 md:w-80 md:h-[500px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl">
+              <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 rounded-[2.5rem] overflow-hidden">
+                {/* Phone Screen Content */}
+                <div className="p-6 text-white">
+                  <div className="flex justify-between items-center mb-8">
+                    <div className="text-lg font-semibold">PayWallet</div>
+                    <div className="text-sm">9:41 AM</div>
+                  </div>
+                  
+                  <div className="text-center mb-8">
+                    <div className="text-sm opacity-80">Available Balance</div>
+                    <div className="text-3xl font-bold">₹25,450</div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
+                      <div className="text-2xl mb-2">💸</div>
+                      <div className="text-sm">Send Money</div>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
+                      <div className="text-2xl mb-2">📱</div>
+                      <div className="text-sm">Mobile Recharge</div>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
+                      <div className="text-2xl mb-2">🧾</div>
+                      <div className="text-sm">Pay Bills</div>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
+                      <div className="text-2xl mb-2">💰</div>
+                      <div className="text-sm">Cash Out</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center bg-white/10 rounded-xl p-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-green-500 rounded-full"></div>
+                        <div>
+                          <div className="text-sm font-medium">Received from Sarah</div>
+                          <div className="text-xs opacity-70">2 hours ago</div>
+                        </div>
+                      </div>
+                      <div className="text-green-400 font-semibold">+₹3,200</div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center bg-white/10 rounded-xl p-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+                        <div>
+                          <div className="text-sm font-medium">Electricity Bill</div>
+                          <div className="text-xs opacity-70">Yesterday</div>
+                        </div>
+                      </div>
+                      <div className="text-red-400 font-semibold">-₹1,200</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Floating Card */}
+            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl p-4 shadow-2xl animate-bounce delay-2000">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm">🎁</span>
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-gray-900">Cashback Earned</div>
+                  <div className="text-xs text-gray-500">₹50 on bill payment</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+      {/* Trust Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-8 text-white/60">
+        <div className="flex items-center space-x-2">
+          <span className="text-lg">🏦</span>
+          <span className="text-sm">Bangladesh Bank Licensed</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-lg">🔒</span>
+          <span className="text-sm">256-bit Encryption</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-lg">⭐</span>
+          <span className="text-sm">4.8★ Rating</span>
         </div>
       </div>
     </section>
