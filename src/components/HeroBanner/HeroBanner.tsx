@@ -9,7 +9,7 @@ const HeroBanner = () => {
       const duration = 2000;
       const steps = 60;
       const stepTime = duration / steps;
-      
+
       let step = 0;
       const timer = setInterval(() => {
         step++;
@@ -19,11 +19,11 @@ const HeroBanner = () => {
           transactions: Math.floor(targets.transactions * progress),
           countries: Math.floor(targets.countries * progress)
         });
-        
+
         if (step >= steps) clearInterval(timer);
       }, stepTime);
     };
-    
+
     animateStats();
   }, []);
 
@@ -45,17 +45,17 @@ const HeroBanner = () => {
               🚀 Bangladesh's #1 Digital Wallet
             </span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Send Money
             <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent"> Instantly </span>
             Anywhere
           </h1>
-          
+
           <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0">
             Send money, pay bills, and manage your finances securely with PayWallet. Trusted by millions across Bangladesh.
           </p>
-          
+
           {/* Features List */}
           <div className="flex flex-wrap gap-4 mb-8 justify-center lg:justify-start">
             <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
@@ -71,11 +71,11 @@ const HeroBanner = () => {
               <span className="text-white text-sm">24/7 Support</span>
             </div>
           </div>
-          
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
             <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg">
-              Download App
+              Sign In
             </button>
             <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300">
               Create Account
@@ -136,7 +136,7 @@ const HeroBanner = () => {
                     <div className="text-lg font-semibold">PayWallet</div>
                     <div className="text-sm">9:41 AM</div>
                   </div>
-                  
+
                   <div className="text-center mb-8">
                     <div className="text-sm opacity-80">Available Balance</div>
                     <div className="text-3xl font-bold">₹25,450</div>
@@ -172,7 +172,7 @@ const HeroBanner = () => {
                       </div>
                       <div className="text-green-400 font-semibold">+₹3,200</div>
                     </div>
-                    
+
                     <div className="flex justify-between items-center bg-white/10 rounded-xl p-3">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-500 rounded-full"></div>

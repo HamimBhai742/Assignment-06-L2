@@ -68,6 +68,22 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link
+              to="/login"
+              className="px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/register"
+              className="px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              Get Started
+            </Link>
+          </div>
+
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
@@ -122,6 +138,28 @@ const Navbar = () => {
                   </a>
                 )
               ))}
+              
+              {/* Mobile Auth Links */}
+              <div className="border-t border-white/20 pt-3 mt-3 space-y-2">
+                <Link
+                  to="/login"
+                  className={`block px-3 py-2 text-base font-medium transition-colors duration-300 ${
+                    isScrolled
+                      ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
+                      : 'text-white hover:text-blue-300 hover:bg-white/10'
+                  } rounded-md`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/register"
+                  className="block px-3 py-2 text-base font-medium bg-white text-purple-700 rounded-md hover:bg-blue-50 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get Started
+                </Link>
+              </div>
             </div>
           </div>
         )}
