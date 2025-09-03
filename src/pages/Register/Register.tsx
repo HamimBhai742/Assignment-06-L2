@@ -3,24 +3,24 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router';
+import { useCreateAccountMutation } from '../../redux/api/userApi';
 
 interface FormData {
   role: 'user' | 'agent';
   name: string;
   phone: string;
   password: string;
-  isActive: boolean;
   agreeTerms: boolean;
 }
 
 const Register = () => {
   const [step, setStep] = useState(1);
+  const [createAccount, { isLoading }] = useCreateAccountMutation();
   const [formData, setFormData] = useState<FormData>({
-    role: '',
+    role: 'user',
     name: '',
     phone: '',
     password: '',
-    isActive: true,
     agreeTerms: false,
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -53,7 +53,7 @@ const Register = () => {
       else if (formData.password.length < 6)
         newErrors.password = 'PIN must be at least 6 digit';
       if (!formData.agreeTerms)
-        newErrors.agreeTerms = 'You must agree to terms'  ;
+        newErrors.agreeTerms = 'You must agree to terms';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -71,12 +71,28 @@ const Register = () => {
     try {
       // Simulate API call
       console.log(formData);
-      // await new Promise((resolve) => setTimeout(resolve, 2000));
-      toast.success(
-        'Registration successful! Please check your email for verification.'
-      );
+      const res = await createAccount(formData);
+      console.log(res.data);
+      console.log(res.error);
+      if (res.data) {
+        toast.success(res.data.message);
+        setIsSubmitting(false);
+      }
+      if (res.error) {
+        const err = res.error as { data: { message: string } };
+        const errSrc = res.error as {
+          data: { errorSource: { message: string }[] };
+        };
+        if (errSrc.data.errorSource.length > 0) {
+          toast.error(errSrc.data.errorSource[0].message);
+        } else {
+          toast.error(err.data.message);
+        }
+        setIsSubmitting(false);
+      }
     } catch (error: any) {
-      console.log(error.message)
+      console.log(error);
+      setIsSubmitting(false);
       toast.error('Registration failed. Please try again.');
     }
   };
