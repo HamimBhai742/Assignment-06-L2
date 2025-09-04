@@ -1,46 +1,54 @@
+import { Link } from 'react-router';
+
 const QuickActions = () => {
   const actions = [
     {
+      title: 'Deposit Money',
+      description: 'Add funds to wallet',
+      icon: '💰',
+      color: 'bg-green-500',
+      hoverColor: 'hover:bg-green-600',
+      href: '/dashboard/deposit'
+    },
+    {
+      title: 'Withdraw Money',
+      description: 'Cash out from agents',
+      icon: '💸',
+      color: 'bg-red-500',
+      hoverColor: 'hover:bg-red-600',
+      href: '/dashboard/withdraw'
+    },
+    {
       title: 'Send Money',
       description: 'Transfer to any number',
-      icon: '💸',
+      icon: '📤',
       color: 'bg-blue-500',
-      hoverColor: 'hover:bg-blue-600'
+      hoverColor: 'hover:bg-blue-600',
+      href: '/dashboard/send'
     },
     {
       title: 'Pay Bills',
       description: 'Electricity, Gas, Internet',
       icon: '🧾',
-      color: 'bg-green-500',
-      hoverColor: 'hover:bg-green-600'
+      color: 'bg-purple-500',
+      hoverColor: 'hover:bg-purple-600',
+      href: '/dashboard/bills'
     },
     {
       title: 'Mobile Recharge',
       description: 'Top up your mobile',
       icon: '📱',
-      color: 'bg-purple-500',
-      hoverColor: 'hover:bg-purple-600'
-    },
-    {
-      title: 'Cash Out',
-      description: 'Withdraw from agent',
-      icon: '🏧',
       color: 'bg-orange-500',
-      hoverColor: 'hover:bg-orange-600'
-    },
-    {
-      title: 'Request Money',
-      description: 'Ask for payment',
-      icon: '📥',
-      color: 'bg-teal-500',
-      hoverColor: 'hover:bg-teal-600'
+      hoverColor: 'hover:bg-orange-600',
+      href: '/dashboard/recharge'
     },
     {
       title: 'QR Payment',
       description: 'Scan & pay instantly',
       icon: '📷',
       color: 'bg-pink-500',
-      hoverColor: 'hover:bg-pink-600'
+      hoverColor: 'hover:bg-pink-600',
+      href: '/dashboard/qr'
     }
   ];
 
@@ -55,8 +63,9 @@ const QuickActions = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {actions.map((action, index) => (
-          <button
+          <Link
             key={index}
+            to={action.href}
             className="group flex flex-col items-center p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-200"
           >
             <div className={`w-12 h-12 ${action.color} ${action.hoverColor} rounded-xl flex items-center justify-center mb-3 transition-colors group-hover:scale-110 transform duration-200`}>
@@ -68,7 +77,7 @@ const QuickActions = () => {
             <p className="text-xs text-gray-500 text-center leading-tight">
               {action.description}
             </p>
-          </button>
+          </Link>
         ))}
       </div>
     </div>

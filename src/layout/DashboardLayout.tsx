@@ -7,7 +7,9 @@ const DashboardLayout = () => {
 
   const menuItems = [
     { name: 'Overview', href: '/dashboard', icon: '📊' },
-    { name: 'Send Money', href: '/dashboard/send', icon: '💸' },
+    { name: 'Deposit Money', href: '/dashboard/deposit', icon: '💰' },
+    { name: 'Withdraw Money', href: '/dashboard/withdraw', icon: '💸' },
+    { name: 'Send Money', href: '/dashboard/send', icon: '📤' },
     { name: 'Transactions', href: '/dashboard/transactions', icon: '📋' },
     { name: 'Cards', href: '/dashboard/cards', icon: '💳' },
     { name: 'Bills', href: '/dashboard/bills', icon: '🧾' },

@@ -9,6 +9,9 @@ import FAQ from '../pages/FAQ/FAQ';
 import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login';
 import Overview from '../pages/Dashboard/Overview/Overview';
+import Deposit from '../pages/Dashboard/Deposit/Deposit';
+import Withdraw from '../pages/Dashboard/Withdraw/Withdraw';
+import SendMoney from '../pages/Dashboard/SendMoney/SendMoney';
 import ProtecedRoutes from './ProtecedRoutes';
 
 export const router = createBrowserRouter([
@@ -53,6 +56,18 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Overview,
+      },
+      {
+        path: 'deposit',
+        Component: Deposit,
+      },
+      {
+        path: 'withdraw',
+        Component: Withdraw,
+      },
+      {
+        path: 'send',
+        Component: SendMoney,
       },
     ],
   },
