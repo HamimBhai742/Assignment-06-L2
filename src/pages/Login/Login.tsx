@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { useLoginMutation } from '../../redux/api/authApi';
+import toast from 'react-hot-toast';
 
 interface LoginData {
-  email: string;
+  phone: string;
   password: string;
   rememberMe: boolean;
 }
 
 const Login = () => {
   const navigate = useNavigate();
+  const [login] = useLoginMutation();
   const [isLoading, setIsLoading] = useState(false);
-
   const [formData, setFormData] = useState<LoginData>({
-    email: '',
+    phone: '',
     password: '',
     rememberMe: false,
   });
@@ -28,17 +30,16 @@ const Login = () => {
 
   const validateForm = (): boolean => {
     const newErrors: Partial<LoginData> = {};
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
+    if (!formData.phone) {
+      newErrors.phone = 'Phone number is required';
     }
-
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    else if (!/^01[3-9]\d{8}$/.test(formData.phone)) {
+      newErrors.phone = 'Invalid BD phone number';
+    }
     if (!formData.password) {
       newErrors.password = 'Password is required';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -48,7 +49,26 @@ const Login = () => {
     if (!validateForm()) return;
 
     try {
-      navigate('/');
+      console.log(formData);
+      const res = await login(formData);
+      console.log(res);
+      if (res.data) {
+        toast.success(res.data.message);
+        setIsLoading(false);
+        navigate('/');
+      }
+      if (res.error) {
+        const err = res.error as { data: { message: string } };
+        const errSrc = res.error as {
+          data: { errorSource: { message: string }[] };
+        };
+        if (errSrc.data.errorSource.length > 0) {
+          toast.error(errSrc.data.errorSource[0].message);
+        } else {
+          toast.error(err.data.message);
+        }
+        setIsLoading(false);
+      }
     } catch (err) {
       console.error('Login failed:', err);
     }
@@ -73,17 +93,17 @@ const Login = () => {
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
               <label className='block text-sm font-medium text-gray-700 mb-2'>
-                Email Address
+                Phone Number
               </label>
               <input
-                type='email'
-                value={formData.email}
-                onChange={(e) => updateFormData('email', e.target.value)}
+                type='text'
+                value={formData.phone}
+                onChange={(e) => updateFormData('phone', e.target.value)}
                 className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
                 placeholder='Enter your email'
               />
-              {errors.email && (
-                <p className='text-red-500 text-xs mt-1'>{errors.email}</p>
+              {errors.phone && (
+                <p className='text-red-500 text-xs mt-1'>{errors.phone}</p>
               )}
             </div>
 
@@ -146,38 +166,7 @@ const Login = () => {
               {isLoading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
-
-          {/* Demo Credentials */}
-          <div className='mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg'>
-            <p className='text-xs text-blue-700 font-medium mb-1'>
-              Demo Credentials:
-            </p>
-            <p className='text-xs text-blue-600'>Email: test@example.com</p>
-            <p className='text-xs text-blue-600'>Password: password</p>
-          </div>
-
-          {/* Divider */}
-          <div className='my-6 flex items-center'>
-            <div className='flex-1 border-t border-gray-300'></div>
-            <span className='px-4 text-sm text-gray-500'>Or continue with</span>
-            <div className='flex-1 border-t border-gray-300'></div>
-          </div>
-
-          {/* Social Login */}
-          <div className='space-y-3'>
-            <button className='w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors'>
-              <span className='text-xl'>📱</span>
-              <span className='font-medium text-gray-700'>
-                Continue with Phone
-              </span>
-            </button>
-            <button className='w-full flex items-center justify-center space-x-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors'>
-              <span className='text-xl'>🔐</span>
-              <span className='font-medium text-gray-700'>Biometric Login</span>
-            </button>
-          </div>
         </div>
-
         {/* Register Link */}
         <div className='text-center mt-6'>
           <p className='text-gray-600'>

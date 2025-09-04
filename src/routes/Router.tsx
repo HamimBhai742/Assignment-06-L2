@@ -7,6 +7,7 @@ import Contact from '../pages/Contact/Contact';
 import FAQ from '../pages/FAQ/FAQ';
 import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login';
+import ProtecedRoutes from './ProtecedRoutes';
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'features',
-        Component: Features,
+        element: (
+          <ProtecedRoutes>
+            <Features />
+          </ProtecedRoutes>
+        ),
       },
       {
         path: 'contact',

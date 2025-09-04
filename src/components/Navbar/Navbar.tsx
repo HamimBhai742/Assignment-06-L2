@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
+import useAuth from '../../hooks/useAuth';
+import useUser from '../../hooks/useUser';
+import toast from 'react-hot-toast';
+import { authApi, useLogoutMutation } from '../../redux/api/authApi';
+import { useAppDispatch } from '../../redux/hook/hooks';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-
+  const { data } = useAuth();
+  const [logOut] = useLogoutMutation();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -19,26 +26,41 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Features', href: '/features' },
     { name: 'FAQ', href: '/faq' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Contact', href: '/contact' },
   ];
-
+  const handleLogout = async () => {
+    try {
+      const res = await logOut();
+      if (res.data) {
+        toast.success(res.data.message);
+        dispatch(authApi.util.resetApiState());
+      }
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-purple-700  shadow-xl' : 'bg-purple-700'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-purple-700  shadow-xl' : 'bg-purple-700'
+      }`}
+    >
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex justify-between items-center h-16'>
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className={`text-2xl font-bold transition-colors duration-300 text-white`}>
+          <div className='flex-shrink-0'>
+            <Link
+              to='/'
+              className={`text-2xl font-bold transition-colors duration-300 text-white`}
+            >
               PayWallet
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
+          <div className='hidden md:block'>
+            <div className='ml-10 flex items-baseline space-x-8'>
+              {navLinks.map((link) =>
                 link.href.startsWith('/') ? (
                   <Link
                     key={link.name}
@@ -47,7 +69,9 @@ const Navbar = () => {
                       isScrolled
                         ? 'text-white hover:text-blue-300'
                         : 'text-white hover:text-blue-300'
-                    } ${location.pathname === link.href ? 'text-blue-600' : ''}`}
+                    } ${
+                      location.pathname === link.href ? 'text-blue-600' : ''
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -64,39 +88,65 @@ const Navbar = () => {
                     {link.name}
                   </a>
                 )
-              ))}
+              )}
             </div>
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/register"
-              className="px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors"
-            >
-              Get Started
-            </Link>
-          </div>
+          {data ? (
+            <button onClick={handleLogout}>
+              <Link
+                to='/'
+                className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
+              >
+                Sign Out
+              </Link>
+            </button>
+          ) : (
+            <div className='hidden md:flex items-center space-x-4'>
+              <Link
+                to='/login'
+                className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
+              >
+                Sign In
+              </Link>
+              <Link
+                to='/register'
+                className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className='md:hidden'>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md transition-colors duration-300 ${
                 isScrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg
+                className='h-6 w-6'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
                 {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M4 6h16M4 12h16M4 18h16'
+                  />
                 )}
               </svg>
             </button>
@@ -105,11 +155,13 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-all duration-300 ${
-              isScrolled ? 'bg-white/95' : 'bg-black/20'
-            } backdrop-blur-md rounded-lg mt-2`}>
-              {navLinks.map((link) => (
+          <div className='md:hidden'>
+            <div
+              className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-all duration-300 ${
+                isScrolled ? 'bg-white/95' : 'bg-black/20'
+              } backdrop-blur-md rounded-lg mt-2`}
+            >
+              {navLinks.map((link) =>
                 link.href.startsWith('/') ? (
                   <Link
                     key={link.name}
@@ -118,7 +170,9 @@ const Navbar = () => {
                       isScrolled
                         ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
                         : 'text-white hover:text-blue-300 hover:bg-white/10'
-                    } rounded-md ${location.pathname === link.href ? 'text-blue-600' : ''}`}
+                    } rounded-md ${
+                      location.pathname === link.href ? 'text-blue-600' : ''
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.name}
@@ -137,12 +191,12 @@ const Navbar = () => {
                     {link.name}
                   </a>
                 )
-              ))}
-              
+              )}
+
               {/* Mobile Auth Links */}
-              <div className="border-t border-white/20 pt-3 mt-3 space-y-2">
+              <div className='border-t border-white/20 pt-3 mt-3 space-y-2'>
                 <Link
-                  to="/login"
+                  to='/login'
                   className={`block px-3 py-2 text-base font-medium transition-colors duration-300 ${
                     isScrolled
                       ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
@@ -153,8 +207,8 @@ const Navbar = () => {
                   Sign In
                 </Link>
                 <Link
-                  to="/register"
-                  className="block px-3 py-2 text-base font-medium bg-white text-purple-700 rounded-md hover:bg-blue-50 transition-colors"
+                  to='/register'
+                  className='block px-3 py-2 text-base font-medium bg-white text-purple-700 rounded-md hover:bg-blue-50 transition-colors'
                   onClick={() => setIsOpen(false)}
                 >
                   Get Started

@@ -1,18 +1,39 @@
 import { baseApi } from './baseApi';
 
 interface LoginRequest {
-  email: string;
+  phone: string;
   password: string;
 }
 
+interface IUser {
+  _id: string;
+  name: string;
+  role: 'user' | 'agent';
+  phone: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface AuthResponse {
-  user: {
-    _id: string;
-    name: string;
-    role: 'user' | 'agent';
+  statusCode: number;
+  message: string;
+  data: {
+    accessToken: string;
+    user: IUser;
+  };
+}
+
+interface LoginResponse {
+  data: {
+    id: string;
+    role: 'user' | 'agent' | 'admin';
     phone: string;
   };
-  token: string;
+}
+
+export interface LogOutResponse {
+  message: string;
+  statusCode: number;
 }
 
 export const authApi = baseApi.injectEndpoints({
@@ -22,10 +43,15 @@ export const authApi = baseApi.injectEndpoints({
         url: '/auth/login',
         method: 'POST',
         body: credentials,
+        credentials: 'include',
       }),
       invalidatesTags: ['Auth'],
     }),
-    logout: builder.mutation<void, void>({
+    checkLogin: builder.query<LoginResponse, void>({
+      query: () => '/auth/check',
+      providesTags: ['Auth'],
+    }),
+    logout: builder.mutation<LogOutResponse, void>({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
@@ -35,4 +61,5 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation, useCheckLoginQuery } =
+  authApi;

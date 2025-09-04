@@ -15,7 +15,7 @@ interface FormData {
 
 const Register = () => {
   const [step, setStep] = useState(1);
-  const [createAccount, { isLoading }] = useCreateAccountMutation();
+  const [createAccount] = useCreateAccountMutation();
   const [formData, setFormData] = useState<FormData>({
     role: 'user',
     name: '',
