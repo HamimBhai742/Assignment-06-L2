@@ -55,7 +55,7 @@ const Login = () => {
       if (res.data) {
         toast.success(res.data.message);
         setIsLoading(false);
-        navigate('/');
+        navigate('/dashboard');
       }
       if (res.error) {
         const err = res.error as { data: { message: string } };

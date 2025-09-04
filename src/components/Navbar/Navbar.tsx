@@ -93,14 +93,22 @@ const Navbar = () => {
 
           {/* Auth Buttons */}
           {data || isLoading ? (
-            <button onClick={handleLogout}>
+            <div className='hidden md:flex items-center space-x-4'>
               <Link
-                to='/'
+                to='/dashboard'
                 className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
               >
-                Sign Out
+                Dashboard
               </Link>
-            </button>
+              <button onClick={handleLogout}>
+                <Link
+                  to='/'
+                  className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
+                >
+                  Sign Out
+                </Link>
+              </button>
+            </div>
           ) : (
             <div className='hidden md:flex items-center space-x-4'>
               <Link
