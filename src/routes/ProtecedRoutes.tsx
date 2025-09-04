@@ -3,7 +3,7 @@ import useAuth from '../hooks/useAuth';
 import { Navigate } from 'react-router';
 import toast from 'react-hot-toast';
 
-const ProtecedRoutes = ({ children }:any) => {
+const ProtecedRoutes = ({ children }: any) => {
   const { data, isLoading, error } = useAuth();
 
   if (isLoading) {
@@ -17,17 +17,12 @@ const ProtecedRoutes = ({ children }:any) => {
   const errSrc = error as {
     data: { errorSource: { message: string }[] };
   };
-  if (errSrc.data.errorSource.length > 0) {
-    toast.error(errSrc.data.errorSource[0].message);
-  } else {
-    toast.error(err.data.message);
-  }
 
   if (error) {
     if (err) {
       toast.error(err.data.message);
     } else {
-      toast.error(errSrc.data.errorSource[0].message);
+      toast.error(errSrc?.data?.errorSource[0].message);
     }
     return <Navigate to='/login' />;
   }

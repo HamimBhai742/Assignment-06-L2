@@ -2,14 +2,7 @@ import { baseApi } from './baseApi';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createAccount: builder.mutation({
-      query: (data) => ({
-        url: '/user/register',
-        method: 'POST',
-        body: data,
-      }),
-      invalidatesTags: ['User'],
-    }),
+
     // getProfile: builder.query({
     //   query: () => '/user/profile',
     //   // Simulate API response
@@ -60,4 +53,4 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateAccountMutation } = userApi;
+export const {  } = userApi;

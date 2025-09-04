@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import useAuth from '../../hooks/useAuth';
-import useUser from '../../hooks/useUser';
 import toast from 'react-hot-toast';
 import { authApi, useLogoutMutation } from '../../redux/api/authApi';
 import { useAppDispatch } from '../../redux/hook/hooks';
@@ -10,7 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { data } = useAuth();
+  const { data, isLoading } = useAuth();
   const [logOut] = useLogoutMutation();
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -93,7 +92,7 @@ const Navbar = () => {
           </div>
 
           {/* Auth Buttons */}
-          {data ? (
+          {data || isLoading ? (
             <button onClick={handleLogout}>
               <Link
                 to='/'

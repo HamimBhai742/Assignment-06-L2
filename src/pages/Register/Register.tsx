@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router';
-import { useCreateAccountMutation } from '../../redux/api/userApi';
+import { useCreateAccountMutation } from '../../redux/api/authApi';
 
 interface FormData {
   role: 'user' | 'agent';

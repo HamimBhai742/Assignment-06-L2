@@ -38,6 +38,14 @@ export interface LogOutResponse {
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createAccount: builder.mutation({
+      query: (data) => ({
+        url: '/user/register',
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['User'],
+    }),
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
         url: '/auth/login',
@@ -61,5 +69,5 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useCheckLoginQuery } =
+export const {useCreateAccountMutation, useLoginMutation, useLogoutMutation, useCheckLoginQuery } =
   authApi;
