@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 const RecentTransactions = () => {
   const transactions = [
     {
@@ -69,9 +71,12 @@ const RecentTransactions = () => {
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Recent Transactions</h2>
-        <button className="text-sm text-purple-600 hover:text-purple-700 font-medium">
+        <Link 
+          to="/dashboard/transactions"
+          className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+        >
           View All
-        </button>
+        </Link>
       </div>
 
       <div className="space-y-4">
@@ -117,9 +122,12 @@ const RecentTransactions = () => {
 
       {/* View All Button */}
       <div className="mt-6 pt-4 border-t border-gray-100">
-        <button className="w-full py-2 text-sm text-purple-600 hover:text-purple-700 font-medium hover:bg-purple-50 rounded-lg transition-colors">
-          View All Transactions
-        </button>
+        <Link 
+          to="/dashboard/transactions"
+          className="w-full py-2 text-sm text-purple-600 hover:text-purple-700 font-medium hover:bg-purple-50 rounded-lg transition-colors flex items-center justify-center"
+        >
+          View All Transactions →
+        </Link>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { SendMoneyData } from '../SendMoney';
+import { useFindUserQuery } from '../../../../redux/api/userApi';
 
 interface RecipientStepProps {
   data: SendMoneyData;
@@ -11,42 +12,35 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
   const [phone, setPhone] = useState(data.recipientPhone || '');
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
-  const [recentContacts] = useState([
-    {
-      phone: '01712345678',
-      name: 'Rahim Ahmed',
-      verified: true,
-      lastSent: '2 days ago',
-    },
-    {
-      phone: '01812345679',
-      name: 'Fatima Khan',
-      verified: true,
-      lastSent: '1 week ago',
-    },
-    {
-      phone: '01912345680',
-      name: 'Karim Hassan',
-      verified: false,
-      lastSent: '2 weeks ago',
-    },
-  ]);
+  const { data: userData } = useFindUserQuery(phone);
+
+  // const [recentContacts] = useState([
+  //   {
+  //     phone: '01712345678',
+  //     name: 'Rahim Ahmed',
+  //     verified: true,
+  //     lastSent: '2 days ago',
+  //   },
+  //   {
+  //     phone: '01812345679',
+  //     name: 'Fatima Khan',
+  //     verified: true,
+  //     lastSent: '1 week ago',
+  //   },
+  //   {
+  //     phone: '01912345680',
+  //     name: 'Karim Hassan',
+  //     verified: false,
+  //     lastSent: '2 weeks ago',
+  //   },
+  // ]);
 
   const handlePhoneChange = (value: string) => {
     // Only allow digits and limit to 11 characters
     const cleanValue = value.replace(/\D/g, '').slice(0, 11);
     setPhone(cleanValue);
     setError('');
-
-    if (cleanValue.length === 11) {
-      searchUser(cleanValue);
-    } else {
-      updateData({
-        recipientPhone: cleanValue,
-        recipientName: '',
-        recipientVerified: false,
-      });
-    }
+    searchUser(cleanValue);
   };
 
   const searchUser = async (phoneNumber: string) => {
@@ -54,53 +48,43 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
       setError('Invalid Bangladesh mobile number');
       return;
     }
-
     setIsSearching(true);
     setError('');
-
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Mock user data
-      const mockUsers: Record<string, { name: string; verified: boolean }> = {
-        '01712345678': { name: 'Rahim Ahmed', verified: true },
-        '01812345679': { name: 'Fatima Khan', verified: true },
-        '01912345680': { name: 'Karim Hassan', verified: false },
-        '01612345681': { name: 'Nasir Uddin', verified: true },
-      };
-
-      const user = mockUsers[phoneNumber];
-
-      if (user) {
+      const user = userData;
+      console.log(user);
+      if (user && userData.data) {
         updateData({
-          recipientPhone: phoneNumber,
-          recipientName: user.name,
-          recipientVerified: user.verified,
+          recipientPhone: user.data.phone,
+          recipientName: user.data.name,
+          recipientVerified: true,
         });
+        setIsSearching(false);
       } else {
         setError('User not found. Please check the phone number.');
         updateData({
-          recipientPhone: phoneNumber,
+          recipientPhone: user.data.phone,
           recipientName: '',
           recipientVerified: false,
         });
+        setIsSearching(false);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
-      setError('Failed to search user. Please try again.');
-    } finally {
       setIsSearching(false);
+      setError('Failed to search user. Please try again.');
     }
   };
 
-  const handleContactSelect = (contact: any) => {
-    setPhone(contact.phone);
-    updateData({
-      recipientPhone: contact.phone,
-      recipientName: contact.name,
-      recipientVerified: contact.verified,
-    });
-  };
+  // const handleContactSelect = (contact: any) => {
+  //   setPhone(contact.phone);
+  //   updateData({
+  //     recipientPhone: contact.phone,
+  //     recipientName: contact.name,
+  //     recipientVerified: contact.verified,
+  //   });
+  // };
 
   const handleNext = () => {
     if (!data.recipientPhone || data.recipientPhone.length !== 11) {
@@ -138,7 +122,7 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
           </label>
           <div className='relative'>
             <div className='absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium'>
-              +880
+              +88
             </div>
             <input
               type='tel'
@@ -154,11 +138,9 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
             )}
           </div>
         </div>
-
         {error && <p className='text-red-500 text-sm'>{error}</p>}
-
         {/* User Found Display */}
-        {data.recipientName && !error && (
+        {userData?.data && !error && (
           <div className='bg-green-50 border border-green-200 rounded-xl p-4'>
             <div className='flex items-center space-x-4'>
               <div className='w-12 h-12 bg-green-100 rounded-full flex items-center justify-center'>
@@ -167,7 +149,7 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
               <div className='flex-1'>
                 <div className='flex items-center space-x-2'>
                   <h3 className='font-semibold text-gray-900'>
-                    {data.recipientName}
+                    {userData.data.name}
                   </h3>
                   {data.recipientVerified && (
                     <span className='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>
@@ -176,7 +158,7 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
                   )}
                 </div>
                 <p className='text-sm text-gray-600'>
-                  +880 {data.recipientPhone}
+                  +88 {userData.data.phone}
                 </p>
               </div>
             </div>
@@ -185,7 +167,7 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
       </div>
 
       {/* Recent Contacts */}
-      {!data.recipientName && (
+      {/* {!data.recipientName && (
         <div>
           <h3 className='text-sm font-medium text-gray-700 mb-3'>
             Recent Contacts
@@ -222,7 +204,7 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Info Box */}
       <div className='bg-blue-50 border border-blue-200 rounded-lg p-4'>

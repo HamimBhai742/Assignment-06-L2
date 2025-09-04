@@ -12,6 +12,8 @@ import Overview from '../pages/Dashboard/Overview/Overview';
 import Deposit from '../pages/Dashboard/Deposit/Deposit';
 import Withdraw from '../pages/Dashboard/Withdraw/Withdraw';
 import SendMoney from '../pages/Dashboard/SendMoney/SendMoney';
+import Transactions from '../pages/Dashboard/Transactions/Transactions';
+import Profile from '../pages/Dashboard/Profile/Profile';
 import ProtecedRoutes from './ProtecedRoutes';
 
 export const router = createBrowserRouter([
@@ -68,6 +70,14 @@ export const router = createBrowserRouter([
       {
         path: 'send',
         Component: SendMoney,
+      },
+      {
+        path: 'transactions',
+        Component: Transactions,
+      },
+      {
+        path: 'profile',
+        Component: Profile,
       },
     ],
   },

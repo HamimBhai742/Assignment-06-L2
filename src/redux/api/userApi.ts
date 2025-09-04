@@ -2,6 +2,13 @@ import { baseApi } from './baseApi';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    findUser: builder.query({
+      query: (phone: string) => ({
+        url: `/user/${phone}`,
+        method: 'GET',
+      }),
+      providesTags: ['User'],
+    }),
 
     // getProfile: builder.query({
     //   query: () => '/user/profile',
@@ -53,4 +60,4 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {  } = userApi;
+export const {useFindUserQuery} = userApi;

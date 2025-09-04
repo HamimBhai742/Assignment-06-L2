@@ -12,7 +12,7 @@ const AmountStep = ({ data, updateData, userBalance, onNext }: AmountStepProps) 
   const [amount, setAmount] = useState(data.amount || '');
   const [error, setError] = useState('');
 
-  const quickAmounts = [500, 1000, 2000, 5000, 10000];
+  const quickAmounts = [100,500, 1000, 2000, 5000, 10000];
 
   const handleAmountChange = (value: string) => {
     const numValue = parseFloat(value) || 0;

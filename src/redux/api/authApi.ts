@@ -59,6 +59,13 @@ export const authApi = baseApi.injectEndpoints({
       query: () => '/auth/check',
       providesTags: ['Auth'],
     }),
+    matchPIN: builder.mutation({
+      query: (pin) => ({
+        url: `/auth/match-pin/${pin}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Auth'],
+    }),
     logout: builder.mutation<LogOutResponse, void>({
       query: () => ({
         url: '/auth/logout',
@@ -69,5 +76,10 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useCreateAccountMutation, useLoginMutation, useLogoutMutation, useCheckLoginQuery } =
-  authApi;
+export const {
+  useCreateAccountMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useCheckLoginQuery,
+  useMatchPINMutation,
+} = authApi;
