@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import type { SendMoneyData } from '../SendMoney';
-import { useMatchPINMutation } from '../../../../redux/api/authApi';
+import { useMatchPINMutation } from '../../../../../redux/api/authApi';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import type { SerializedError } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 // import type { SendMoneyRequest } from '../../../../redux/api/walletApi';
 import { format } from 'date-fns';
-import { useSendMoneyMutation } from '../../../../redux/api/walletApi';
+import { useSendMoneyMutation } from '../../../../../redux/api/walletApi';
 interface ConfirmationStepProps {
   data: SendMoneyData;
   userBalance: number;

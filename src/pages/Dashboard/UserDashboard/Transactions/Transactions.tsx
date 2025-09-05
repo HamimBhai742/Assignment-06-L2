@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import FilterBar from './components/FilterBar';
 import TransactionList from './components/TransactionList';
 import Pagination from './components/Pagination';
-import { useGetMyTransactionsQuery } from '../../../redux/api/transactionApi';
+import { useGetMyTransactionsQuery } from '../../../../redux/api/transactionApi';
 
 interface ISenderReceiver {
   _id: string;

@@ -3,7 +3,7 @@ import AmountStep from './components/AmountStep';
 // import MethodStep from './components/MethodStep';
 // import LocationStep from './components/LocationStep';
 import ConfirmationStep from './components/ConfirmationStep';
-import { useMyWalletQuery } from '../../../redux/api/walletApi';
+import { useMyWalletQuery } from '../../../../redux/api/walletApi';
 
 export interface WithdrawData {
   amount: number;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import RecipientStep from './components/RecipientStep';
 import AmountStep from './components/AmountStep';
 import ConfirmationStep from './components/ConfirmationStep';
-import { useMyWalletQuery } from '../../../redux/api/walletApi';
+import { useMyWalletQuery } from '../../../../redux/api/walletApi';
 
 export interface SendMoneyData {
   recipientPhone: string;

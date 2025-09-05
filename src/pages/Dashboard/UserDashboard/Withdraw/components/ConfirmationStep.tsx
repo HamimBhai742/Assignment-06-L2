@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import type { WithdrawData } from '../Withdraw';
-import { useMatchPINMutation } from '../../../../redux/api/authApi';
+import { useMatchPINMutation } from '../../../../../redux/api/authApi';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
-import { useWithdrawMoneyMutation } from '../../../../redux/api/walletApi';
+import { useWithdrawMoneyMutation } from '../../../../../redux/api/walletApi';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import type { SerializedError } from '@reduxjs/toolkit';
 

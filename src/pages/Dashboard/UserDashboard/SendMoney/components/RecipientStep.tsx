@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { SendMoneyData } from '../SendMoney';
-import { useFindUserQuery } from '../../../../redux/api/userApi';
+import { useFindUserQuery } from '../../../../../redux/api/userApi';
 
 interface RecipientStepProps {
   data: SendMoneyData;
