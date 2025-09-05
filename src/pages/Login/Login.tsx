@@ -53,9 +53,14 @@ const Login = () => {
       const res = await login(formData);
       console.log(res);
       if (res.data) {
+        console.log(res.data.data.user.role);
         toast.success(res.data.message);
         setIsLoading(false);
-        navigate('/dashboard');
+        if (res.data.data.user.role === 'user') {
+          navigate('/dashboard');
+        } else if (res.data.data.user.role === 'agent') {
+          navigate('/agent-dashboard');
+        }
       }
       if (res.error) {
         const err = res.error as { data: { message: string } };

@@ -14,6 +14,8 @@ import Withdraw from '../pages/Dashboard/UserDashboard/Withdraw/Withdraw';
 import SendMoney from '../pages/Dashboard/UserDashboard/SendMoney/SendMoney';
 import Transactions from '../pages/Dashboard/UserDashboard/Transactions/Transactions';
 import Profile from '../pages/Dashboard/UserDashboard/Profile/Profile';
+import AgentOverview from '../pages/Dashboard/AgentDashboard/Overview';
+import TestAgentDashboard from '../pages/TestAgentDashboard';
 import ProtecedRoutes from './ProtecedRoutes';
 
 export const router = createBrowserRouter([
@@ -31,11 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'features',
-        element: (
-          <ProtecedRoutes>
-            <Features />
-          </ProtecedRoutes>
-        ),
+        Component: Features,
       },
       {
         path: 'contact',
@@ -88,5 +86,23 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     Component: Login,
+  },
+  {
+    path: '/test-agent',
+    Component: TestAgentDashboard,
+  },
+  {
+    path: '/agent-dashboard',
+    element: (
+      <ProtecedRoutes>
+        <DashboardLayout />
+      </ProtecedRoutes>
+    ),
+    children: [
+      {
+        index: true,
+        Component: AgentOverview,
+      },
+    ],
   },
 ]);

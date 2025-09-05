@@ -1,13 +1,13 @@
 import { Role } from '../interfaces/role.interfaces';
 import { useCheckLoginQuery } from '../redux/api/authApi';
 
-const useUser = () => {
+const useAgent = () => {
   const { data, error } = useCheckLoginQuery();
-  if (data?.data.role === Role.USER) {
-    return { user: data?.data };
+  if (data?.data.role === Role.AGENT) {
+    return { agent: data?.data };
   } else {
     return error;
   }
 };
 
-export default useUser;
+export default useAgent;
