@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import RecipientStep from './components/RecipientStep';
 import AmountStep from './components/AmountStep';
-import PurposeStep from './components/PurposeStep';
 import ConfirmationStep from './components/ConfirmationStep';
-import { useFindUserQuery } from '../../../redux/api/userApi';
 import { useMyWalletQuery } from '../../../redux/api/walletApi';
 
 export interface SendMoneyData {
@@ -124,16 +122,6 @@ const SendMoney = () => {
             onPrev={prevStep}
           />
         )}
-        {/*
-        {currentStep === 3 && (
-          <PurposeStep
-            data={sendData}
-            updateData={updateSendData}
-            onNext={nextStep}
-            onPrev={prevStep}
-          />
-        )} */}
-
         {currentStep === 3 && (
           <ConfirmationStep
             data={sendData}

@@ -1,0 +1,19 @@
+import { baseApi } from './baseApi';
+
+export const transactionApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getMyTransactions: builder.query({
+      query: ({ limit, page, type, search, status, sort }) => ({
+        url: `/transactions/me?limit=${limit}&page=${page}&${
+          type !== 'all' ? `&type=${type}` : ''
+        }&search=${search}&${
+          status !== 'all' ? `&status=${status}` : ''
+        }&sort=${sort}`,
+        method: 'GET',
+      }),
+      providesTags: ['Transaction'],
+    }),
+  }),
+});
+
+export const { useGetMyTransactionsQuery } = transactionApi;
