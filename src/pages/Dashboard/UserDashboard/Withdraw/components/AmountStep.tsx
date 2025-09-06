@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import type{ WithdrawData } from '../Withdraw';
-
-interface AmountStepProps {
-  data: WithdrawData;
-  updateData: (data: Partial<WithdrawData>) => void;
-  userBalance: number;
-  onNext: () => void;
-}
-
+import type { AmountStepProps } from '../interfaces';
 const AmountStep = ({ data, updateData, userBalance, onNext }: AmountStepProps) => {
   const [amount, setAmount] = useState(data.amount || '');
   const [error, setError] = useState('');

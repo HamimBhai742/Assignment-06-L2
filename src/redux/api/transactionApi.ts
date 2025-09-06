@@ -20,7 +20,18 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Transaction'],
     }),
+    lastMonthTransactions: builder.query({
+      query: () => ({
+        url: `/transactions/last-month-transactions`,
+        method: 'GET',
+      }),
+      providesTags: ['Transaction'],
+    }),
   }),
 });
 
-export const { useGetMyTransactionsQuery ,useTodayTotalTransactionsQuery} = transactionApi;
+export const {
+  useGetMyTransactionsQuery,
+  useTodayTotalTransactionsQuery,
+  useLastMonthTransactionsQuery,
+} = transactionApi;

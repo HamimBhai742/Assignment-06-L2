@@ -1,13 +1,6 @@
 import { useState } from 'react';
-import type { SendMoneyData } from '../SendMoney';
+import type { AmountStepProps } from '../interfaces';
 
-interface AmountStepProps {
-  data: SendMoneyData;
-  updateData: (data: Partial<SendMoneyData>) => void;
-  userBalance: number;
-  onNext: () => void;
-  onPrev: () => void;
-}
 
 const AmountStep = ({
   data,
@@ -33,7 +26,6 @@ const AmountStep = ({
     updateData({ amount: value });
     setError('');
   };
-  console.log(data);
   const getFee = () => {
     if ((data.amount || 0) >= 100) return 5;
     return 0;

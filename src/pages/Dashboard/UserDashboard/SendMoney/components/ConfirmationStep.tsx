@@ -1,23 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
-import type { SendMoneyData } from '../SendMoney';
 import { useMatchPINMutation } from '../../../../../redux/api/authApi';
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import type { SerializedError } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
-// import type { SendMoneyRequest } from '../../../../redux/api/walletApi';
 import { format } from 'date-fns';
 import { useSendMoneyMutation } from '../../../../../redux/api/walletApi';
-interface ConfirmationStepProps {
-  data: SendMoneyData;
-  userBalance: number;
-  onPrev: () => void;
-}
-
-interface ResponseData {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
-  error?: FetchBaseQueryError | SerializedError;
-}
+import type { ConfirmationStepProps, ResponseData } from '../interfaces';
 
 const ConfirmationStep = ({
   data,
@@ -50,7 +37,6 @@ const ConfirmationStep = ({
       };
       if (match.data) {
         const res = await SendMoney(sendData);
-        console.log(res);
         if (res?.data) {
           setResponse(res as ResponseData);
           const dates = format(
@@ -74,7 +60,7 @@ const ConfirmationStep = ({
         setIsProcessing(false);
       }
     } catch (error) {
-      console.error('Send money failed:', error);
+      toast.error('Send money failed');
     } finally {
       setIsProcessing(false);
     }

@@ -3,16 +3,7 @@ import RecipientStep from './components/RecipientStep';
 import AmountStep from './components/AmountStep';
 import ConfirmationStep from './components/ConfirmationStep';
 import { useMyWalletQuery } from '../../../../redux/api/walletApi';
-
-export interface SendMoneyData {
-  recipientPhone: string;
-  recipientName: string;
-  recipientVerified: boolean;
-  amount: number;
-  purpose: string;
-  reference: string;
-  pin: string;
-}
+import type { SendMoneyData } from './interfaces';
 
 const SendMoney = () => {
   const [currentStep, setCurrentStep] = useState(1);

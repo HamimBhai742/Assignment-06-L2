@@ -10,10 +10,9 @@ import { useTodayTotalTransactionsQuery } from '../../../../../redux/api/transac
 
 const SummaryCards: React.FC = () => {
   const { data, isLoading } = useMyWalletQuery(undefined);
-  console.log(data);
   const { data: today, isLoading: lo } =
     useTodayTotalTransactionsQuery(undefined);
-  console.log(today);
+
   if (isLoading || lo) {
     return <div>Loading...</div>;
   }

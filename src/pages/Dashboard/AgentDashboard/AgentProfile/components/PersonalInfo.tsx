@@ -1,12 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 
 import toast from 'react-hot-toast';
-import type { UserProfile } from '../AgentProfile';
 import { useUpdateUserMutation } from '../../../../../redux/api/userApi';
-
-interface PersonalInfoProps {
-  userProfile: UserProfile;
-}
+import type { PersonalInfoProps } from '../interfaces';
 
 const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,7 +19,6 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
   };
 
   const handleSave = async () => {
-    console.log(formData);
     setIsSaving(true);
     try {
       const res = await updateUser(formData);
@@ -32,7 +28,6 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
         setIsEditing(false);
       }
       if (res.error) {
-        console.log(res.error);
         const err = res?.error as { data: { message: string } };
         const errSrc = res?.error as {
           data: { errorSource: { message: string }[] };
@@ -46,7 +41,7 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
       }
       // Show success message
     } catch (error) {
-      console.error('Failed to update profile:', error);
+      toast.error('Failed to update profile:');
     } finally {
       setIsSaving(false);
     }
@@ -129,29 +124,6 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
           )}
         </div>
       </div>
-
-      {/* Account Information */}
-      {/* <div className='bg-blue-50 border border-blue-200 rounded-lg p-4'>
-        <h4 className='font-medium text-blue-900 mb-3'>Account Information</h4>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 text-sm'>
-          <div>
-            <span className='text-blue-700 font-medium'>Account ID:</span>
-            <p className='text-blue-900'>{userProfile.id}</p>
-          </div>
-          <div>
-            <span className='text-blue-700 font-medium'>Account Type:</span>
-            <p className='text-blue-900 capitalize'>
-              {userProfile.accountType}
-            </p>
-          </div>
-          <div>
-            <span className='text-blue-700 font-medium'>Last Login:</span>
-            <p className='text-blue-900'>
-              {new Date(userProfile.lastLogin).toLocaleDateString('en-GB')}
-            </p>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

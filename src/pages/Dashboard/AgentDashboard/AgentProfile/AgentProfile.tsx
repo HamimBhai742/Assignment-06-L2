@@ -2,37 +2,10 @@ import { useState } from 'react';
 import SecuritySettings from './components/SecuritySettings';
 import { useMyProfileQuery } from '../../../../redux/api/userApi';
 import PersonalInfo from './components/PersonalInfo';
-
-
-export interface UserProfile {
-  _id?: string;
-  name: string;
-  phone: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
 const AgentProfile = () => {
   const [activeTab, setActiveTab] = useState('personal');
   const { data: userProfile, isLoading } = useMyProfileQuery(undefined);
-  console.log(userProfile);
-  // const [userProfile] = useState<UserProfile>({
-  //   id: 'USR001',
-  //   firstName: 'John',
-  //   lastName: 'Doe',
-  //   email: 'john.doe@example.com',
-  //   phone: '01712345678',
-  //   nid: '1234567890123',
-  //   dateOfBirth: '1990-01-15',
-  //   address: 'House 123, Road 456, Dhanmondi, Dhaka-1205',
-  //   isVerified: true,
-  //   verificationLevel: 'standard',
-  //   accountType: 'user',
-  //   joinDate: '2023-01-15',
-  //   lastLogin: new Date().toISOString(),
-  // });
-  if (isLoading) {
+    if (isLoading) {
     return <h1>Loading...</h1>;
   }
   const tabs = [

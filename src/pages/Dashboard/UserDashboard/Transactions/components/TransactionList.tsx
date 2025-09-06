@@ -1,11 +1,5 @@
 import { format } from 'date-fns';
-import type { Transaction } from '../Transactions';
-
-interface TransactionListProps {
-  transactions: Transaction[];
-  isLoading: boolean;
-  isEmpty: boolean;
-}
+import type { TransactionListProps } from '../intrefaces';
 
 const TransactionList = ({
   transactions,
@@ -26,6 +20,8 @@ const TransactionList = ({
         return '🧾';
       case 'commission':
         return '📱';
+      case 'add_money':
+        return '⬇️';
       default:
         return '💳';
     }
@@ -36,6 +32,8 @@ const TransactionList = ({
       case 'send_money':
         return 'text-red-600';
       case 'receive_money':
+        return 'text-green-600';
+      case 'add_money':
         return 'text-green-600';
       case 'deposit':
         return 'text-blue-600';
@@ -62,31 +60,6 @@ const TransactionList = ({
         return 'bg-gray-100 text-gray-700';
     }
   };
-
-  // const formatDate = (dateString: string) => {
-  //   const date = new Date(dateString);
-  //   const now = new Date();
-  //   const diffTime = Math.abs(now.getTime() - date.getTime());
-  //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  //   if (diffDays === 1) return 'Today';
-  //   if (diffDays === 2) return 'Yesterday';
-  //   if (diffDays <= 7) return `${diffDays - 1} days ago`;
-
-  //   return date.toLocaleDateString('en-GB', {
-  //     day: '2-digit',
-  //     month: 'short',
-  //     year: 'numeric',
-  //   });
-  // };
-
-  // const formatTime = (dateString: string) => {
-  //   return new Date(dateString).toLocaleTimeString('en-US', {
-  //     hour: '2-digit',
-  //     minute: '2-digit',
-  //     hour12: true,
-  //   });
-  // };
 
   if (isLoading) {
     return (
@@ -131,7 +104,7 @@ const TransactionList = ({
       </div>
     );
   }
-  function formatLabel(key) {
+  function formatLabel(key: string) {
     return key
       .split('_') // 'receive_money' -> ['receive', 'money']
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // ['Receive', 'Money']
@@ -167,6 +140,8 @@ const TransactionList = ({
                         {(() => {
                           switch (transaction.type) {
                             case 'receive_money':
+                              return `+88${transaction.from?.phone}`;
+                            case 'add_money':
                               return `+88${transaction.from?.phone}`;
                             case 'send_money':
                               return `+88${transaction.to?.phone}`;
@@ -210,7 +185,8 @@ const TransactionList = ({
                       )}`}
                     >
                       {transaction.type === 'receive_money' ||
-                      transaction.type === 'deposit'
+                      transaction.type === 'deposit'||
+                      transaction.type === 'add_money'
                         ? '+'
                         : '-'}
                       ৳{transaction.amount.toLocaleString()}

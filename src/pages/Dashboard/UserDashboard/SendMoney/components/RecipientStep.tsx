@@ -1,12 +1,7 @@
 import { useState } from 'react';
-import type { SendMoneyData } from '../SendMoney';
 import { useFindUserQuery } from '../../../../../redux/api/userApi';
+import type { RecipientStepProps } from '../interfaces';
 
-interface RecipientStepProps {
-  data: SendMoneyData;
-  updateData: (data: Partial<SendMoneyData>) => void;
-  onNext: () => void;
-}
 
 const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
   const [phone, setPhone] = useState(data.recipientPhone || '');
@@ -14,29 +9,7 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
   const [error, setError] = useState('');
   const { data: userData } = useFindUserQuery(phone);
 
-  // const [recentContacts] = useState([
-  //   {
-  //     phone: '01712345678',
-  //     name: 'Rahim Ahmed',
-  //     verified: true,
-  //     lastSent: '2 days ago',
-  //   },
-  //   {
-  //     phone: '01812345679',
-  //     name: 'Fatima Khan',
-  //     verified: true,
-  //     lastSent: '1 week ago',
-  //   },
-  //   {
-  //     phone: '01912345680',
-  //     name: 'Karim Hassan',
-  //     verified: false,
-  //     lastSent: '2 weeks ago',
-  //   },
-  // ]);
-
   const handlePhoneChange = (value: string) => {
-    // Only allow digits and limit to 11 characters
     const cleanValue = value.replace(/\D/g, '').slice(0, 11);
     setPhone(cleanValue);
     setError('');
@@ -53,7 +26,6 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
     try {
       // Simulate API call
       const user = userData;
-      console.log(user);
       if (user && userData.data) {
         updateData({
           recipientPhone: user.data.phone,
@@ -77,14 +49,6 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
     }
   };
 
-  // const handleContactSelect = (contact: any) => {
-  //   setPhone(contact.phone);
-  //   updateData({
-  //     recipientPhone: contact.phone,
-  //     recipientName: contact.name,
-  //     recipientVerified: contact.verified,
-  //   });
-  // };
 
   const handleNext = () => {
     if (!data.recipientPhone || data.recipientPhone.length !== 11) {
@@ -165,46 +129,6 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
           </div>
         )}
       </div>
-
-      {/* Recent Contacts */}
-      {/* {!data.recipientName && (
-        <div>
-          <h3 className='text-sm font-medium text-gray-700 mb-3'>
-            Recent Contacts
-          </h3>
-          <div className='space-y-2'>
-            {recentContacts.map((contact, index) => (
-              <button
-                key={index}
-                onClick={() => handleContactSelect(contact)}
-                className='w-full p-3 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-all text-left'
-              >
-                <div className='flex items-center space-x-3'>
-                  <div className='w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center'>
-                    <span className='text-lg'>👤</span>
-                  </div>
-                  <div className='flex-1'>
-                    <div className='flex items-center space-x-2'>
-                      <h4 className='font-medium text-gray-900'>
-                        {contact.name}
-                      </h4>
-                      {contact.verified && (
-                        <span className='text-blue-500 text-xs'>✓</span>
-                      )}
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <p className='text-sm text-gray-600'>{contact.phone}</p>
-                      <p className='text-xs text-gray-500'>
-                        {contact.lastSent}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      )} */}
 
       {/* Info Box */}
       <div className='bg-blue-50 border border-blue-200 rounded-lg p-4'>

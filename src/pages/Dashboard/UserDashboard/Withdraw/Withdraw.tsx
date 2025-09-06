@@ -4,17 +4,8 @@ import AmountStep from './components/AmountStep';
 // import LocationStep from './components/LocationStep';
 import ConfirmationStep from './components/ConfirmationStep';
 import { useMyWalletQuery } from '../../../../redux/api/walletApi';
+import type { WithdrawData } from './interfaces';
 
-export interface WithdrawData {
-  amount: number;
-  method: 'agent' | 'atm' | 'bank' | '';
-  agentId?: string;
-  agentName?: string;
-  agentLocation?: string;
-  atmId?: string;
-  bankAccount?: string;
-  pin: string;
-}
 
 const Withdraw = () => {
   const { data } = useMyWalletQuery(undefined);
@@ -24,9 +15,8 @@ const Withdraw = () => {
     method: '',
     pin: '',
   });
-  console.log(data?.data?.balance);
+  
   const userBalance = data?.data?.balance; // Mock user balance
-
   const steps = [
     { number: 1, title: 'Amount', icon: '💰' },
     { number: 2, title: 'Confirm', icon: '✅' },

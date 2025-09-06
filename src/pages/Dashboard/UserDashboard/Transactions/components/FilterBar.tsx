@@ -1,9 +1,6 @@
-import type { FilterState } from '../Transactions';
+import type { FilterBarProps, FilterState } from "../intrefaces";
 
-interface FilterBarProps {
-  filters: FilterState;
-  setFilters: (filters: FilterState) => void;
-}
+
 
 const FilterBar = ({ filters, setFilters }: FilterBarProps) => {
   const updateFilter = (key: keyof FilterState, value: string) => {
@@ -82,6 +79,7 @@ const FilterBar = ({ filters, setFilters }: FilterBarProps) => {
             <option value='withdraw'>🏧 Withdraw</option>
             <option value='bill'>🧾 Bill Payment</option>
             <option value='recharge'>📱 Mobile Recharge</option>
+            <option value='add_money'>⬇️ Add Money</option>
           </select>
         </div>
 
