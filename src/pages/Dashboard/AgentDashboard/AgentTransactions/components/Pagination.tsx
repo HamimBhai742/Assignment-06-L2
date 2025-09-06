@@ -1,11 +1,5 @@
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-  totalItems: number;
-  itemsPerPage: number;
-  setItemsPerPage: (itemsPerPage: number) => void;
-}
+import type { PaginationProps } from "../interfaces";
+
 
 const Pagination = ({
   currentPage,

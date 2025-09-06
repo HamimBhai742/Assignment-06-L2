@@ -1,4 +1,4 @@
-import type { FilterState } from '../AgentTransactions';
+import type { FilterState } from "../interfaces";
 
 interface FilterBarProps {
   filters: FilterState;

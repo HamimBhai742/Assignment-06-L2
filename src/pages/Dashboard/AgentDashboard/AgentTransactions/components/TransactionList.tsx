@@ -1,11 +1,7 @@
 import { format } from 'date-fns';
-import type { Transaction } from '../AgentTransactions';
+import type { TransactionListProps } from '../interfaces';
 
-interface TransactionListProps {
-  transactions: Transaction[];
-  isLoading: boolean;
-  isEmpty: boolean;
-}
+
 
 const TransactionList = ({
   transactions,
@@ -106,11 +102,11 @@ const TransactionList = ({
       </div>
     );
   }
-  function formatLabel(key) {
+  function formatLabel(key: string) {
     return key
-      .split('_') // 'receive_money' -> ['receive', 'money']
+      .split('_')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // ['Receive', 'Money']
-      .join(' '); // 'Receive Money'
+      .join(' '); 
   }
 
   return (
