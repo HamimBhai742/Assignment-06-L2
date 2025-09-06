@@ -7,42 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useCashInMutation } from '../../../../../redux/api/walletApi';
 import toast from 'react-hot-toast';
-
-interface User {
-  id: string;
-  name: string;
-  phone: string;
-  balance: number;
-  verified: boolean;
-}
-
-interface TransactionData {
-  amount: number;
-  charge: number;
-  totalAmount: number;
-  pin: string;
-  reference: string;
-  timestamp: string;
-}
-
-export interface ResponseData {
-  message: string;
-  data: {
-    availableBlance: number;
-    phone: string;
-    recipient: string;
-    amount: number;
-    commission: number;
-    trnxId: string;
-    walletStatus: string;
-  };
-}
-
-interface TransactionConfirmationProps {
-  user: User;
-  transactionData: TransactionData;
-  onReset: () => void;
-}
+import type { ResponseData, TransactionConfirmationProps } from '../intefaces';
 
 const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
   user,
@@ -62,17 +27,15 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
       };
       const res = await cashIn(sendData);
       if (res.data) {
-        console.log(res.data);
         setRes(res.data);
         setIsSuccess(true);
       }
       if (res.error) {
-        console.log(res.error);
         const err = res.error as { data: { message: string } };
         toast.error(err.data.message);
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Cash in failed. Please try again.');
     } finally {
       setIsProcessing(false);
     }
@@ -118,13 +81,13 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
             <div className='flex justify-between border-t border-green-200 pt-2'>
               <span className='text-gray-600'>Total Deducted:</span>
               <span className='font-bold'>
-                ৳{res?.data?.amount?.toFixed(2)}
+                ৳{res?.data?.amount.toLocaleString()}
               </span>
             </div>
             <div className='flex justify-between'>
               <span className='text-gray-600'>Agent Commission:</span>
               <span className='font-semibold text-blue-600'>
-                ৳{res?.data?.commission?.toFixed(2)}
+                ৳{res?.data?.commission?.toLocaleString()}
               </span>
             </div>
             <div className='flex justify-between'>

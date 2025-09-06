@@ -9,21 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useMatchPINMutation } from '../../../../../redux/api/authApi';
 import toast from 'react-hot-toast';
-
-interface User {
-  id: string;
-  name: string;
-  phone: string;
-  balance: number;
-  verified: boolean;
-  myBalance: number;
-}
-
-interface TransactionFormProps {
-  user: User;
-  onSubmit: (data: any) => void;
-  onBack: () => void;
-}
+import type { TransactionFormProps } from '../intefaces';
 
 const TransactionForm: React.FC<TransactionFormProps> = ({
   user,
@@ -36,7 +22,6 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
   const [process, setProcess] = useState(false);
   const [matchPIN] = useMatchPINMutation();
   const quickAmounts = [500, 1000, 2000, 5000];
-  console.log(amount, user);
   const handleSubmit = async (e: React.FormEvent) => {
     setProcess(true);
     e.preventDefault();

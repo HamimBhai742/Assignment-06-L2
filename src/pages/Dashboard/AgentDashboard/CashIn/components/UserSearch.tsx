@@ -5,28 +5,19 @@ import {
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
 import { useFindUserQuery } from '../../../../../redux/api/userApi';
-
-export interface SelectUser {
-  user: {
-    _id: string;
-    name: string;
-    phone: string;
-    isActive: boolean;
-  };
-  wallet: {
-    balance: number;
-  };
-}
-
-interface UserSearchProps {
-  onUserSelect: (user: SelectUser) => void;
-}
+import type { UserSearchProps } from '../intefaces';
 
 const UserSearch: React.FC<UserSearchProps> = ({ onUserSelect }) => {
   const [searchPhone, setSearchPhone] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { data: user, error, refetch } = useFindUserQuery(searchPhone);
+  const {
+    data: user,
+    error,
+    refetch,
+  } = useFindUserQuery(searchPhone, {
+    skip: searchPhone.length < 11,
+  });
 
   useEffect(() => {
     if (user?.data) {
@@ -39,7 +30,6 @@ const UserSearch: React.FC<UserSearchProps> = ({ onUserSelect }) => {
 
   const handleSearch = () => {
     if (searchPhone.length < 11) return;
-    console.log(user);
     refetch();
     setIsSearching(true);
     setTimeout(() => {

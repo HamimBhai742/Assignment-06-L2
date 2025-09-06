@@ -1,28 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import UserSearch, { type SelectUser } from './components/UserSearch';
+import UserSearch from './components/UserSearch';
 import TransactionForm from './components/TransactionForm';
 import TransactionConfirmation from './components/TransactionConfirmation';
 import { useMyWalletQuery } from '../../../../redux/api/walletApi';
 import toast from 'react-hot-toast';
-
+import type { SelectedUser, SelectUser } from './intefaces';
 type Step = 'search' | 'form' | 'confirmation';
-
-interface SelectedUser {
-  id: string;
-  name: string;
-  phone: string;
-  balance: number;
-  verified: boolean;
-  myBalance: number;
-}
-
 const CashIn: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<Step>('search');
   const [selectedUser, setSelectedUser] = useState<SelectedUser | null>();
   const [transactionData, setTransactionData] = useState<any>(null);
   const { data: myWallet } = useMyWalletQuery(undefined);
-  console.log(myWallet);
 
   const handleUserSelect = (user: SelectUser) => {
     if (myWallet.data.status === 'blocked') {
