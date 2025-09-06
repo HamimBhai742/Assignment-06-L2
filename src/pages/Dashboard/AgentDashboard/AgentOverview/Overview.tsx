@@ -1,6 +1,6 @@
 import React from 'react';
-import SummaryCards from '../components/SummaryCards';
-import RecentActivity from '../components/RecentActivity';
+import SummaryCards from './components/SummaryCards';
+import RecentActivity from './components/RecentActivity';
 
 const Overview: React.FC = () => {
   return (

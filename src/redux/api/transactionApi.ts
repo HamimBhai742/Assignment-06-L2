@@ -13,7 +13,14 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Transaction'],
     }),
+    todayTotalTransactions: builder.query({
+      query: () => ({
+        url: `/transactions/today-total-transactions`,
+        method: 'GET',
+      }),
+      providesTags: ['Transaction'],
+    }),
   }),
 });
 
-export const { useGetMyTransactionsQuery } = transactionApi;
+export const { useGetMyTransactionsQuery ,useTodayTotalTransactionsQuery} = transactionApi;

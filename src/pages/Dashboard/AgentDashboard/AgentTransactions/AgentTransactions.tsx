@@ -1,7 +1,7 @@
 import { useState} from 'react';
-import FilterBar from '../components/FilterBar';
-import TransactionList from '../components/TransactionList';
-import Pagination from '../components/Pagination';
+import FilterBar from './components/FilterBar';
+import TransactionList from './components/TransactionList';
+import Pagination from './components/Pagination';
 import { useGetMyTransactionsQuery } from '../../../../redux/api/transactionApi';
 
 interface ISenderReceiver {
@@ -14,12 +14,13 @@ interface ISenderReceiver {
 export interface Transaction {
   _id?: string;
   type:
-    | 'send_money'
-    | 'receive_money'
+    | 'cash_in'
+    | 'cash_out'
     | 'deposit'
     | 'withdraw'
     | 'fee'
-    | 'commission';
+    | 'commission'
+    ;
   transactionId: string;
   amount: number;
   to?: ISenderReceiver;
@@ -46,10 +47,6 @@ export interface FilterState {
 }
 
 const AgentTransactions = () => {
-  // const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [filteredTransactions, setFilteredTransactions] = useState<
-    Transaction[]
-  >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [filters, setFilters] = useState<FilterState>({

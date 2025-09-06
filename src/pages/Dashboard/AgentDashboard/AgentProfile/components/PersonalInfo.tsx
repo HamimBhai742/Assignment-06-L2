@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import toast from 'react-hot-toast';
-import type { UserProfile } from '../AgentProfile/AgentProfile';
-import { useUpdateUserMutation } from '../../../../redux/api/userApi';
+import type { UserProfile } from '../AgentProfile';
+import { useUpdateUserMutation } from '../../../../../redux/api/userApi';
 
 interface PersonalInfoProps {
   userProfile: UserProfile;

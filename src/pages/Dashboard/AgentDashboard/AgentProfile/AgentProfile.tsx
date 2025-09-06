@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import SecuritySettings from '../components/SecuritySettings';
+import SecuritySettings from './components/SecuritySettings';
 import { useMyProfileQuery } from '../../../../redux/api/userApi';
-import PersonalInfo from '../components/PersonalInfo';
+import PersonalInfo from './components/PersonalInfo';
 
 
 export interface UserProfile {

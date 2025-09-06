@@ -1,4 +1,4 @@
-import type { FilterState } from '../AgentTransactions/AgentTransactions';
+import type { FilterState } from '../AgentTransactions';
 
 interface FilterBarProps {
   filters: FilterState;
@@ -76,12 +76,10 @@ const FilterBar = ({ filters, setFilters }: FilterBarProps) => {
             className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
           >
             <option value='all'>All Types</option>
-            <option value='send_money'>💸 Send Money</option>
-            <option value='receive_money'>📥 Receive Money</option>
-            <option value='deposit'>💰 Deposit</option>
-            <option value='withdraw'>🏧 Withdraw</option>
-            <option value='bill'>🧾 Bill Payment</option>
-            <option value='recharge'>📱 Mobile Recharge</option>
+            <option value='cash_in'>💸 Cash In</option>
+            <option value='cash_out'>📥 Cash Out</option>
+            <option value='fee'>🧾 Fee</option>
+            <option value='commission'>📱 Commission</option>
           </select>
         </div>
 

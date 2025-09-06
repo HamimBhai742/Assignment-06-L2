@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useChangePinMutation } from '../../../../redux/api/userApi';
+import { useChangePinMutation } from '../../../../../redux/api/userApi';
 
 const SecuritySettings = () => {
   const [showChangePIN, setShowChangePIN] = useState(false);
