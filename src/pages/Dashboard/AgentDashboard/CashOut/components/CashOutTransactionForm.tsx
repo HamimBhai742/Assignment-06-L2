@@ -11,21 +11,8 @@ import {
 import { useMatchPINMutation } from '../../../../../redux/api/authApi';
 import toast from 'react-hot-toast';
 import { useMatchUserPinMutation } from '../../../../../redux/api/userApi';
+import type { CashOutTransactionFormProps } from '../interface';
 
-interface User {
-  id: string;
-  name: string;
-  phone: string;
-  balance: number;
-  verified: boolean;
-  myBalance: number;
-}
-
-interface CashOutTransactionFormProps {
-  user: User;
-  onSubmit: (data: any) => void;
-  onBack: () => void;
-}
 
 const CashOutTransactionForm: React.FC<CashOutTransactionFormProps> = ({
   user,
@@ -59,7 +46,6 @@ const CashOutTransactionForm: React.FC<CashOutTransactionFormProps> = ({
     };
     const resUSer = await matchUserPin(resCustomer);
     if (resUSer.error) {
-      console.log(resUSer.error);
       setProcess(false);
       toast.error("User pin doesn't match");
       return;
@@ -82,7 +68,6 @@ const CashOutTransactionForm: React.FC<CashOutTransactionFormProps> = ({
     });
     setProcess(false);
   };
-  console.log(user, 'jjj');
   return (
     <div className='p-6'>
       {/* Header with Back Button */}

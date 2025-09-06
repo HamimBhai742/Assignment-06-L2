@@ -1,23 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import CashOutUserSearch, {
-  type SelectUser,
 } from './components/CashOutUserSearch';
 import CashOutTransactionForm from './components/CashOutTransactionForm';
 import CashOutConfirmation from './components/CashOutConfirmation';
 import { useMyWalletQuery } from '../../../../redux/api/walletApi';
+import type { SelectUser, User } from './interface';
 
 type Step = 'search' | 'form' | 'confirmation';
-
-interface User {
-  id: string;
-  name: string;
-  phone: string;
-  balance: number;
-  verified: boolean;
-  myBalance: number;
-}
-
 const CashOut: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<Step>('search');
   const [selectedUser, setSelectedUser] = useState<User | null>(null);

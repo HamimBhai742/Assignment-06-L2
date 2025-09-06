@@ -6,22 +6,7 @@ import {
   ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
 import { useFindUserQuery } from '../../../../../redux/api/userApi';
-
-export interface SelectUser {
-  user: {
-    _id: string;
-    name: string;
-    phone: string;
-    isActive: boolean;
-  };
-  wallet: {
-    balance: number;
-  };
-}
-
-interface CashOutUserSearchProps {
-  onUserSelect: (user: SelectUser) => void;
-}
+import type { CashOutUserSearchProps } from '../interface';
 
 const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
   onUserSelect,
@@ -44,7 +29,6 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
 
   const handleSearch = () => {
     if (searchPhone.length < 11) return;
-    console.log(data);
     refetch();
     setIsSearching(true);
     setTimeout(() => {

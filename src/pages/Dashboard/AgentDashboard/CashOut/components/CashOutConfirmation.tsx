@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import {
   CheckCircleIcon,
@@ -5,33 +6,12 @@ import {
   UserIcon,
   ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
-import type { ResponseData } from '../../CashIn/components/TransactionConfirmation';
 import { useCashOutMutation } from '../../../../../redux/api/walletApi';
 import toast from 'react-hot-toast';
+import type { CashOutConfirmationProps } from '../interface';
+import type { ResponseData } from '../../CashIn/intefaces';
 
-interface User {
-  id: string;
-  name: string;
-  phone: string;
-  balance: number;
-  verified: boolean;
-}
 
-interface TransactionData {
-  amount: number;
-  charge: number;
-  totalDeduction: number;
-  customerPin: string;
-  agentPin: string;
-  reference: string;
-  timestamp: string;
-}
-
-interface CashOutConfirmationProps {
-  user: User;
-  transactionData: TransactionData;
-  onReset: () => void;
-}
 
 const CashOutConfirmation: React.FC<CashOutConfirmationProps> = ({
   user,
@@ -50,26 +30,21 @@ const CashOutConfirmation: React.FC<CashOutConfirmationProps> = ({
         to: user.phone,
         amount: transactionData.amount,
       };
-      console.log(sendData);
       const res = await cashOut(sendData);
       if (res.data) {
-        console.log(res.data);
         setRes(res.data);
         setIsSuccess(true);
       }
       if (res.error) {
-        console.log(res.error);
         const err = res.error as { data: { message: string } };
         toast.error(err.data.message);
       }
     } catch (error) {
       toast.error('Cash out failed. Please try again.');
-      console.log(error);
     } finally {
       setIsProcessing(false);
     }
   };
-  console.log(res);
   if (isSuccess) {
     return (
       <div className='p-6 text-center'>
