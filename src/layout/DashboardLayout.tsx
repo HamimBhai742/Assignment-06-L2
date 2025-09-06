@@ -14,13 +14,17 @@ const DashboardLayout = () => {
     { name: 'Withdraw Money', href: '/dashboard/withdraw', icon: '💸' },
     { name: 'Send Money', href: '/dashboard/send', icon: '📤' },
     { name: 'Transactions', href: '/dashboard/transactions', icon: '📋' },
-    { name: 'Cards', href: '/dashboard/cards', icon: '💳' },
-    { name: 'Bills', href: '/dashboard/bills', icon: '🧾' },
+    // { name: 'Cards', href: '/dashboard/cards', icon: '💳' },
+    // { name: 'Bills', href: '/dashboard/bills', icon: '🧾' },
     { name: 'Profile', href: '/dashboard/profile', icon: '👤' },
   ];
 
   const agentMenuItems = [
     { name: 'Overview', href: '/agent-dashboard', icon: '📊' },
+    { name: 'Cash In', href: '/agent-dashboard/cash-in', icon: '💸' },
+    { name: 'Cash Out', href: '/agent-dashboard/cash-out', icon: '📤' },
+    { name: 'Transactions', href: '/agent-dashboard/transactions', icon: '📋' },
+    { name: 'Profile', href: '/agent-dashboard/profile', icon: '👤' },
   ];
 
   return (

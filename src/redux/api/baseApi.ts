@@ -6,6 +6,6 @@ export const baseApi = createApi({
     baseUrl: 'http://localhost:5000/api/a5',
     credentials: 'include',
   }),
-  tagTypes: ['Auth', 'User', 'Transaction'],
+  tagTypes: ['Auth', 'User', 'Transaction', 'Agent'],
   endpoints: () => ({}),
 });

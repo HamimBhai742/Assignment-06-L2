@@ -14,9 +14,13 @@ import Withdraw from '../pages/Dashboard/UserDashboard/Withdraw/Withdraw';
 import SendMoney from '../pages/Dashboard/UserDashboard/SendMoney/SendMoney';
 import Transactions from '../pages/Dashboard/UserDashboard/Transactions/Transactions';
 import Profile from '../pages/Dashboard/UserDashboard/Profile/Profile';
-import AgentOverview from '../pages/Dashboard/AgentDashboard/Overview';
+import AgentOverview from '../pages/Dashboard/AgentDashboard/AgentOverview/Overview';
+import CashIn from '../pages/Dashboard/AgentDashboard/CashIn/CashIn';
+import CashOut from '../pages/Dashboard/AgentDashboard/CashOut/CashOut';
 import TestAgentDashboard from '../pages/TestAgentDashboard';
 import ProtecedRoutes from './ProtecedRoutes';
+import AgentTransactions from '../pages/Dashboard/AgentDashboard/AgentTransactions/AgentTransactions';
+import AgentProfile from '../pages/Dashboard/AgentDashboard/AgentProfile/AgentProfile';
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +106,22 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: AgentOverview,
+      },
+      {
+        path: 'cash-in',
+        Component: CashIn,
+      },
+      {
+        path: 'cash-out',
+        Component: CashOut,
+      },
+      {
+        path: 'transactions',
+        Component: AgentTransactions,
+      },
+      {
+        path: 'profile',
+        Component: AgentProfile,
       },
     ],
   },

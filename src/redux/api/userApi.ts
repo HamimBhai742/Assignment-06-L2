@@ -7,7 +7,7 @@ export const userApi = baseApi.injectEndpoints({
         url: `/user/${phone}`,
         method: 'GET',
       }),
-      providesTags: ['User'],
+      providesTags: ['User', 'Agent'],
     }),
     myProfile: builder.query({
       query: () => ({
@@ -32,6 +32,14 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+    matchUserPin: builder.mutation({
+      query: (data) => ({
+        url: `/user/match-pin/${data.phone}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
@@ -40,4 +48,5 @@ export const {
   useMyProfileQuery,
   useUpdateUserMutation,
   useChangePinMutation,
+  useMatchUserPinMutation
 } = userApi;
