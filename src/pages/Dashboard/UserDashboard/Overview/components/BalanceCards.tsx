@@ -4,7 +4,6 @@ import { useMyWalletQuery } from '../../../../../redux/api/walletApi';
 const BalanceCards = () => {
   const { data } = useMyWalletQuery(undefined);
   const { data: TransactionList } = useLastMonthTransactionsQuery(undefined);
-  console.log(TransactionList);
   const balanceData = [
     {
       title: 'Main Balance',
@@ -16,15 +15,6 @@ const BalanceCards = () => {
       gradient: 'from-blue-500 to-purple-600',
     },
     {
-      title: 'Savings',
-      amount: 15000,
-      currency: '৳',
-      change: '+5.2%',
-      changeType: 'increase',
-      icon: '🏦',
-      gradient: 'from-green-500 to-teal-600',
-    },
-    {
       title: 'Last Month Transactions',
       amount: TransactionList?.data?.lastMonth?.totalAmount,
       currency: '৳',
@@ -34,8 +24,17 @@ const BalanceCards = () => {
       gradient: 'from-orange-500 to-red-500',
     },
     {
-      title: 'Cashback',
-      amount: 850,
+      title: 'Last Month Send Money',
+      amount: TransactionList?.data?.lastMonthSendMoney?.totalAmount,
+      currency: '৳',
+      change: '+5.2%',
+      changeType: 'increase',
+      icon: '📤',
+      gradient: 'from-green-500 to-teal-600',
+    },
+    {
+      title: 'Last Month Recive Money',
+      amount: TransactionList?.data?.lastMonthReciveMoney?.totalAmount,
       currency: '৳',
       change: '+8.7%',
       changeType: 'increase',

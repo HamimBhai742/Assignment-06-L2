@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import useAuth from '../../hooks/useAuth';
@@ -35,7 +36,7 @@ const Navbar = () => {
         dispatch(authApi.util.resetApiState());
       }
     } catch (error) {
-      console.error('Logout failed:', error);
+      toast.error('Failed to logout');
     }
   };
   return (

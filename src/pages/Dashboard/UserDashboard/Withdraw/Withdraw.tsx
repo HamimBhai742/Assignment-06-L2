@@ -12,7 +12,6 @@ const Withdraw = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [withdrawData, setWithdrawData] = useState<WithdrawData>({
     amount: 0,
-    method: '',
     pin: '',
   });
   

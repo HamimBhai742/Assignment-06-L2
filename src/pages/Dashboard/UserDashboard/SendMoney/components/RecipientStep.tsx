@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useFindUserQuery } from '../../../../../redux/api/userApi';
 import type { RecipientStepProps } from '../interfaces';
 
-
 const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
   const [phone, setPhone] = useState(data.recipientPhone || '');
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
-  const { data: userData } = useFindUserQuery(phone);
+  const { data: userData } = useFindUserQuery(phone, {
+    skip: phone.length < 11,
+  });
+  const [isOpen, setIsOpen] = useState(false);
 
   const handlePhoneChange = (value: string) => {
     const cleanValue = value.replace(/\D/g, '').slice(0, 11);
@@ -15,7 +17,6 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
     setError('');
     searchUser(cleanValue);
   };
-
   const searchUser = async (phoneNumber: string) => {
     if (!/^01[3-9]\d{8}$/.test(phoneNumber)) {
       setError('Invalid Bangladesh mobile number');
@@ -27,19 +28,15 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
       // Simulate API call
       const user = userData;
       if (user && userData.data) {
+        setIsOpen(true);
         updateData({
-          recipientPhone: user.data.phone,
-          recipientName: user.data.name,
+          recipientPhone: user.data.user.phone,
+          recipientName: user.data.user.name,
           recipientVerified: true,
         });
         setIsSearching(false);
       } else {
         setError('User not found. Please check the phone number.');
-        updateData({
-          recipientPhone: user.data.phone,
-          recipientName: '',
-          recipientVerified: false,
-        });
         setIsSearching(false);
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,7 +45,6 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
       setError('Failed to search user. Please try again.');
     }
   };
-
 
   const handleNext = () => {
     if (!data.recipientPhone || data.recipientPhone.length !== 11) {
@@ -63,7 +59,14 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
 
     onNext();
   };
-
+  const setDataUser = () => {
+    updateData({
+      recipientPhone: userData?.data?.user.phone,
+      recipientName: userData?.data?.user.name,
+      recipientVerified: true,
+    });
+    onNext();
+  };
   return (
     <div className='space-y-6'>
       <div className='text-center'>
@@ -102,10 +105,13 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
             )}
           </div>
         </div>
-        {error && <p className='text-red-500 text-sm'>{error}</p>}
+        {!isOpen && <p className='text-red-500 text-sm'>{error}</p>}
         {/* User Found Display */}
-        {userData?.data && !error && (
-          <div className='bg-green-50 border border-green-200 rounded-xl p-4'>
+        {isOpen && (
+          <div
+            onClick={setDataUser}
+            className='bg-green-50 border hover:cursor-pointer border-green-200 rounded-xl p-4'
+          >
             <div className='flex items-center space-x-4'>
               <div className='w-12 h-12 bg-green-100 rounded-full flex items-center justify-center'>
                 <span className='text-xl'>👤</span>
@@ -113,17 +119,20 @@ const RecipientStep = ({ data, updateData, onNext }: RecipientStepProps) => {
               <div className='flex-1'>
                 <div className='flex items-center space-x-2'>
                   <h3 className='font-semibold text-gray-900'>
-                    {userData.data.name}
+                    {userData.data.user.name}
                   </h3>
-                  {data.recipientVerified && (
+                  {userData?.data?.isActive && (
                     <span className='bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full font-medium'>
                       ✓ Verified
                     </span>
                   )}
                 </div>
                 <p className='text-sm text-gray-600'>
-                  +88 {userData.data.phone}
+                  +88 {userData?.data?.user.phone}
                 </p>
+              </div>
+              <div className='w-12 h-12 flex items-center justify-center'>
+                <p>Select</p>
               </div>
             </div>
           </div>

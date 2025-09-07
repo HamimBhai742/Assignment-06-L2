@@ -1,31 +1,21 @@
 import { useState } from 'react';
 import AmountStep from './components/AmountStep';
-import PaymentMethodStep from './components/PaymentMethodStep';
-import DetailsStep from './components/DetailsStep';
 import ConfirmationStep from './components/ConfirmationStep';
 
 export interface DepositData {
   amount: number;
-  method: 'bank' | 'card' | 'mobile' | '';
-  bankAccount?: string;
-  cardNumber?: string;
-  mobileNumber?: string;
-  pin: string;
 }
 
 const Deposit = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [depositData, setDepositData] = useState<DepositData>({
-    amount: 0,
-    method: '',
-    pin: ''
+    amount: 0
+
   });
 
   const steps = [
     { number: 1, title: 'Amount', icon: '💰' },
-    { number: 2, title: 'Method', icon: '💳' },
-    { number: 3, title: 'Details', icon: '📝' },
-    { number: 4, title: 'Confirm', icon: '✅' }
+    { number: 2, title: 'Confirm', icon: '✅' }
   ];
 
   const updateDepositData = (data: Partial<DepositData>) => {
@@ -81,26 +71,8 @@ const Deposit = () => {
             onNext={nextStep}
           />
         )}
-        
+
         {currentStep === 2 && (
-          <PaymentMethodStep
-            data={depositData}
-            updateData={updateDepositData}
-            onNext={nextStep}
-            onPrev={prevStep}
-          />
-        )}
-        
-        {currentStep === 3 && (
-          <DetailsStep
-            data={depositData}
-            updateData={updateDepositData}
-            onNext={nextStep}
-            onPrev={prevStep}
-          />
-        )}
-        
-        {currentStep === 4 && (
           <ConfirmationStep
             data={depositData}
             onPrev={prevStep}

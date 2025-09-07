@@ -1,7 +1,6 @@
 import BalanceCards from './components/BalanceCards';
 import QuickActions from './components/QuickActions';
 import RecentTransactions from './components/RecentTransactions';
-import FinancialCharts from './components/FinancialCharts';
 
 const Overview = () => {
   return (
@@ -24,14 +23,14 @@ const Overview = () => {
       <QuickActions />
 
       {/* Charts and Transactions Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div>
         {/* Financial Charts */}
-        <div className="lg:col-span-2">
+        {/* <div className="lg:col-span-2">
           <FinancialCharts />
-        </div>
-        
+        </div> */}
+
         {/* Recent Transactions */}
-        <div className="lg:col-span-1">
+        <div >
           <RecentTransactions />
         </div>
       </div>

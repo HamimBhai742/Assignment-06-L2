@@ -28,7 +28,6 @@ const RecentActivity: React.FC = () => {
       refetchOnMountOrArgChange: true,
     }
   );
-  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;

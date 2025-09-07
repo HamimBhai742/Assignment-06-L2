@@ -53,7 +53,7 @@ const Register = () => {
       else if (formData.password.length < 6)
         newErrors.password = 'PIN must be at least 6 digit';
       if (!formData.agreeTerms)
-        newErrors.agreeTerms = 'You must agree to terms';
+        toast.error('Please agree to the terms and conditions');
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -70,10 +70,7 @@ const Register = () => {
     setIsSubmitting(true);
     try {
       // Simulate API call
-      console.log(formData);
       const res = await createAccount(formData);
-      console.log(res.data);
-      console.log(res.error);
       if (res.data) {
         toast.success(res.data.message);
         setIsSubmitting(false);
@@ -91,7 +88,6 @@ const Register = () => {
         setIsSubmitting(false);
       }
     } catch (error: any) {
-      console.log(error);
       setIsSubmitting(false);
       toast.error('Registration failed. Please try again.');
     }

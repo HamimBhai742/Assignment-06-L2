@@ -146,11 +146,13 @@ const TransactionList = ({
                             case 'send_money':
                               return `+88${transaction.to?.phone}`;
                             case 'fee':
-                              return `Apps`; // or some other info
+                              return `Apps`;
                             case 'commission':
-                              return `Apps`; // or some field
+                              return `Apps`;
                             case 'withdraw':
-                              return `+88${transaction.from?.phone}`; // example
+                              return `+88${transaction.from?.phone}`;
+                                 case 'deposit':
+                              return `+88${transaction.to?.phone}`;
                             default:
                               return '-';
                           }

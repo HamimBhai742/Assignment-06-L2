@@ -7,7 +7,6 @@ const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const { data } = useAuth();
-  console.log(data);
   const userMenuItems = [
     { name: 'Overview', href: '/dashboard', icon: '📊' },
     { name: 'Deposit Money', href: '/dashboard/deposit', icon: '💰' },

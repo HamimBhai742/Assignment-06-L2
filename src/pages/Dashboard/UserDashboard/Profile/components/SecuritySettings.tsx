@@ -27,7 +27,6 @@ const SecuritySettings = () => {
     };
     setIsProcessing(true);
     try {
-      console.log(dataFrom)
       const res = await changePin(dataFrom);
       if (res?.data) {
         toast.success(res.data.message);
@@ -35,7 +34,6 @@ const SecuritySettings = () => {
       }
       if (res.error) {
         // setPinForm({ currentPIN: '', newPIN: '', confirmPIN: '' });
-        console.log(res.error);
         const err = res?.error as { data: { message: string } };
         const errSrc = res?.error as {
           data: { errorSource: { message: string }[] };

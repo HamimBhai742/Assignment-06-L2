@@ -5,6 +5,14 @@ export interface SendMoneyRequest {
 }
 export const walletApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    depositMoney: builder.mutation({
+      query: (amount: number) => ({
+        url: '/wallet/deposit-money',
+        method: 'POST',
+        body: { amount },
+      }),
+      invalidatesTags: ['User'],
+    }),
     withdrawMoney: builder.mutation({
       query: (amount: number) => ({
         url: '/wallet/withdraw-money',
@@ -52,5 +60,6 @@ export const {
   useMyWalletQuery,
   useSendMoneyMutation,
   useCashInMutation,
-  useCashOutMutation
+  useCashOutMutation,
+  useDepositMoneyMutation
 } = walletApi;

@@ -77,8 +77,6 @@ const ConfirmationStep = ({
       wallet: { balance: number; receiver: string; availableBalance: number };
     };
   };
-
-  console.log(res);
   if (isSuccess) {
     return (
       <div className='text-center space-y-6'>

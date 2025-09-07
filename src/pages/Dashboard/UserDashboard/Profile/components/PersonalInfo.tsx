@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import type { UserProfile } from '../Profile';
 import { useUpdateUserMutation } from '../../../../../redux/api/userApi';
@@ -21,7 +22,6 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
   };
 
   const handleSave = async () => {
-    console.log(formData);
     setIsSaving(true);
     try {
       const res = await updateUser(formData);
@@ -31,7 +31,6 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
         setIsEditing(false);
       }
       if (res.error) {
-        console.log(res.error);
         const err = res?.error as { data: { message: string } };
         const errSrc = res?.error as {
           data: { errorSource: { message: string }[] };
@@ -45,7 +44,7 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
       }
       // Show success message
     } catch (error) {
-      console.error('Failed to update profile:', error);
+      toast.error('Failed to update profile:');
     } finally {
       setIsSaving(false);
     }

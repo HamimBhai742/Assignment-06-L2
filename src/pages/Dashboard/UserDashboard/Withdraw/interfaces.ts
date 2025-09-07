@@ -3,12 +3,6 @@ import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 export interface WithdrawData {
   amount: number;
-  method: 'agent' | 'atm' | 'bank' | '';
-  agentId?: string;
-  agentName?: string;
-  agentLocation?: string;
-  atmId?: string;
-  bankAccount?: string;
   pin: string;
 }
 

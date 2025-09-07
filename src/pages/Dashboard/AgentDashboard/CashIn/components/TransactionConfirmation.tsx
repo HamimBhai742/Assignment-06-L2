@@ -40,7 +40,6 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
       setIsProcessing(false);
     }
   };
-  console.log(res);
   if (isSuccess) {
     return (
       <div className='p-6 text-center'>

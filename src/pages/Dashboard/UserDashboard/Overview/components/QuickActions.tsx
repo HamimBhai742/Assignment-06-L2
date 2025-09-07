@@ -27,28 +27,12 @@ const QuickActions = () => {
       href: '/dashboard/send'
     },
     {
-      title: 'Pay Bills',
-      description: 'Electricity, Gas, Internet',
+      title: 'Transaction',
+      description: 'Show your transaction history',
       icon: '🧾',
       color: 'bg-purple-500',
       hoverColor: 'hover:bg-purple-600',
-      href: '/dashboard/bills'
-    },
-    {
-      title: 'Mobile Recharge',
-      description: 'Top up your mobile',
-      icon: '📱',
-      color: 'bg-orange-500',
-      hoverColor: 'hover:bg-orange-600',
-      href: '/dashboard/recharge'
-    },
-    {
-      title: 'QR Payment',
-      description: 'Scan & pay instantly',
-      icon: '📷',
-      color: 'bg-pink-500',
-      hoverColor: 'hover:bg-pink-600',
-      href: '/dashboard/qr'
+      href: '/dashboard/transactions'
     }
   ];
 

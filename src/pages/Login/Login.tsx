@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useLoginMutation } from '../../redux/api/authApi';
@@ -49,11 +50,8 @@ const Login = () => {
     if (!validateForm()) return;
 
     try {
-      console.log(formData);
       const res = await login(formData);
-      console.log(res);
       if (res.data) {
-        console.log(res.data.data.user.role);
         toast.success(res.data.message);
         setIsLoading(false);
         if (res.data.data.user.role === 'user') {
@@ -75,8 +73,7 @@ const Login = () => {
         setIsLoading(false);
       }
     } catch (err) {
-      console.error('Login failed:', err);
-    }
+toast.error('Failed to login');  }
   };
 
   return (
