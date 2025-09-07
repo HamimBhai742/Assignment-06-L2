@@ -26,6 +26,14 @@ const DashboardLayout = () => {
     { name: 'Profile', href: '/agent-dashboard/profile', icon: '👤' },
   ];
 
+  const adminMenuItems = [
+    { name: 'Overview', href: '/admin-dashboard', icon: '📊' },
+    { name: 'Manage Users', href: '/admin-dashboard/manage-users', icon: '💸' },
+    // { name: 'Cash Out', href: '/agent-dashboard/cash-out', icon: '📤' },
+    // { name: 'Transactions', href: '/agent-dashboard/transactions', icon: '📋' },
+    // { name: 'Profile', href: '/agent-dashboard/profile', icon: '👤' },
+  ];
+
   return (
     <div className='min-h-screen bg-gray-50 flex'>
       {/* Sidebar */}
@@ -73,6 +81,27 @@ const DashboardLayout = () => {
           <nav className='mt-6 px-3'>
             <div className='space-y-1'>
               {agentMenuItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-colors ${
+                    location.pathname === item.href
+                      ? 'bg-purple-100 text-purple-700'
+                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                  }`}
+                >
+                  <span className='mr-3 text-lg'>{item.icon}</span>
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
+
+         {data?.role === Role.ADMIN && (
+          <nav className='mt-6 px-3'>
+            <div className='space-y-1'>
+              {adminMenuItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}

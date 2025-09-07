@@ -7,6 +7,6 @@ export const baseApi = createApi({
     // baseUrl: 'https://assignment-05-lemon.vercel.app/api/a5',
     credentials: 'include',
   }),
-  tagTypes: ['Auth', 'User', 'Transaction', 'Agent'],
+  tagTypes: ['Auth', 'User', 'Transaction', 'Agent', 'Admin'],
   endpoints: () => ({}),
 });

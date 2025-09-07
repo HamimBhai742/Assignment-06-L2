@@ -21,6 +21,8 @@ import TestAgentDashboard from '../pages/TestAgentDashboard';
 import ProtecedRoutes from './ProtecedRoutes';
 import AgentTransactions from '../pages/Dashboard/AgentDashboard/AgentTransactions/AgentTransactions';
 import AgentProfile from '../pages/Dashboard/AgentDashboard/AgentProfile/AgentProfile';
+import AdminDashboard from '../pages/Dashboard/AdminDashboard/AdminDashboard';
+import ManageUsers from '../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
 
 export const router = createBrowserRouter([
   {
@@ -123,6 +125,24 @@ export const router = createBrowserRouter([
         path: 'profile',
         Component: AgentProfile,
       },
+    ],
+  },
+  {
+    path: '/admin-dashboard',
+    element: (
+      <ProtecedRoutes>
+        <DashboardLayout />
+      </ProtecedRoutes>
+    ),
+    children: [
+      {
+        index: true,
+        Component: AdminDashboard,
+      },
+      {
+        path:'manage-users',
+        Component: ManageUsers
+      }
     ],
   },
 ]);

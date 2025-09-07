@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { authApi, useLogoutMutation } from '../../redux/api/authApi';
 import { useAppDispatch } from '../../redux/hook/hooks';
+import { Role } from '../../interfaces/role.interfaces';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,7 +97,11 @@ const Navbar = () => {
           {data || isLoading ? (
             <div className='hidden md:flex items-center space-x-4'>
               <Link
-                to='/dashboard'
+                to={
+                  data?.role === Role.USER
+                    ? '/dashboard'
+                    : `/${data?.role?.toLowerCase()}-dashboard`
+                }
                 className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
               >
                 Dashboard
