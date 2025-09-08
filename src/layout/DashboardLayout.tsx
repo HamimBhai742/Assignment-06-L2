@@ -28,10 +28,9 @@ const DashboardLayout = () => {
 
   const adminMenuItems = [
     { name: 'Overview', href: '/admin-dashboard', icon: '📊' },
-    { name: 'Manage Users', href: '/admin-dashboard/manage-users', icon: '💸' },
-    // { name: 'Cash Out', href: '/agent-dashboard/cash-out', icon: '📤' },
-    // { name: 'Transactions', href: '/agent-dashboard/transactions', icon: '📋' },
-    // { name: 'Profile', href: '/agent-dashboard/profile', icon: '👤' },
+    { name: 'Manage Users', href: '/admin-dashboard/users', icon: '👥' },
+    { name: 'Manage Agents', href: '/admin-dashboard/agents', icon: '🏪' },
+    { name: 'Settings', href: '/admin-dashboard/settings', icon: '⚙️' },
   ];
 
   return (
@@ -171,8 +170,10 @@ const DashboardLayout = () => {
         </header>
 
         {/* Page Content */}
-        <main className='flex-1 p-4 sm:p-6'>
-          <Outlet />
+        <main className='flex-1 p-3 sm:p-4 lg:p-6 overflow-x-hidden'>
+          <div className="max-w-full">
+            <Outlet />
+          </div>
         </main>
       </div>
 

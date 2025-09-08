@@ -79,7 +79,7 @@ const Overview = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
         <div className="mt-4 sm:mt-0">
           <span className="text-sm text-gray-500">Last updated: {new Date().toLocaleTimeString()}</span>
         </div>

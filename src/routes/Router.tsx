@@ -21,7 +21,8 @@ import TestAgentDashboard from '../pages/TestAgentDashboard';
 import ProtecedRoutes from './ProtecedRoutes';
 import AgentTransactions from '../pages/Dashboard/AgentDashboard/AgentTransactions/AgentTransactions';
 import AgentProfile from '../pages/Dashboard/AgentDashboard/AgentProfile/AgentProfile';
-import AdminDashboard from '../pages/Dashboard/AdminDashboard/AdminDashboard';
+import AdminOverview from '../pages/Dashboard/AdminDashboard/Overview/Overview';
+import ManageAgents from '../pages/Dashboard/AdminDashboard/ManageAgents/ManageAgents';
 import ManageUsers from '../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
 
 export const router = createBrowserRouter([
@@ -137,12 +138,20 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: AdminDashboard,
+        Component: AdminOverview,
       },
       {
-        path:'manage-users',
-        Component: ManageUsers
-      }
+        path: 'users',
+        Component: ManageUsers,
+      },
+      {
+        path: 'agents',
+        Component: ManageAgents,
+      },
+      {
+        path: 'settings',
+        element: <div className="text-center py-12 text-gray-500">Settings - Coming Soon</div>,
+      },
     ],
   },
 ]);

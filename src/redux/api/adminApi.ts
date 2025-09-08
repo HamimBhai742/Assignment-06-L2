@@ -11,15 +11,20 @@ interface AdminStats {
   volumeGrowth: number;
 }
 
-interface User {
+interface Agent {
   id: string;
+  agentId: string;
   name: string;
   email: string;
   phone: string;
-  status: 'active' | 'blocked' | 'pending';
+  status: 'pending' | 'approved' | 'suspended';
   balance: number;
+  commission: number;
+  location: string;
+  shopName: string;
   joinedAt: string;
   lastActive: string;
+  totalTransactions: number;
 }
 
 export const adminApi = baseApi.injectEndpoints({
@@ -28,38 +33,63 @@ export const adminApi = baseApi.injectEndpoints({
       query: () => '/admin/stats',
       providesTags: ['Admin'],
     }),
-    getAllUsers: builder.query<User[], void>({
-      query: () => '/admin/users',
+    getAllUsers: builder.query({
+      query: ({ status }) => ({
+        url: `/admin/users?${status !== 'all' ? `isActive=${status}` : ''}`,
+        method: 'GET',
+      }),
       providesTags: ['Admin', 'User'],
     }),
-    blockUser: builder.mutation<void, string>({
-      query: (userId) => ({
-        url: `/admin/users/${userId}/block`,
+    manageUsers: builder.mutation({
+      query: (data) => ({
+        url: `/admin/user-status/${data.id}`,
         method: 'PATCH',
+        body: data,
       }),
       invalidatesTags: ['Admin', 'User'],
     }),
-    unblockUser: builder.mutation<void, string>({
+    deleteUser: builder.mutation({
       query: (userId) => ({
-        url: `/admin/users/${userId}/unblock`,
-        method: 'PATCH',
-      }),
-      invalidatesTags: ['Admin', 'User'],
-    }),
-    deleteUser: builder.mutation<void, string>({
-      query: (userId) => ({
-        url: `/admin/users/${userId}`,
+        url: `/admin/user/${userId}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Admin', 'User'],
     }),
+    getAllAgents: builder.query<Agent[], void>({
+      query: () => '/admin/agents',
+      providesTags: ['Admin', 'Agent'],
+    }),
+    approveAgent: builder.mutation<void, string>({
+      query: (agentId) => ({
+        url: `/admin/agents/${agentId}/approve`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Admin', 'Agent'],
+    }),
+    suspendAgent: builder.mutation<void, string>({
+      query: (agentId) => ({
+        url: `/admin/agents/${agentId}/suspend`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Admin', 'Agent'],
+    }),
+    reactivateAgent: builder.mutation<void, string>({
+      query: (agentId) => ({
+        url: `/admin/agents/${agentId}/reactivate`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Admin', 'Agent'],
+    }),
   }),
 });
 
-export const { 
+export const {
   useGetAdminStatsQuery,
   useGetAllUsersQuery,
-  useBlockUserMutation,
-  useUnblockUserMutation,
-  useDeleteUserMutation
+  useManageUsersMutation,
+  useDeleteUserMutation,
+  useGetAllAgentsQuery,
+  useApproveAgentMutation,
+  useSuspendAgentMutation,
+  useReactivateAgentMutation,
 } = adminApi;
