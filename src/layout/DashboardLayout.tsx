@@ -35,7 +35,7 @@ const DashboardLayout = () => {
       href: '/admin-dashboard/all-transactions',
       icon: '📋',
     },
-    { name: 'Settings', href: '/admin-dashboard/settings', icon: '⚙️' },
+    { name: 'Profile', href: '/admin-dashboard/profile', icon: '👤' },
   ];
 
   return (
