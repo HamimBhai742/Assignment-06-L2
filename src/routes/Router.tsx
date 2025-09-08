@@ -26,6 +26,9 @@ import ManageAgents from '../pages/Dashboard/AdminDashboard/ManageAgents/ManageA
 import ManageUsers from '../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
 import AllTransactions from '../pages/Dashboard/AdminDashboard/Transactions/Transactions';
 import AdminProfile from '../pages/Dashboard/AdminDashboard/Profile/Profile';
+import AdminProtectedRoute from './AdminProtected';
+import AgentProtectedRoute from './AgentProtected';
+import UserProtectedRoute from './UserProtected';
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +61,9 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     element: (
       <ProtecedRoutes>
-        <DashboardLayout />
+        <UserProtectedRoute>
+          <DashboardLayout />
+        </UserProtectedRoute>
       </ProtecedRoutes>
     ),
     children: [
@@ -104,7 +109,9 @@ export const router = createBrowserRouter([
     path: '/agent-dashboard',
     element: (
       <ProtecedRoutes>
-        <DashboardLayout />
+        <AgentProtectedRoute>
+          <DashboardLayout />
+        </AgentProtectedRoute>
       </ProtecedRoutes>
     ),
     children: [
@@ -134,7 +141,9 @@ export const router = createBrowserRouter([
     path: '/admin-dashboard',
     element: (
       <ProtecedRoutes>
-        <DashboardLayout />
+        <AdminProtectedRoute>
+          <DashboardLayout />
+        </AdminProtectedRoute>
       </ProtecedRoutes>
     ),
     children: [
