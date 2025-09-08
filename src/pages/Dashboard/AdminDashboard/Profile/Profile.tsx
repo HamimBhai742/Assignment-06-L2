@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PersonalInfo from './components/PersonalInfo';
 import SecuritySettings from './components/SecuritySettings';
 import { useMyProfileQuery } from '../../../../redux/api/userApi';
-
+import Loding from '../../../../components/Loding/Loding';
 
 export interface UserProfile {
   _id?: string;
@@ -18,7 +18,7 @@ const AdminProfile = () => {
   const { data: userProfile, isLoading } = useMyProfileQuery(undefined);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loding/>
   }
   const tabs = [
     { id: 'personal', name: 'Personal Info', icon: '👤' },

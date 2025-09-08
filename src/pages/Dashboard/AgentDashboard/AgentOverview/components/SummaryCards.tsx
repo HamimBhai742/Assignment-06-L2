@@ -7,19 +7,22 @@ import {
 } from '@heroicons/react/24/outline';
 import { useMyWalletQuery } from '../../../../../redux/api/walletApi';
 import { useTodayTotalTransactionsQuery } from '../../../../../redux/api/transactionApi';
+import Loding from '../../../../../components/Loding/Loding';
 
 const SummaryCards: React.FC = () => {
   const { data, isLoading } = useMyWalletQuery(undefined);
   const { data: today, isLoading: lo } =
-    useTodayTotalTransactionsQuery(undefined);
-
+    useTodayTotalTransactionsQuery(undefined,{
+      refetchOnMountOrArgChange: true
+    });
+  console.log(today);
   if (isLoading || lo) {
-    return <div>Loading...</div>;
+    return <Loding />;
   }
   const summaryData = [
     {
       title: 'Total Balance',
-      amount: `৳ ${data?.data.balance.toLocaleString()}`,
+      amount: `৳ ${data?.data?.balance?.toLocaleString()||0}`,
       icon: WalletIcon,
       color: 'bg-blue-500',
       change: today?.data?.totalChange,
@@ -27,7 +30,7 @@ const SummaryCards: React.FC = () => {
     },
     {
       title: 'Cash In Today',
-      amount: `৳ ${today?.data?.cashIn?.totalAmount.toLocaleString()}`,
+      amount: `৳ ${today?.data?.cashIn?.totalAmount?.toLocaleString()||0}`,
       icon: ArrowDownIcon,
       color: 'bg-green-500',
       change: today?.data?.cashInChange,
@@ -35,7 +38,7 @@ const SummaryCards: React.FC = () => {
     },
     {
       title: 'Cash Out Today',
-      amount: `৳ ${today?.data?.cashOut?.totalAmount.toLocaleString()}`,
+      amount: `৳ ${today?.data?.cashOut?.totalAmount?.toLocaleString()||0}`,
       icon: ArrowUpIcon,
       color: 'bg-red-500',
       change: today?.data?.cashOutChange,
@@ -43,7 +46,7 @@ const SummaryCards: React.FC = () => {
     },
     {
       title: 'Total Commission',
-      amount: `৳ ${today?.data?.commission?.totalAmount.toLocaleString()}`,
+      amount: `৳ ${today?.data?.commission?.totalAmount?.toLocaleString()||0}`,
       icon: UsersIcon,
       color: 'bg-purple-500',
       change: today?.data?.comissionChange,

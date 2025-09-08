@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 interface VolumeChartProps {
@@ -9,6 +10,7 @@ interface VolumeChartProps {
 }
 
 const VolumeChart = ({ data }: VolumeChartProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -31,11 +33,11 @@ const VolumeChart = ({ data }: VolumeChartProps) => {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text 
-        x={x} 
-        y={y} 
-        fill="white" 
-        textAnchor={x > cx ? 'start' : 'end'} 
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
         className="text-xs font-medium"
       >
@@ -49,9 +51,9 @@ const VolumeChart = ({ data }: VolumeChartProps) => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900">Transaction Volume Distribution</h3>
       </div>
-      
+
       <div className="h-80">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="90%">
           <PieChart>
             <Pie
               data={data}
@@ -60,7 +62,7 @@ const VolumeChart = ({ data }: VolumeChartProps) => {
               labelLine={false}
               label={CustomLabel}
               outerRadius={100}
-              innerRadius={60}
+              innerRadius={50}
               fill="#8884d8"
               dataKey="value"
               strokeWidth={2}
@@ -71,8 +73,8 @@ const VolumeChart = ({ data }: VolumeChartProps) => {
               ))}
             </Pie>
             <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              verticalAlign="bottom" 
+            <Legend
+              verticalAlign="bottom"
               height={36}
               formatter={(value, entry: any) => (
                 <span style={{ color: entry.color }} className="text-sm font-medium">

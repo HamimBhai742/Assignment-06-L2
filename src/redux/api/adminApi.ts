@@ -66,6 +66,20 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Admin', 'Transaction'],
     }),
+    adminOverView: builder.query({
+      query: () => ({
+        url: `/admin/overview`,
+        method: 'GET',
+      }),
+      providesTags: ['Admin'],
+    }),
+    transactionAnalytics: builder.query({
+      query: () => ({
+        url: `admin/transaction-analytics`,
+        method: 'GET',
+      }),
+      providesTags: ['Admin'],
+    }),
   }),
 });
 
@@ -78,4 +92,6 @@ export const {
   useSuspendAgentMutation,
   useReactiveAgentMutation,
   useGetAllTransactionsQuery,
+  useAdminOverViewQuery,
+  useTransactionAnalyticsQuery,
 } = adminApi;

@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { Role } from '../interfaces/role.interfaces';
+import { useMyProfileQuery } from '../redux/api/userApi';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const { data } = useAuth();
+  const { data: profile } = useMyProfileQuery(undefined);
+  console.log(profile);
   const userMenuItems = [
     { name: 'Overview', href: '/dashboard', icon: '📊' },
     { name: 'Deposit Money', href: '/dashboard/deposit', icon: '💰' },
@@ -127,13 +130,17 @@ const DashboardLayout = () => {
         <div className='absolute bottom-0 w-full p-4 border-t border-gray-200'>
           <div className='flex items-center space-x-3'>
             <div className='w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center'>
-              <span className='text-purple-600 font-semibold'>JD</span>
+              <span className='text-purple-600 font-semibold'>
+                {profile?.data?.name?.charAt(0).toUpperCase()}
+              </span>
             </div>
             <div className='flex-1 min-w-0'>
               <p className='text-sm font-medium text-gray-900 truncate'>
-                John Doe
+                {profile?.data?.name}
               </p>
-              <p className='text-xs text-gray-500 truncate'>john@example.com</p>
+              <p className='text-xs text-gray-500 truncate'>
+                {profile?.data?.phone}
+              </p>
             </div>
           </div>
         </div>

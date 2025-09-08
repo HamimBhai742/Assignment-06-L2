@@ -12,8 +12,8 @@ interface LoginData {
 
 const Login = () => {
   const navigate = useNavigate();
-  const [login] = useLoginMutation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [login, { isLoading }] = useLoginMutation();
+  // const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<LoginData>({
     phone: '',
     password: '',
@@ -48,12 +48,10 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-
     try {
       const res = await login(formData);
       if (res.data) {
         toast.success(res.data.message);
-        setIsLoading(false);
         if (res.data.data.user.role === 'user') {
           navigate('/dashboard');
         } else if (res.data.data.user.role === 'agent') {
@@ -72,7 +70,6 @@ const Login = () => {
         } else {
           toast.error(err.data.message);
         }
-        setIsLoading(false);
       }
     } catch (err) {
       toast.error('Failed to login');
@@ -105,7 +102,8 @@ const Login = () => {
                 value={formData.phone}
                 onChange={(e) => updateFormData('phone', e.target.value)}
                 className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
-                placeholder='Enter your email'
+                placeholder='Enter your phone number'
+                maxLength={11}
               />
               {errors.phone && (
                 <p className='text-red-500 text-xs mt-1'>{errors.phone}</p>
@@ -114,7 +112,7 @@ const Login = () => {
 
             <div>
               <label className='block text-sm font-medium text-gray-700 mb-2'>
-                Password
+                PIN
               </label>
               <div className='relative'>
                 <input
@@ -122,7 +120,8 @@ const Login = () => {
                   value={formData.password}
                   onChange={(e) => updateFormData('password', e.target.value)}
                   className='w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
-                  placeholder='Enter your password'
+                  placeholder='Enter your 6-digit pin'
+                  maxLength={6}
                 />
                 <button
                   type='button'

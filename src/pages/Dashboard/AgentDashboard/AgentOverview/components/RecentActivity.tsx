@@ -6,16 +6,13 @@ import {
   ClockIcon,
   FunnelIcon,
 } from '@heroicons/react/24/outline';
-import {
-  useGetMyTransactionsQuery,
-} from '../../../../../redux/api/transactionApi';
+import { useGetMyTransactionsQuery } from '../../../../../redux/api/transactionApi';
 import { format } from 'timeago.js';
 import type { Transaction } from '../interface';
 
-
 const RecentActivity: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'cash_in' | 'cash_out'>('all');
-  const { data, isLoading } = useGetMyTransactionsQuery(
+  const { data } = useGetMyTransactionsQuery(
     {
       limit: 6,
       page: 1,
@@ -28,10 +25,6 @@ const RecentActivity: React.FC = () => {
       refetchOnMountOrArgChange: true,
     }
   );
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -69,7 +62,7 @@ const RecentActivity: React.FC = () => {
                 <option value='all'>All Transactions</option>
                 <option value='cash_in'>Cash In</option>
                 <option value='cash_out'>Cash Out</option>
-                <option value="commission">Commission</option>
+                <option value='commission'>Commission</option>
               </select>
             </div>
           </div>

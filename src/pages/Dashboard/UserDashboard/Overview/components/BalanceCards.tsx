@@ -1,9 +1,10 @@
+import Loding from '../../../../../components/Loding/Loding';
 import { useLastMonthTransactionsQuery } from '../../../../../redux/api/transactionApi';
 import { useMyWalletQuery } from '../../../../../redux/api/walletApi';
 
 const BalanceCards = () => {
   const { data } = useMyWalletQuery(undefined);
-  const { data: TransactionList } = useLastMonthTransactionsQuery(undefined);
+  const { data: TransactionList ,isLoading} = useLastMonthTransactionsQuery(undefined);
   const balanceData = [
     {
       title: 'Main Balance',
@@ -42,6 +43,10 @@ const BalanceCards = () => {
       gradient: 'from-pink-500 to-rose-600',
     },
   ];
+
+  if(isLoading){
+    return <Loding/>
+  }
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
