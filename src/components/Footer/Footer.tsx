@@ -85,13 +85,10 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: 'Send Money', icon: '💸' },
-                { name: 'Mobile Recharge', icon: '📱' },
-                { name: 'Bill Payments', icon: '🧾' },
                 { name: 'Cash Out', icon: '🏧' },
-                { name: 'Merchant Payment', icon: '🏪' },
-                { name: 'International Transfer', icon: '🌍' },
-                { name: 'Savings Account', icon: '💰' },
-                { name: 'Micro Loans', icon: '🏦' }
+                { name: 'Cash In', icon: '🏪' },
+                { name: 'Withdraw', icon: '💰' },
+                { name: 'Deposit', icon: '🏧' }
               ].map((service) => (
                 <li key={service.name}>
                   <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm flex items-center group">

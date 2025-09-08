@@ -1,13 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { Role } from '../interfaces/role.interfaces';
 import { useMyProfileQuery } from '../redux/api/userApi';
+import { ArrowRightEndOnRectangleIcon } from '@heroicons/react/24/outline';
+import { authApi, useLogoutMutation } from '../redux/api/authApi';
+import toast from 'react-hot-toast';
+import { useAppDispatch } from '../redux/hook/hooks';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const { data } = useAuth();
+  const [logOut] = useLogoutMutation();
   const { data: profile } = useMyProfileQuery(undefined);
   console.log(profile);
   const userMenuItems = [
@@ -40,14 +46,27 @@ const DashboardLayout = () => {
     },
     { name: 'Profile', href: '/admin-dashboard/profile', icon: '👤' },
   ];
+  const dispatch = useAppDispatch();
+  const handleLogout = async () => {
+    try {
+      const res = await logOut();
+      if (res.data) {
+        toast.success(res.data.message);
+        dispatch(authApi.util.resetApiState());
+      }
+    } catch (error) {
+      toast.error('Failed to logout');
+    }
+  };
 
   return (
     <div className='min-h-screen bg-gray-50 flex'>
       {/* Sidebar */}
+
       <div
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
+        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:fixed lg:inset-0`}
       >
         {/* Logo */}
         <div className='flex items-center justify-between h-16 px-6 border-b border-gray-200'>
@@ -127,7 +146,7 @@ const DashboardLayout = () => {
         )}
 
         {/* User Info */}
-        <div className='absolute bottom-0 w-full p-4 border-t border-gray-200'>
+        <div className='absolute flex items-center justify-between bottom-0 w-full p-4 border-t border-gray-200'>
           <div className='flex items-center space-x-3'>
             <div className='w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center'>
               <span className='text-purple-600 font-semibold'>
@@ -143,11 +162,14 @@ const DashboardLayout = () => {
               </p>
             </div>
           </div>
+          <button onClick={handleLogout}>
+            <ArrowRightEndOnRectangleIcon width={30} height={30} />
+          </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className='flex-1 lg:ml-0'>
+      <div className='flex-1 lg:ml-64'>
         {/* Top Header */}
         <header className='bg-white shadow-sm border-b border-gray-200'>
           <div className='flex items-center justify-between h-16 px-4 sm:px-6'>
@@ -190,12 +212,7 @@ const DashboardLayout = () => {
       </div>
 
       {/* Overlay for mobile */}
-      {isSidebarOpen && (
-        <div
-          className='fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden'
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      )}
+
     </div>
   );
 };

@@ -9,30 +9,7 @@ export const allFeatures = [
     color: 'from-blue-500 to-cyan-500',
     benefits: ['Instant transfer', 'No hidden fees', '24/7 availability'],
   },
-  {
-    category: 'transfer',
-    title: 'Instant Add Money ',
-    description: 'Add money to any agent wallet instantly using mobile number',
-    icon: '⚡',
-    color: 'from-blue-500 to-cyan-500',
-    benefits: [
-      'Instant agent transfer',
-      'transaction fees',
-      '24/7 availability',
-    ],
-  },
-  {
-    category: 'transfer',
-    title: 'Instant Diposit Money ',
-    description: 'Diposit money to any agent wallet instantly using mobile number',
-    icon: '⚡',
-    color: 'from-blue-500 to-cyan-500',
-    benefits: [
-      'Instant agent transfer',
-      'transaction fees',
-      '24/7 availability',
-    ],
-  },
+                                                                                                                                               
   {
     category: 'transfer',
     title: 'International Remittance',
@@ -49,7 +26,46 @@ export const allFeatures = [
     color: 'from-purple-500 to-violet-500',
     benefits: ['Bulk processing', 'CSV upload', 'Business tools'],
   },
-
+  {
+    category: 'cash_in',
+    title: 'Cash In',
+    description: 'Agent can add money to user wallet',
+    icon: '💸',
+    color: 'from-purple-500 to-violet-500',
+    benefits: ['Commission', 'No hidden fees', 'Instant transfer'],
+  },
+  {
+    category: 'cash_out',
+    title: 'Cash Out',
+    description: 'Agent withdraw money from user wallet',
+    icon: '📥',
+    color: 'from-purple-500 to-violet-500',
+    benefits: ['Instant transfer', 'Commission', 'No hidden fees'],
+  },
+  {
+    category: 'send_money',
+    title: 'Send Money',
+    description: 'Send money to multiple recipients at once for businesses',
+    icon: '📱',
+    color: 'from-purple-500 to-violet-500',
+    benefits: ['Instant transfer', 'Free send upto 100 tk', 'Limited amount'],
+  },
+  {
+    category: 'withdraw',
+    title: 'Withdraw',
+    description: 'Withdraw money from user wallet',
+    icon: '🏧',
+    color: 'from-purple-500 to-violet-500',
+    benefits: ['Instant transfer', 'No hidden fees', 'Limited'],
+  },
+  {
+    category: 'deposit',
+    title: 'Deposit',
+    description: 'Deposit money to user wallet',
+    icon: '💰',
+    color: 'from-purple-500 to-violet-500',
+    benefits: ['Instant transfer', 'No hidden fees', 'Limited'],
+  },
   // Security Features
   {
     category: 'security',

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useCreateAccountMutation } from '../../redux/api/authApi';
 
 interface FormData {
@@ -25,7 +25,7 @@ const Register = () => {
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const navigate = useNavigate();
   const updateFormData = (field: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
@@ -72,6 +72,7 @@ const Register = () => {
       // Simulate API call
       const res = await createAccount(formData);
       if (res.data) {
+        navigate('/login');
         toast.success(res.data.message);
         setIsSubmitting(false);
       }
@@ -170,7 +171,7 @@ const Register = () => {
                         Personal User
                       </h3>
                       <p className='text-sm text-gray-600'>
-                        Send money, pay bills, shop online
+                        Send money, deposit, withdraw
                       </p>
                     </div>
                   </div>
@@ -189,9 +190,7 @@ const Register = () => {
                       <span className='text-2xl'>🏪</span>
                     </div>
                     <div className='text-left'>
-                      <h3 className='font-semibold text-gray-900'>
-                        Agent/Merchant
-                      </h3>
+                      <h3 className='font-semibold text-gray-900'>Agent</h3>
                       <p className='text-sm text-gray-600'>
                         Provide cash-in/out services
                       </p>

@@ -4,11 +4,12 @@ import { useMyWalletQuery } from '../../../../../redux/api/walletApi';
 
 const BalanceCards = () => {
   const { data } = useMyWalletQuery(undefined);
-  const { data: TransactionList ,isLoading} = useLastMonthTransactionsQuery(undefined);
+  const { data: TransactionList, isLoading } =
+    useLastMonthTransactionsQuery(undefined);
   const balanceData = [
     {
       title: 'Main Balance',
-      amount: data?.data?.balance,
+      amount: data?.data?.balance || 0,
       currency: '৳',
       change: '+12.5%',
       changeType: 'increase',
@@ -17,7 +18,7 @@ const BalanceCards = () => {
     },
     {
       title: 'Last Month Transactions',
-      amount: TransactionList?.data?.lastMonth?.totalAmount,
+      amount: TransactionList?.data?.lastMonth?.totalAmount || 0,
       currency: '৳',
       change: '-2.1%',
       changeType: 'decrease',
@@ -26,7 +27,7 @@ const BalanceCards = () => {
     },
     {
       title: 'Last Month Send Money',
-      amount: TransactionList?.data?.lastMonthSendMoney?.totalAmount,
+      amount: TransactionList?.data?.lastMonthSendMoney?.totalAmount || 0,
       currency: '৳',
       change: '+5.2%',
       changeType: 'increase',
@@ -35,7 +36,7 @@ const BalanceCards = () => {
     },
     {
       title: 'Last Month Recive Money',
-      amount: TransactionList?.data?.lastMonthReciveMoney?.totalAmount,
+      amount: TransactionList?.data?.lastMonthReciveMoney?.totalAmount || 0,
       currency: '৳',
       change: '+8.7%',
       changeType: 'increase',
@@ -44,8 +45,8 @@ const BalanceCards = () => {
     },
   ];
 
-  if(isLoading){
-    return <Loding/>
+  if (isLoading) {
+    return <Loding />;
   }
 
   return (
