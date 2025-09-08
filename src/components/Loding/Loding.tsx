@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react';
-import loding from '../../../lottieFiles/loding.json';
+import loding from '../../assets/lottieFiles/loding.json';
 export default function Loding() {
   return (
     <div className='w-full h-full flex justify-center items-center'>
