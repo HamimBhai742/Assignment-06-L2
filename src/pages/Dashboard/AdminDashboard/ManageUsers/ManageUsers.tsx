@@ -1,31 +1,31 @@
 import { useState } from 'react';
-import { useDemoUsersData } from '../../../../hooks/useDemoUsersData';
-import { usePagination } from '../../../../hooks/usePagination';
 import UserTable, { type User } from './UserTable';
 import UserCard from './UserCard';
 import SearchBar from './SearchBar';
 import FilterDropdown from './FilterDropdown';
-import Pagination from '../../../../components/Pagination/Pagination';
-import { MagnifyingGlassIcon, FunnelIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useGetAllUsersQuery } from '../../../../redux/api/adminApi';
+import Pagination from './UserPAgination';
 
 const ManageUsers = () => {
-  const { data: users, isLoading } = useDemoUsersData();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
-  const { data } = useGetAllUsersQuery({
+  const { data, isLoading } = useGetAllUsersQuery({
     status: statusFilter,
+    search: searchTerm,
+    limit: itemsPerPage,
+    page: currentPage,
   });
-  console.log(statusFilter);
 
-  // const {
-  //   currentPage,
-  //   totalPages,
-  //   goToPage,
-  //   totalItems,
-  //   itemsPerPage,
-  // } = usePagination({ data: filteredUsers, itemsPerPage: 10 });
+  const users = data?.data?.users;
+  const activeUsers = data?.data?.activeUsers;
+  const blockedUsers = data?.data?.blockedUsers;
+  const totalUsers = data?.data?.totalUsers;
+  const totalPages = data?.metadata?.totalPage;
+  const total = data?.metadata?.total;
 
   if (isLoading) {
     return (
@@ -65,10 +65,11 @@ const ManageUsers = () => {
       <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
         <div>
           <h1 className='text-2xl font-bold text-gray-900'>Manage Users</h1>
-          <p className='text-sm text-gray-600 mt-1'>
-            Total: {users?.length || 0} users | Active:{' '}
-            {users?.filter((u) => u.status === 'active').length || 0}
-          </p>
+          <div className='flex flex-wrap items-center gap-2 sm:gap-4 mt-1 text-xs sm:text-sm text-gray-600'>
+            <span>Total: {totalUsers}</span>
+            <span className='text-green-600'>Active: {activeUsers}</span>
+            <span className='text-red-600'>Blocked: {blockedUsers}</span>
+          </div>
         </div>
 
         {/* View Toggle */}
@@ -102,7 +103,7 @@ const ManageUsers = () => {
           <SearchBar
             value={searchTerm}
             onChange={setSearchTerm}
-            placeholder='Search by name, email, or phone...'
+            placeholder='Search by name or phone...'
           />
         </div>
         <FilterDropdown
@@ -131,23 +132,26 @@ const ManageUsers = () => {
         ) : (
           <>
             {viewMode === 'table' ? (
-              <UserTable users={data?.data} />
+              <UserTable users={users} />
             ) : (
               <div className='p-6'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                  {data?.data.map((user: User) => (
+                  {users?.map((user: User) => (
                     <UserCard key={user._id} user={user} />
                   ))}
                 </div>
               </div>
             )}
-            {/* <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={goToPage}
-              totalItems={totalItems}
-              itemsPerPage={itemsPerPage}
-            /> */}
+            {!isLoading && total > 0 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+                totalItems={total}
+                itemsPerPage={itemsPerPage}
+                setItemsPerPage={setItemsPerPage}
+              />
+            )}
           </>
         )}
       </div>

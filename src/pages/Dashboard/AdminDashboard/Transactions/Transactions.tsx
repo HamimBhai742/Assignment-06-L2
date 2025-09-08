@@ -1,0 +1,76 @@
+import { useState } from 'react';
+import FilterBar from './components/FilterBar';
+import TransactionList from './components/TransactionList';
+import Pagination from './components/Pagination';
+import type { FilterState } from './intrefaces';
+import { useGetAllTransactionsQuery } from '../../../../redux/api/adminApi';
+
+const AllTransactions = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [filters, setFilters] = useState<FilterState>({
+    sort: '-createdAt',
+    type: 'all',
+    status: 'all',
+    search: '',
+  });
+  const { data, isLoading } = useGetAllTransactionsQuery({
+    limit: itemsPerPage,
+    page: currentPage,
+    type: filters?.type,
+    search: filters?.search,
+    status: filters?.status,
+    sort: filters?.sort,
+  });
+  console.log(data);
+  const transactions = data?.data?.allTransaction;
+  const totalPages = data?.data?.metaData?.totalPage;
+  const total = data?.data?.metaData?.total;
+  console.log(total)
+  return (
+    <div className='space-y-6'>
+      {/* Header */}
+      <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
+        <div>
+          <h1 className='text-2xl font-bold text-gray-900'>
+            Transaction History
+          </h1>
+          <p className='text-gray-600 mt-1'>{total} transactions found</p>
+        </div>
+
+        <div className='mt-4 sm:mt-0 flex items-center space-x-3'>
+          <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium'>
+            📊 Export
+          </button>
+          <button className='px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium'>
+            📄 Statement
+          </button>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <FilterBar filters={filters} setFilters={setFilters} />
+
+      {/* Transaction List */}
+      <TransactionList
+        transactions={transactions}
+        isLoading={isLoading}
+        isEmpty={total === 0}
+      />
+
+      {/* Pagination */}
+      {!isLoading && total > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          totalItems={total}
+          itemsPerPage={itemsPerPage}
+          setItemsPerPage={setItemsPerPage}
+        />
+      )}
+    </div>
+  );
+};
+
+export default AllTransactions;

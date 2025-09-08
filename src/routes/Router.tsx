@@ -24,6 +24,7 @@ import AgentProfile from '../pages/Dashboard/AgentDashboard/AgentProfile/AgentPr
 import AdminOverview from '../pages/Dashboard/AdminDashboard/Overview/Overview';
 import ManageAgents from '../pages/Dashboard/AdminDashboard/ManageAgents/ManageAgents';
 import ManageUsers from '../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers';
+import AllTransactions from '../pages/Dashboard/AdminDashboard/Transactions/Transactions';
 
 export const router = createBrowserRouter([
   {
@@ -149,8 +150,16 @@ export const router = createBrowserRouter([
         Component: ManageAgents,
       },
       {
+        path: 'all-transactions',
+        Component: AllTransactions,
+      },
+      {
         path: 'settings',
-        element: <div className="text-center py-12 text-gray-500">Settings - Coming Soon</div>,
+        element: (
+          <div className='text-center py-12 text-gray-500'>
+            Settings - Coming Soon
+          </div>
+        ),
       },
     ],
   },

@@ -30,6 +30,11 @@ const DashboardLayout = () => {
     { name: 'Overview', href: '/admin-dashboard', icon: '📊' },
     { name: 'Manage Users', href: '/admin-dashboard/users', icon: '👥' },
     { name: 'Manage Agents', href: '/admin-dashboard/agents', icon: '🏪' },
+    {
+      name: 'All Transactions',
+      href: '/admin-dashboard/all-transactions',
+      icon: '📋',
+    },
     { name: 'Settings', href: '/admin-dashboard/settings', icon: '⚙️' },
   ];
 
@@ -97,7 +102,7 @@ const DashboardLayout = () => {
           </nav>
         )}
 
-         {data?.role === Role.ADMIN && (
+        {data?.role === Role.ADMIN && (
           <nav className='mt-6 px-3'>
             <div className='space-y-1'>
               {adminMenuItems.map((item) => (
@@ -171,7 +176,7 @@ const DashboardLayout = () => {
 
         {/* Page Content */}
         <main className='flex-1 p-3 sm:p-4 lg:p-6 overflow-x-hidden'>
-          <div className="max-w-full">
+          <div className='max-w-full'>
             <Outlet />
           </div>
         </main>

@@ -58,6 +58,8 @@ const Login = () => {
           navigate('/dashboard');
         } else if (res.data.data.user.role === 'agent') {
           navigate('/agent-dashboard');
+        } else if (res.data.data.user.role === 'admin') {
+          navigate('/admin-dashboard');
         }
       }
       if (res.error) {
@@ -73,7 +75,8 @@ const Login = () => {
         setIsLoading(false);
       }
     } catch (err) {
-toast.error('Failed to login');  }
+      toast.error('Failed to login');
+    }
   };
 
   return (
