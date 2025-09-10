@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { authApi, useLogoutMutation } from '../../redux/api/authApi';
 import { useAppDispatch } from '../../redux/hook/hooks';
 import { Role } from '../../interfaces/role.interfaces';
+import { ModeToggle } from '../mode-toggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -132,6 +133,10 @@ const Navbar = () => {
             </div>
           )}
 
+          <div>
+            <ModeToggle />
+          </div>
+
           {/* Mobile menu button */}
           <div className='md:hidden'>
             <button
@@ -226,6 +231,9 @@ const Navbar = () => {
                 >
                   Get Started
                 </Link>
+                <div>
+                  <ModeToggle />
+                </div>
               </div>
             </div>
           </div>

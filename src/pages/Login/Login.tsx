@@ -84,7 +84,7 @@ const Login = () => {
           <div className='bg-gradient-to-r from-blue-600 to-purple-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4'>
             <span className='text-2xl text-white'>💳</span>
           </div>
-          <h1 className='text-3xl font-bold text-gray-900 mb-2'>
+          <h1 className='text-3xl font-bold  text-gray-900 mb-2'>
             Welcome Back
           </h1>
           <p className='text-gray-600'>Sign in to your PayWallet account</p>
@@ -101,7 +101,7 @@ const Login = () => {
                 type='text'
                 value={formData.phone}
                 onChange={(e) => updateFormData('phone', e.target.value)}
-                className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
+                className='w-full  px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
                 placeholder='Enter your phone number'
                 maxLength={11}
               />
