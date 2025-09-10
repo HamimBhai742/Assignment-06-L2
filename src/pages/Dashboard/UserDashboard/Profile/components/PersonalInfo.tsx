@@ -61,13 +61,13 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
-        <h3 className='text-lg font-semibold text-gray-900'>
+        <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
           Personal Information
         </h3>
         {!isEditing ? (
           <button
             onClick={() => setIsEditing(true)}
-            className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium'
+            className='px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors font-medium'
           >
             ✏️ Edit Profile
           </button>
@@ -75,14 +75,14 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
           <div className='flex space-x-3'>
             <button
               onClick={handleCancel}
-              className='px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors'
+              className='px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors'
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50'
+              className='px-4 py-2 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-800 transition-colors disabled:opacity-50'
             >
               {isSaving ? 'Saving...' : 'Save Changes'}
             </button>
@@ -93,7 +93,7 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {/* First Name */}
         <div>
-          <label className='block text-sm font-medium text-gray-700 mb-2'>
+          <label className='block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2'>
             Name
           </label>
           {isEditing ? (
@@ -101,16 +101,16 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
               type='text'
               value={formData?.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
             />
           ) : (
-            <div className='px-4 py-3 bg-gray-50 rounded-lg text-gray-900'>
+            <div className='px-4 py-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-gray-900 dark:text-white'>
               {userProfile?.name}
             </div>
           )}
         </div>
         <div>
-          <label className='block text-sm font-medium text-gray-700 mb-2'>
+          <label className='block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2'>
             Phone Number
           </label>
           {isEditing ? (
@@ -118,10 +118,10 @@ const PersonalInfo = ({ userProfile }: PersonalInfoProps) => {
               type='text'
               value={formData?.phone}
               onChange={(e) => handleInputChange('phone', e.target.value)}
-              className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+              className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
             />
           ) : (
-            <div className='px-4 py-3 bg-gray-50 rounded-lg text-gray-900'>
+            <div className='px-4 py-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-gray-900 dark:text-white'>
               {userProfile?.phone}
             </div>
           )}

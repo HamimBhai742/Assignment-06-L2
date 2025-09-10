@@ -43,55 +43,55 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
   if (isSuccess) {
     return (
       <div className='p-6 text-center'>
-        <div className='w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4'>
-          <CheckCircleIcon className='h-10 w-10 text-green-500' />
+        <div className='w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4'>
+          <CheckCircleIcon className='h-10 w-10 text-green-500 dark:text-green-400' />
         </div>
-        <h2 className='text-2xl font-bold text-gray-900 mb-2'>
+        <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
           {res?.message}
         </h2>
-        <p className='text-gray-600 mb-6'>
+        <p className='text-gray-600 dark:text-gray-300 mb-6'>
           Money has been added to customer's account
         </p>
 
-        <div className='bg-green-50 border border-green-200 rounded-lg p-4 mb-6'>
+        <div className='bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6'>
           <div className='space-y-2 text-sm'>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>Transaction ID:</span>
-              <span className='font-mono font-medium'>{res?.data.trnxId}</span>
+              <span className='text-gray-600 dark:text-gray-300'>Transaction ID:</span>
+              <span className='font-mono font-medium text-gray-900 dark:text-white'>{res?.data.trnxId}</span>
             </div>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>Customer:</span>
-              <span className='font-medium'>{res?.data.recipient}</span>
+              <span className='text-gray-600 dark:text-gray-300'>Customer:</span>
+              <span className='font-medium text-gray-900 dark:text-white'>{res?.data.recipient}</span>
             </div>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>Phone:</span>
-              <span className='font-medium'>{res?.data.phone}</span>
+              <span className='text-gray-600 dark:text-gray-300'>Phone:</span>
+              <span className='font-medium text-gray-900 dark:text-white'>{res?.data.phone}</span>
             </div>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>Amount Added:</span>
-              <span className='font-bold text-green-600'>
+              <span className='text-gray-600 dark:text-gray-300'>Amount Added:</span>
+              <span className='font-bold text-green-600 dark:text-green-400'>
                 ৳{res?.data.amount?.toLocaleString()}
               </span>
             </div>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>Service Charge:</span>
-              <span className='font-semibold text-blue-600'>Free</span>
+              <span className='text-gray-600 dark:text-gray-300'>Service Charge:</span>
+              <span className='font-semibold text-blue-600 dark:text-blue-400'>Free</span>
             </div>
-            <div className='flex justify-between border-t border-green-200 pt-2'>
-              <span className='text-gray-600'>Total Deducted:</span>
-              <span className='font-bold'>
+            <div className='flex justify-between border-t border-green-200 dark:border-green-600 pt-2'>
+              <span className='text-gray-600 dark:text-gray-300'>Total Deducted:</span>
+              <span className='font-bold text-gray-900 dark:text-white'>
                 ৳{res?.data?.amount.toLocaleString()}
               </span>
             </div>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>Agent Commission:</span>
-              <span className='font-semibold text-blue-600'>
+              <span className='text-gray-600 dark:text-gray-300'>Agent Commission:</span>
+              <span className='font-semibold text-blue-600 dark:text-blue-400'>
                 ৳{res?.data?.commission?.toLocaleString()}
               </span>
             </div>
             <div className='flex justify-between'>
-              <span className='text-gray-600'>New Balance:</span>
-              <span className='font-bold text-blue-600'>
+              <span className='text-gray-600 dark:text-gray-300'>New Balance:</span>
+              <span className='font-bold text-blue-600 dark:text-blue-400'>
                 {/* ৳{(user?.balance + transactionData?.amount)?.toLocaleString()} */}
                 ৳{res?.data?.availableBlance?.toLocaleString()}
               </span>
@@ -101,7 +101,7 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
 
         <button
           onClick={onReset}
-          className='w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors'
+          className='w-full bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors'
         >
           Make Another Transaction
         </button>
@@ -112,55 +112,55 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
   return (
     <div className='p-6'>
       <div className='mb-6'>
-        <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+        <h2 className='text-xl font-semibold text-gray-900 dark:text-white mb-2'>
           Confirm Transaction
         </h2>
-        <p className='text-gray-600 text-sm'>
+        <p className='text-gray-600 dark:text-gray-300 text-sm'>
           Please review the details before confirming
         </p>
       </div>
 
       {/* Customer Info */}
-      <div className='bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6'>
+      <div className='bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-6'>
         <div className='flex items-center space-x-3'>
-          <div className='w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center'>
-            <UserIcon className='h-6 w-6 text-blue-600' />
+          <div className='w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center'>
+            <UserIcon className='h-6 w-6 text-blue-600 dark:text-blue-400' />
           </div>
           <div>
             <div className='flex items-center space-x-2'>
-              <h3 className='font-medium text-gray-900'>{user.name}</h3>
+              <h3 className='font-medium text-gray-900 dark:text-white'>{user.name}</h3>
               {user.verified && (
-                <CheckCircleIcon className='h-4 w-4 text-green-500' />
+                <CheckCircleIcon className='h-4 w-4 text-green-500 dark:text-green-400' />
               )}
             </div>
-            <p className='text-sm text-gray-600'>{user.phone}</p>
+            <p className='text-sm text-gray-600 dark:text-gray-300'>{user.phone}</p>
           </div>
         </div>
       </div>
 
       {/* Transaction Details */}
-      <div className='bg-gray-50 rounded-lg p-4 mb-6'>
-        <h3 className='font-medium text-gray-900 mb-3'>Transaction Details</h3>
+      <div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6'>
+        <h3 className='font-medium text-gray-900 dark:text-white mb-3'>Transaction Details</h3>
         <div className='space-y-2 text-sm'>
           <div className='flex justify-between'>
-            <span className='text-gray-600'>Amount to Add:</span>
-            <span className='font-medium'>
+            <span className='text-gray-600 dark:text-gray-300'>Amount to Add:</span>
+            <span className='font-medium text-gray-900 dark:text-white'>
               ৳{transactionData?.amount?.toLocaleString()}
             </span>
           </div>
           <div className='flex justify-between'>
-            <span className='text-gray-600'>Service Charge:</span>
-            <span className='font-semibold text-blue-600'>Free</span>
+            <span className='text-gray-600 dark:text-gray-300'>Service Charge:</span>
+            <span className='font-semibold text-blue-600 dark:text-blue-400'>Free</span>
           </div>
-          <div className='flex justify-between border-t border-gray-200 pt-2'>
-            <span className='font-medium text-gray-900'>Total Amount:</span>
-            <span className='font-bold text-lg text-blue-600'>
+          <div className='flex justify-between border-t border-gray-200 dark:border-gray-600 pt-2'>
+            <span className='font-medium text-gray-900 dark:text-white'>Total Amount:</span>
+            <span className='font-bold text-lg text-blue-600 dark:text-blue-400'>
               ৳{transactionData?.amount?.toLocaleString()}
             </span>
           </div>
           <div className='flex justify-between'>
-            <span className='text-gray-600'>Customer's New Balance:</span>
-            <span className='font-bold text-green-600'>
+            <span className='text-gray-600 dark:text-gray-300'>Customer's New Balance:</span>
+            <span className='font-bold text-green-600 dark:text-green-400'>
               ৳{(user.balance + transactionData.amount).toLocaleString()}
             </span>
           </div>
@@ -172,7 +172,7 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
         <button
           onClick={handleConfirmTransaction}
           disabled={isProcessing}
-          className='w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white py-3 rounded-lg font-medium text-lg transition-colors flex items-center justify-center'
+          className='w-full bg-green-500 dark:bg-green-600 hover:bg-green-600 dark:hover:bg-green-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white py-3 rounded-lg font-medium text-lg transition-colors flex items-center justify-center'
         >
           {isProcessing ? (
             <>
@@ -186,7 +186,7 @@ const TransactionConfirmation: React.FC<TransactionConfirmationProps> = ({
         <button
           onClick={onReset}
           disabled={isProcessing}
-          className='w-full bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300 text-white py-3 rounded-lg font-medium transition-colors'
+          className='w-full bg-gray-500 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white py-3 rounded-lg font-medium transition-colors'
         >
           Cancel
         </button>

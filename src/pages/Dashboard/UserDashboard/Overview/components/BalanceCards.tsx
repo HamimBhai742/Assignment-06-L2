@@ -54,7 +54,7 @@ const BalanceCards = () => {
       {balanceData?.map((item, index) => (
         <div
           key={index}
-          className='relative overflow-hidden bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300'
+          className='relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300'
         >
           {/* Background Gradient */}
           <div
@@ -72,8 +72,8 @@ const BalanceCards = () => {
               <div
                 className={`px-2 py-1 rounded-full text-xs font-medium ${
                   item.changeType === 'increase'
-                    ? 'bg-green-100 text-green-700'
-                    : 'bg-red-100 text-red-700'
+                    ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                    : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
                 }`}
               >
                 {item.change}
@@ -82,11 +82,11 @@ const BalanceCards = () => {
 
             {/* Amount */}
             <div className='mb-2'>
-              <h3 className='text-sm font-medium text-gray-600 mb-1'>
+              <h3 className='text-sm font-medium text-gray-600 dark:text-gray-300 mb-1'>
                 {item.title}
               </h3>
               <div className='flex items-baseline'>
-                <span className='text-2xl font-bold text-gray-900'>
+                <span className='text-2xl font-bold text-gray-900 dark:text-white'>
                   {item.currency}
                   {item?.amount?.toLocaleString()}
                 </span>
@@ -98,13 +98,13 @@ const BalanceCards = () => {
               <span
                 className={`text-xs ${
                   item.changeType === 'increase'
-                    ? 'text-green-600'
-                    : 'text-red-600'
+                    ? 'text-green-600 dark:text-green-400'
+                    : 'text-red-600 dark:text-red-400'
                 }`}
               >
                 {item.changeType === 'increase' ? '↗️' : '↘️'}
               </span>
-              <span className='text-xs text-gray-500'>vs last month</span>
+              <span className='text-xs text-gray-500 dark:text-gray-400'>vs last month</span>
             </div>
           </div>
 

@@ -32,26 +32,26 @@ const ManageAgents = () => {
     return (
       <div className='space-y-4 sm:space-y-6'>
         <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
-          <div className='h-8 bg-gray-200 rounded-lg w-48 animate-pulse'></div>
+          <div className='h-8 bg-gray-200 dark:bg-gray-700 rounded-lg w-48 animate-pulse'></div>
           <div className='flex flex-col sm:flex-row gap-2 sm:gap-4'>
-            <div className='h-10 bg-gray-200 rounded-lg w-full sm:w-64 animate-pulse'></div>
-            <div className='h-10 bg-gray-200 rounded-lg w-full sm:w-32 animate-pulse'></div>
+            <div className='h-10 bg-gray-200 dark:bg-gray-700 rounded-lg w-full sm:w-64 animate-pulse'></div>
+            <div className='h-10 bg-gray-200 dark:bg-gray-700 rounded-lg w-full sm:w-32 animate-pulse'></div>
           </div>
         </div>
-        <div className='bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100'>
+        <div className='bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700'>
           <div className='space-y-4'>
             {[...Array(5)].map((_, i) => (
               <div
                 key={i}
-                className='flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 border border-gray-100 rounded-xl animate-pulse'
+                className='flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 border border-gray-100 dark:border-gray-700 rounded-xl animate-pulse'
               >
-                <div className='h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 rounded-full flex-shrink-0'></div>
+                <div className='h-10 w-10 sm:h-12 sm:w-12 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0'></div>
                 <div className='flex-1 space-y-2 min-w-0'>
-                  <div className='h-4 bg-gray-200 rounded w-24 sm:w-32'></div>
-                  <div className='h-3 bg-gray-200 rounded w-32 sm:w-48'></div>
+                  <div className='h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 sm:w-32'></div>
+                  <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-32 sm:w-48'></div>
                 </div>
-                <div className='h-6 bg-gray-200 rounded-full w-12 sm:w-16 flex-shrink-0'></div>
-                <div className='h-8 bg-gray-200 rounded w-16 sm:w-20 flex-shrink-0'></div>
+                <div className='h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-12 sm:w-16 flex-shrink-0'></div>
+                <div className='h-8 bg-gray-200 dark:bg-gray-700 rounded w-16 sm:w-20 flex-shrink-0'></div>
               </div>
             ))}
           </div>
@@ -73,14 +73,14 @@ const ManageAgents = () => {
 
       <div className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4'>
         <div className='min-w-0 flex-1'>
-          <h1 className='text-xl sm:text-2xl font-bold text-gray-900'>
+          <h1 className='text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100'>
             Manage Agents
           </h1>
-          <div className='flex flex-wrap items-center gap-2 sm:gap-4 mt-1 text-xs sm:text-sm text-gray-600'>
+          <div className='flex flex-wrap items-center gap-2 sm:gap-4 mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400'>
             <span>Total: {totalAgents}</span>
-            <span className='text-yellow-600'>Pending: {pendingAgents}</span>
-            <span className='text-green-600'>Approved: {approvedAgents}</span>
-            <span className='text-red-600'>Suspended: {suspendedAgents}</span>
+            <span className='text-yellow-600 dark:text-yellow-400'>Pending: {pendingAgents}</span>
+            <span className='text-green-600 dark:text-green-400'>Approved: {approvedAgents}</span>
+            <span className='text-red-600 dark:text-red-400'>Suspended: {suspendedAgents}</span>
           </div>
         </div>
 
@@ -90,8 +90,8 @@ const ManageAgents = () => {
             onClick={() => setViewMode('table')}
             className={`px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
               viewMode === 'table'
-                ? 'bg-blue-100 text-blue-700'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
             }`}
           >
             Table
@@ -100,8 +100,8 @@ const ManageAgents = () => {
             onClick={() => setViewMode('cards')}
             className={`px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
               viewMode === 'cards'
-                ? 'bg-blue-100 text-blue-700'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
             }`}
           >
             Cards
@@ -127,14 +127,14 @@ const ManageAgents = () => {
       </div>
 
       {/* Results */}
-      <div className='bg-white rounded-2xl shadow-sm border  border-gray-100 overflow-hidden'>
+      <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden'>
         {agents.length === 0 ? (
           <div className='text-center py-8 sm:py-12 px-4'>
-            <UserGroupIcon className='h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-4' />
-            <h3 className='text-base sm:text-lg font-medium text-gray-900 mb-2'>
+            <UserGroupIcon className='h-10 w-10 sm:h-12 sm:w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4' />
+            <h3 className='text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 mb-2'>
               No agents found
             </h3>
-            <p className='text-sm sm:text-base text-gray-600'>
+            <p className='text-sm sm:text-base text-gray-600 dark:text-gray-400'>
               Try adjusting your search or filter criteria.
             </p>
           </div>

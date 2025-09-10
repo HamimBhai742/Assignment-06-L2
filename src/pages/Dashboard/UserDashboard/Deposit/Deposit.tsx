@@ -26,11 +26,11 @@ const Deposit = () => {
   const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto dark:bg-gray-900">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Deposit Money</h1>
-        <p className="text-gray-600">Add funds to your PayWallet account</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Deposit Money</h1>
+        <p className="text-gray-600 dark:text-gray-400">Add funds to your PayWallet account</p>
       </div>
 
       {/* Progress Steps */}
@@ -40,14 +40,14 @@ const Deposit = () => {
             <div key={step.number} className="flex items-center">
               <div className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium ${
                 currentStep >= step.number
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-gray-200 text-gray-600'
+                  ? 'bg-purple-600 dark:bg-purple-700 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
               }`}>
                 {currentStep > step.number ? '✓' : step.number}
               </div>
               {index < steps.length - 1 && (
                 <div className={`flex-1 h-1 mx-4 ${
-                  currentStep > step.number ? 'bg-purple-600' : 'bg-gray-200'
+                  currentStep > step.number ? 'bg-purple-600 dark:bg-purple-700' : 'bg-gray-200 dark:bg-gray-700'
                 }`} />
               )}
             </div>
@@ -55,7 +55,7 @@ const Deposit = () => {
         </div>
         <div className="flex justify-between mt-2">
           {steps.map((step) => (
-            <span key={step.number} className="text-xs text-gray-500 text-center">
+            <span key={step.number} className="text-xs text-gray-500 dark:text-gray-400 text-center">
               {step.title}
             </span>
           ))}
@@ -63,7 +63,7 @@ const Deposit = () => {
       </div>
 
       {/* Form Steps */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         {currentStep === 1 && (
           <AmountStep
             data={depositData}

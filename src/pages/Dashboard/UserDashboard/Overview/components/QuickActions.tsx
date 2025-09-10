@@ -37,10 +37,10 @@ const QuickActions = () => {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
-        <button className="text-sm text-purple-600 hover:text-purple-700 font-medium">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Quick Actions</h2>
+        <button className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium">
           View All
         </button>
       </div>
@@ -50,15 +50,15 @@ const QuickActions = () => {
           <Link
             key={index}
             to={action.href}
-            className="group flex flex-col items-center p-4 rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-200"
+            className="group flex flex-col items-center p-4 rounded-xl border border-gray-100 dark:border-gray-600 hover:border-gray-200 dark:hover:border-gray-500 hover:shadow-md transition-all duration-200"
           >
             <div className={`w-12 h-12 ${action.color} ${action.hoverColor} rounded-xl flex items-center justify-center mb-3 transition-colors group-hover:scale-110 transform duration-200`}>
               <span className="text-xl text-white">{action.icon}</span>
             </div>
-            <h3 className="text-sm font-medium text-gray-900 text-center mb-1">
+            <h3 className="text-sm font-medium text-gray-900 dark:text-white text-center mb-1">
               {action.title}
             </h3>
-            <p className="text-xs text-gray-500 text-center leading-tight">
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center leading-tight">
               {action.description}
             </p>
           </Link>

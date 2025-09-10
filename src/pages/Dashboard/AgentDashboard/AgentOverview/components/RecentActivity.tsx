@@ -29,13 +29,13 @@ const RecentActivity: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'text-green-600 bg-green-50';
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30';
       case 'pending':
-        return 'text-yellow-600 bg-yellow-50';
+        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/30';
       case 'failed':
-        return 'text-red-600 bg-red-50';
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30';
       default:
-        return 'text-gray-600 bg-gray-50';
+        return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700';
     }
   };
   function formatLabel(key: string) {
@@ -45,19 +45,19 @@ const RecentActivity: React.FC = () => {
       .join(' ');
   }
   return (
-    <div className='bg-white rounded-xl shadow-sm border border-gray-100'>
-      <div className='p-6 border-b border-gray-100'>
+    <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700'>
+      <div className='p-6 border-b border-gray-100 dark:border-gray-600'>
         <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
-          <h2 className='text-xl font-semibold text-gray-900'>
+          <h2 className='text-xl font-semibold text-gray-900 dark:text-white'>
             Recent Activity
           </h2>
           <div className='flex items-center gap-3'>
             <div className='flex items-center gap-2'>
-              <FunnelIcon className='h-4 w-4 text-gray-500' />
+              <FunnelIcon className='h-4 w-4 text-gray-500 dark:text-gray-400' />
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value as any)}
-                className='text-sm border border-gray-300 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                className='text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
               >
                 <option value='all'>All Transactions</option>
                 <option value='cash_in'>Cash In</option>
@@ -69,11 +69,11 @@ const RecentActivity: React.FC = () => {
         </div>
       </div>
 
-      <div className='divide-y divide-gray-100'>
+      <div className='divide-y divide-gray-100 dark:divide-gray-600'>
         {data?.data?.map((transaction: Transaction) => (
           <div
             key={transaction._id}
-            className='p-6 hover:bg-gray-50 transition-colors'
+            className='p-6 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
           >
             <div className='flex items-center justify-between'>
               <div className='flex items-center gap-4'>
@@ -81,20 +81,20 @@ const RecentActivity: React.FC = () => {
                   className={`p-2 rounded-lg ${
                     transaction.type === 'cash_in' ||
                     transaction.type === 'commission'
-                      ? 'bg-green-100'
-                      : 'bg-red-100'
+                      ? 'bg-green-100 dark:bg-green-900/30'
+                      : 'bg-red-100 dark:bg-red-900/30'
                   }`}
                 >
                   {transaction.type === 'cash_in' ||
                   transaction.type === 'commission' ? (
-                    <ArrowDownIcon className='h-5 w-5 text-green-600' />
+                    <ArrowDownIcon className='h-5 w-5 text-green-600 dark:text-green-400' />
                   ) : (
-                    <ArrowUpIcon className='h-5 w-5 text-red-600' />
+                    <ArrowUpIcon className='h-5 w-5 text-red-600 dark:text-red-400' />
                   )}
                 </div>
                 <div>
                   <div className='flex items-center gap-2 mb-1'>
-                    <p className='font-semibold text-gray-900'>
+                    <p className='font-semibold text-gray-900 dark:text-white'>
                       {formatLabel(transaction.type)}
                     </p>
                     <span
@@ -105,7 +105,7 @@ const RecentActivity: React.FC = () => {
                       {transaction.status}
                     </span>
                   </div>
-                  <p className='text-sm text-gray-600'>
+                  <p className='text-sm text-gray-600 dark:text-gray-300'>
                     {' '}
                     {(() => {
                       switch (transaction.type) {
@@ -125,8 +125,8 @@ const RecentActivity: React.FC = () => {
                     })()}
                   </p>
                   <div className='flex items-center gap-1 mt-1'>
-                    <ClockIcon className='h-3 w-3 text-gray-400' />
-                    <p className='text-xs text-gray-500'>
+                    <ClockIcon className='h-3 w-3 text-gray-400 dark:text-gray-500' />
+                    <p className='text-xs text-gray-500 dark:text-gray-400'>
                       {format(transaction.createdAt)}
                     </p>
                   </div>
@@ -137,8 +137,8 @@ const RecentActivity: React.FC = () => {
                   className={`font-semibold ${
                     transaction.type === 'cash_in' ||
                     transaction.type === 'commission'
-                      ? 'text-green-600'
-                      : 'text-red-600'
+                      ? 'text-green-600 dark:text-green-400'
+                      : 'text-red-600 dark:text-red-400'
                   }`}
                 >
                   {transaction.type === 'cash_in' ||
@@ -147,7 +147,7 @@ const RecentActivity: React.FC = () => {
                     : '-'}
                   ৳{transaction.amount.toLocaleString()}
                 </p>
-                <p className='text-xs text-gray-500 mt-1'>
+                <p className='text-xs text-gray-500 dark:text-gray-300 mt-1'>
                   TrxID: {transaction.transactionId}
                 </p>
               </div>
@@ -156,8 +156,8 @@ const RecentActivity: React.FC = () => {
         ))}
       </div>
 
-      <div className='p-6 border-t border-gray-100'>
-        <button className='w-full text-center text-blue-600 hover:text-blue-700 font-medium text-sm py-2 hover:bg-blue-50 rounded-lg transition-colors'>
+      <div className='p-6 border-t border-gray-100 dark:border-gray-600'>
+        <button className='w-full text-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm py-2 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors'>
           View All Transactions
         </button>
       </div>

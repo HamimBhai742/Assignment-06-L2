@@ -49,13 +49,13 @@ const QuickStatsBar = ({
   ];
 
   return (
-    <div className='bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-white shadow-lg'>
+    <div className='bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-2xl p-6 text-white shadow-lg'>
       <h3 className='text-lg font-semibold mb-4'>Today's Performance</h3>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
         {stats.map((stat, index) => (
           <div
             key={index}
-            className='bg-white/10 backdrop-blur-sm rounded-xl p-4'
+            className='bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4'
           >
             <div className='flex items-center justify-between mb-2'>
               <stat.icon className='h-5 w-5 text-white/80' />

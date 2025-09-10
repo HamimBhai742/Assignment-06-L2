@@ -15,10 +15,10 @@ const VolumeChart = ({ data }: VolumeChartProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-          <p className="font-medium text-gray-900 mb-1">{data.name}</p>
-          <p className="text-sm text-gray-600">
-            Volume: <span className="font-semibold text-gray-900">৳{data.value.toLocaleString()}</span>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <p className="font-medium text-gray-900 dark:text-white mb-1">{data.name}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Volume: <span className="font-semibold text-gray-900 dark:text-white">৳{data.value.toLocaleString()}</span>
           </p>
         </div>
       );
@@ -47,9 +47,9 @@ const VolumeChart = ({ data }: VolumeChartProps) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Transaction Volume Distribution</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Transaction Volume Distribution</h3>
       </div>
 
       <div className="h-80">

@@ -51,8 +51,8 @@ const RecentTransactions = () => {
         return 'text-blue-600';
       case 'withdraw':
         return 'text-orange-600';
-      case 'bill':
-        return 'text-purple-600';
+      case 'fee':
+        return 'text-red-500';
       case 'recharge':
         return 'text-pink-600';
       default:
@@ -63,13 +63,13 @@ const RecentTransactions = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-700';
+        return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-700';
+        return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400';
       case 'failed':
-        return 'bg-red-100 text-red-700';
+        return 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400';
       default:
-        return 'bg-gray-100 text-gray-700';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300';
     }
   };
 
@@ -80,14 +80,14 @@ const RecentTransactions = () => {
       .join(' '); // 'Receive Money'
   }
   return (
-    <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-6'>
+    <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
       <div className='flex items-center justify-between mb-6'>
-        <h2 className='text-lg font-semibold text-gray-900'>
+        <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
           Recent Transactions
         </h2>
         <Link
           to='/dashboard/transactions'
-          className='text-sm text-purple-600 hover:text-purple-700 font-medium'
+          className='text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium'
         >
           View All
         </Link>
@@ -97,10 +97,10 @@ const RecentTransactions = () => {
         {data?.data?.map((transaction: Transaction) => (
           <div
             key={transaction._id}
-            className='flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors'
+            className='flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors'
           >
             {/* Icon */}
-            <div className='md:w-10 md:h-10 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0'>
+            <div className='md:w-10 md:h-10 w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0'>
               <span className='text-lg'>
                 {getTransactionIcon(transaction.type)}
               </span>
@@ -109,7 +109,7 @@ const RecentTransactions = () => {
             {/* Transaction Details */}
             <div className='flex-1 min-w-0'>
               <div className='flex items-center justify-between'>
-                <h3 className='text-sm font-semibold text-gray-900 truncate'>
+                <h3 className='text-sm font-semibold text-gray-900 dark:text-white truncate'>
                   {formatLabel(transaction.type)}
                 </h3>
                 <span
@@ -127,7 +127,7 @@ const RecentTransactions = () => {
               </div>
 
               <div className='flex items-center justify-between mt-1'>
-                <p className='text-xs text-gray-500 truncate'>
+                <p className='text-xs text-gray-500 dark:text-gray-400 truncate'>
                   {(() => {
                     switch (transaction.type) {
                       case 'add_money':
@@ -158,10 +158,10 @@ const RecentTransactions = () => {
                 </span>
               </div>
 
-              <p className='text-xs text-gray-400 mt-1 md:flex items-center gap-3'>
+              <p className='text-xs text-gray-400 dark:text-gray-500 mt-1 md:flex items-center gap-3'>
                 <span>TrxID:{transaction.transactionId}</span>
                 <span className='flex items-center gap-1'>
-                  <ClockIcon className='h-3 w-3 text-gray-400' />
+                  <ClockIcon className='h-3 w-3 text-gray-400 dark:text-gray-500' />
                   {format(transaction.createdAt)}
                 </span>
               </p>
@@ -171,10 +171,10 @@ const RecentTransactions = () => {
       </div>
 
       {/* View All Button */}
-      <div className='mt-6 pt-4 border-t border-gray-100'>
+      <div className='mt-6 pt-4 border-t border-gray-100 dark:border-gray-600'>
         <Link
           to='/dashboard/transactions'
-          className='w-full py-2 text-sm text-purple-600 hover:text-purple-700 font-medium hover:bg-purple-50 rounded-lg transition-colors flex items-center justify-center'
+          className='w-full py-2 text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-colors flex items-center justify-center'
         >
           View All Transactions →
         </Link>

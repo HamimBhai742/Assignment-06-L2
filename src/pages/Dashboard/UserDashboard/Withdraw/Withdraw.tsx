@@ -29,24 +29,24 @@ const Withdraw = () => {
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
   return (
-    <div className='max-w-2xl mx-auto'>
+    <div className='max-w-2xl mx-auto dark:bg-gray-900'>
       {/* Header */}
       <div className='mb-8'>
-        <h1 className='text-2xl font-bold text-gray-900 mb-2'>
+        <h1 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>
           Withdraw Money
         </h1>
-        <p className='text-gray-600'>Cash out from your PayWallet account</p>
+        <p className='text-gray-600 dark:text-gray-400'>Cash out from your PayWallet account</p>
 
         {/* Balance Display */}
-        <div className='mt-4 p-4 bg-gradient-to-r from-purple-500 to-blue-600 rounded-xl text-white'>
+        <div className='mt-4 p-4 bg-gradient-to-r from-purple-500 to-blue-600 dark:from-purple-600 dark:to-blue-700 rounded-xl text-white'>
           <div className='flex items-center justify-between'>
             <div>
-              <p className='text-purple-100 text-sm'>Available Balance</p>
+              <p className='text-purple-100 dark:text-purple-200 text-sm'>Available Balance</p>
               <p className='text-2xl font-bold'>
                 ৳{userBalance?.toLocaleString()}
               </p>
             </div>
-            <div className='w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center'>
+            <div className='w-12 h-12 bg-white/20 dark:bg-white/10 rounded-xl flex items-center justify-center'>
               <span className='text-2xl'>💰</span>
             </div>
           </div>
@@ -61,8 +61,8 @@ const Withdraw = () => {
               <div
                 className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium ${
                   currentStep >= step.number
-                    ? 'bg-red-600 text-white'
-                    : 'bg-gray-200 text-gray-600'
+                    ? 'bg-red-600 dark:bg-red-700 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
                 }`}
               >
                 {currentStep > step.number ? '✓' : step.number}
@@ -70,7 +70,7 @@ const Withdraw = () => {
               {index < steps.length - 1 && (
                 <div
                   className={`flex-1 h-1 mx-4 ${
-                    currentStep > step.number ? 'bg-red-600' : 'bg-gray-200'
+                    currentStep > step.number ? 'bg-red-600 dark:bg-red-700' : 'bg-gray-200 dark:bg-gray-700'
                   }`}
                 />
               )}
@@ -81,7 +81,7 @@ const Withdraw = () => {
           {steps.map((step) => (
             <span
               key={step.number}
-              className='text-xs text-gray-500 text-center'
+              className='text-xs text-gray-500 dark:text-gray-400 text-center'
             >
               {step.title}
             </span>
@@ -90,7 +90,7 @@ const Withdraw = () => {
       </div>
 
       {/* Form Steps */}
-      <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-6'>
+      <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
         {currentStep === 1 && (
           <AmountStep
             data={withdrawData}

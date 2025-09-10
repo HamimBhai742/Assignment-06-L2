@@ -59,7 +59,7 @@ const SummaryCards: React.FC = () => {
       {summaryData.map((item, index) => (
         <div
           key={index}
-          className='bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow'
+          className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md transition-shadow'
         >
           <div className='flex items-center justify-between mb-4'>
             <div className={`${item.color} p-3 rounded-lg`}>
@@ -67,7 +67,7 @@ const SummaryCards: React.FC = () => {
             </div>
             <span
               className={`text-sm font-medium ${
-                item.change > 0 ? 'text-green-600' : 'text-red-600'
+                item.change > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
               }`}
             >
               {item.change > 0 && '+'}
@@ -75,8 +75,8 @@ const SummaryCards: React.FC = () => {
             </span>
           </div>
           <div>
-            <p className='text-gray-600 text-sm mb-1'>{item.title}</p>
-            <p className='text-2xl font-bold text-gray-900'>{item.amount}</p>
+            <p className='text-gray-600 dark:text-gray-300 text-sm mb-1'>{item.title}</p>
+            <p className='text-2xl font-bold text-gray-900 dark:text-white'>{item.amount}</p>
           </div>
         </div>
       ))}

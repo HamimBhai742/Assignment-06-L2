@@ -44,10 +44,10 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
 
   const getBalanceStatus = (balance: number) => {
     if (balance < 50)
-      return { color: 'text-red-600', bg: 'bg-red-50', status: 'Very Low' };
+      return { color: 'text-red-600 dark:text-red-400', bg: 'bg-red-50 dark:bg-red-900/30', status: 'Very Low' };
     if (balance < 500)
-      return { color: 'text-yellow-600', bg: 'bg-yellow-50', status: 'Low' };
-    return { color: 'text-green-600', bg: 'bg-green-50', status: 'Good' };
+      return { color: 'text-yellow-600 dark:text-yellow-400', bg: 'bg-yellow-50 dark:bg-yellow-900/30', status: 'Low' };
+    return { color: 'text-green-600 dark:text-green-400', bg: 'bg-green-50 dark:bg-green-900/30', status: 'Good' };
   };
   const balanceStatus = getBalanceStatus(data?.data?.wallet.balance);
   const canWithdraw =
@@ -55,10 +55,10 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
   return (
     <div className='p-6'>
       <div className='mb-6'>
-        <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+        <h2 className='text-xl font-semibold text-gray-900 dark:text-white mb-2'>
           Find Customer
         </h2>
-        <p className='text-gray-600 text-sm'>
+        <p className='text-gray-600 dark:text-gray-300 text-sm'>
           Enter customer's phone number to check balance
         </p>
       </div>
@@ -72,15 +72,15 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
             onChange={(e) => setSearchPhone(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder='Enter phone number (e.g., 01712345678)'
-            className='w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-lg'
+            className='w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
             maxLength={11}
           />
-          <MagnifyingGlassIcon className='absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400' />
+          <MagnifyingGlassIcon className='absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-500' />
         </div>
         <button
           onClick={handleSearch}
           disabled={searchPhone.length < 11 || isSearching}
-          className='w-full mt-3 bg-red-500 hover:bg-red-600 disabled:bg-gray-300 text-white py-3 rounded-lg font-medium transition-colors'
+          className='w-full mt-3 bg-red-500 dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white py-3 rounded-lg font-medium transition-colors'
         >
           {isSearching ? 'Searching...' : 'Search Customer'}
         </button>
@@ -89,36 +89,36 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
       {/* Search Results */}
       {isOpen && (
         <div className='space-y-3'>
-          <h3 className='font-medium text-gray-900'>Search Results</h3>
+          <h3 className='font-medium text-gray-900 dark:text-white'>Search Results</h3>
           <div
             onClick={() => canWithdraw && onUserSelect(data?.data)}
             className={`p-4 border rounded-lg transition-colors ${
               canWithdraw
-                ? 'border-gray-200 hover:border-red-300 hover:bg-red-50 cursor-pointer'
-                : 'border-red-200 bg-red-50 cursor-not-allowed opacity-75'
+                ? 'border-gray-200 dark:border-gray-600 hover:border-red-300 dark:hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 cursor-pointer'
+                : 'border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20 cursor-not-allowed opacity-75'
             }`}
           >
             <div className='flex items-center justify-between'>
               <div className='flex items-center space-x-3'>
-                <div className='w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center'>
-                  <UserIcon className='h-6 w-6 text-gray-600' />
+                <div className='w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center'>
+                  <UserIcon className='h-6 w-6 text-gray-600 dark:text-gray-300' />
                 </div>
                 <div>
                   <div className='flex items-center space-x-2'>
-                    <h4 className='font-medium text-gray-900'>
+                    <h4 className='font-medium text-gray-900 dark:text-white'>
                       {data?.data?.user.name}
                     </h4>
                     {data?.data?.user.isActive ? (
-                      <CheckCircleIcon className='h-4 w-4 text-green-500' />
+                      <CheckCircleIcon className='h-4 w-4 text-green-500 dark:text-green-400' />
                     ) : (
-                      <ExclamationTriangleIcon className='h-4 w-4 text-yellow-500' />
+                      <ExclamationTriangleIcon className='h-4 w-4 text-yellow-500 dark:text-yellow-400' />
                     )}
                   </div>
-                  <p className='text-sm text-gray-600'>
+                  <p className='text-sm text-gray-600 dark:text-gray-300'>
                     {data?.data?.user.phone}
                   </p>
                   <div className='flex items-center space-x-2 mt-1'>
-                    <p className='text-sm font-medium'>
+                    <p className='text-sm font-medium text-gray-900 dark:text-white'>
                       Balance: ৳{data?.data?.wallet.balance.toLocaleString()}
                     </p>
                     <span
@@ -128,12 +128,12 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
                     </span>
                   </div>
                   {!data?.data?.user.isActive && (
-                    <p className='text-xs text-red-600 mt-1'>
+                    <p className='text-xs text-red-600 dark:text-red-400 mt-1'>
                       Account not verified
                     </p>
                   )}
                   {data?.data?.wallet.balance < 50 && (
-                    <p className='text-xs text-red-600 mt-1'>
+                    <p className='text-xs text-red-600 dark:text-red-400 mt-1'>
                       Insufficient balance for withdrawal
                     </p>
                   )}
@@ -141,7 +141,7 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
               </div>
               <div
                 className={`font-medium ${
-                  canWithdraw ? 'text-red-500' : 'text-gray-400'
+                  canWithdraw ? 'text-red-500 dark:text-red-400' : 'text-gray-400 dark:text-gray-500'
                 }`}
               >
                 {canWithdraw ? 'Select' : 'Cannot Withdraw'}
@@ -153,8 +153,8 @@ const CashOutUserSearch: React.FC<CashOutUserSearchProps> = ({
 
       {!isOpen && (
         <div className='text-center py-8'>
-          <UserIcon className='h-12 w-12 text-gray-300 mx-auto mb-3' />
-          <p className='text-gray-500'>
+          <UserIcon className='h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-3' />
+          <p className='text-gray-500 dark:text-gray-400'>
             No customer found with this phone number
           </p>
         </div>

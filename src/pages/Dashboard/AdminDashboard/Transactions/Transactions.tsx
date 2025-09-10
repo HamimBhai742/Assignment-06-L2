@@ -32,17 +32,17 @@ const AllTransactions = () => {
       {/* Header */}
       <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
         <div>
-          <h1 className='text-2xl font-bold text-gray-900'>
+          <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
             Transaction History
           </h1>
-          <p className='text-gray-600 mt-1'>{total} transactions found</p>
+          <p className='text-gray-600 dark:text-gray-300 mt-1'>{total} transactions found</p>
         </div>
 
         <div className='mt-4 sm:mt-0 flex items-center space-x-3'>
-          <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium'>
+          <button className='px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors text-sm font-medium'>
             📊 Export
           </button>
-          <button className='px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium'>
+          <button className='px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm font-medium'>
             📄 Statement
           </button>
         </div>

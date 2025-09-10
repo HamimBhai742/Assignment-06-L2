@@ -13,13 +13,13 @@ const TransactionChart = ({ data }: TransactionChartProps) => {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-          <p className="font-medium text-gray-900 mb-2">{label}</p>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <p className="font-medium text-gray-900 dark:text-white mb-2">{label}</p>
           <div className="space-y-1">
-            <p className="text-sm text-blue-600">
+            <p className="text-sm text-blue-600 dark:text-blue-400">
               Transactions: <span className="font-semibold">{payload[0]?.value?.toLocaleString()}</span>
             </p>
-            <p className="text-sm text-purple-600">
+            <p className="text-sm text-purple-600 dark:text-purple-400">
               Volume: <span className="font-semibold">৳{payload[1]?.value?.toLocaleString()}</span>
             </p>
           </div>
@@ -30,17 +30,17 @@ const TransactionChart = ({ data }: TransactionChartProps) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Transaction Analytics</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Transaction Analytics</h3>
         <div className="flex items-center space-x-4 mt-2 sm:mt-0">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-            <span className="text-sm text-gray-600">Transactions</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">Transactions</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-            <span className="text-sm text-gray-600">Volume</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">Volume</span>
           </div>
         </div>
       </div>

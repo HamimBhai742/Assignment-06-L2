@@ -55,7 +55,7 @@ const UserActions = ({ user }: UserActionsProps) => {
       <div className='relative'>
         <button
           onClick={() => setShowDropdown(!showDropdown)}
-          className='p-2 text-gray-400 hover:text-gray-600 transition-colors'
+          className='p-2 text-gray-400 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-100 transition-colors'
         >
           <EllipsisVerticalIcon className='h-5 w-5' />
         </button>
@@ -66,12 +66,12 @@ const UserActions = ({ user }: UserActionsProps) => {
               className='fixed inset-0 z-10'
               onClick={() => setShowDropdown(false)}
             />
-            <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-20'>
+            <div className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 z-20'>
               <div className='py-1'>
                 {user.isActive ? (
                   <button
                     onClick={() => handleAction('block', user._id)}
-                    className='flex items-center space-x-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50'
+                    className='flex items-center space-x-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
                   >
                     <LockClosedIcon className='h-4 w-4' />
                     <span>Block</span>
@@ -79,7 +79,7 @@ const UserActions = ({ user }: UserActionsProps) => {
                 ) : (
                   <button
                     onClick={() => handleAction('unblock', user._id)}
-                    className='flex items-center space-x-2 w-full px-4 py-2 text-sm text-green-600 hover:bg-green-50'
+                    className='flex items-center space-x-2 w-full px-4 py-2 text-sm text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20'
                   >
                     <LockOpenIcon className='h-4 w-4' />
                     <span>Unblock</span>
@@ -88,7 +88,7 @@ const UserActions = ({ user }: UserActionsProps) => {
 
                 <button
                   onClick={() => handleAction('delete', user._id)}
-                  className='flex items-center space-x-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50'
+                  className='flex items-center space-x-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
                 >
                   <TrashIcon className='h-4 w-4' />
                   <span>Delete User</span>

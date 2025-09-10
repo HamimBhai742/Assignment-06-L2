@@ -14,12 +14,12 @@ const AgentProfile = () => {
    ];
 
   return (
-    <div className='space-y-6'>
+    <div className='space-y-6 dark:bg-gray-900'>
       {/* Header */}
       <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
         <div>
-          <h1 className='text-2xl font-bold text-gray-900'>Profile Settings</h1>
-          <p className='text-gray-600 mt-1'>
+          <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>Profile Settings</h1>
+          <p className='text-gray-600 dark:text-gray-400 mt-1'>
             Manage your account information and preferences
           </p>
         </div>
@@ -29,15 +29,15 @@ const AgentProfile = () => {
             <span
               className={`px-3 py-1 rounded-full font-medium ${
                 userProfile?.data?.isActive
-                  ? 'bg-green-100 text-green-700'
-                  : 'bg-yellow-100 text-yellow-700'
+                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                  : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
               }`}
             >
               {userProfile?.data?.isActive
                 ? '✅ Verified'
                 : '⏳ Pending Verification'}
             </span>
-            <span className='px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-medium capitalize'>
+            <span className='px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full font-medium capitalize'>
               {userProfile?.data?.status} Level
             </span>
           </div>
@@ -45,9 +45,9 @@ const AgentProfile = () => {
       </div>
 
       {/* Profile Header Card */}
-      <div className='bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-white'>
+      <div className='bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-2xl p-6 text-white'>
         <div className='flex items-center space-x-6'>
-          <div className='w-20 h-20 bg-white/20 rounded-full flex items-center justify-center'>
+          <div className='w-20 h-20 bg-white/20 dark:bg-white/10 rounded-full flex items-center justify-center'>
             <span className='text-3xl'>👤</span>
           </div>
 

@@ -6,25 +6,29 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-const SearchBar = ({ value, onChange, placeholder = "Search..." }: SearchBarProps) => {
+const SearchBar = ({
+  value,
+  onChange,
+  placeholder = 'Search...',
+}: SearchBarProps) => {
   return (
-    <div className="relative">
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <MagnifyingGlassIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+    <div className='relative'>
+      <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+        <MagnifyingGlassIcon className='h-4 w-4 sm:h-5 sm:w-5 text-gray-400' />
       </div>
       <input
-        type="text"
+        type='text'
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="block w-full pl-9 sm:pl-10 pr-10 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+        className='block w-full pl-9 sm:pl-10 pr-10 py-2.5 text-sm dark:border-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors'
         placeholder={placeholder}
       />
       {value && (
         <button
           onClick={() => onChange('')}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+          className='absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 dark:text-white hover:text-gray-600 transition-colors'
         >
-          <XMarkIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+          <XMarkIcon className='h-4 w-4 sm:h-5 sm:w-5' />
         </button>
       )}
     </div>

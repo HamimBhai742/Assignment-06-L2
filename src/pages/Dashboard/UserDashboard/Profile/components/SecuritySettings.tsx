@@ -33,7 +33,6 @@ const SecuritySettings = () => {
         setShowChangePIN(false);
       }
       if (res.error) {
-        // setPinForm({ currentPIN: '', newPIN: '', confirmPIN: '' });
         const err = res?.error as { data: { message: string } };
         const errSrc = res?.error as {
           data: { errorSource: { message: string }[] };
@@ -53,29 +52,29 @@ const SecuritySettings = () => {
 
   return (
     <div className='space-y-6'>
-      <h3 className='text-lg font-semibold text-gray-900'>Security Settings</h3>
+      <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>Security Settings</h3>
 
       {/* PIN Section */}
-      <div className='border border-gray-200 rounded-lg p-6'>
+      <div className='border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-800'>
         <div className='flex items-center justify-between mb-4'>
           <div>
-            <h4 className='font-medium text-gray-900'>Transaction PIN</h4>
-            <p className='text-sm text-gray-600'>
+            <h4 className='font-medium text-gray-900 dark:text-white'>Transaction PIN</h4>
+            <p className='text-sm text-gray-600 dark:text-gray-300'>
               Used for transaction verification
             </p>
           </div>
           <button
             onClick={() => setShowChangePIN(!showChangePIN)}
-            className='px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors'
+            className='px-4 py-2 bg-purple-600 dark:bg-purple-700 text-white rounded-lg hover:bg-purple-700 dark:hover:bg-purple-800 transition-colors'
           >
             {showChangePIN ? 'Cancel' : 'Change PIN'}
           </button>
         </div>
 
         {showChangePIN && (
-          <div className='space-y-4 pt-4 border-t border-gray-200'>
+          <div className='space-y-4 pt-4 border-t border-gray-200 dark:border-gray-600'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2'>
                 Current PIN
               </label>
               <input
@@ -87,14 +86,14 @@ const SecuritySettings = () => {
                     currentPIN: e.target.value,
                   }))
                 }
-                className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center'
+                className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                 placeholder='Enter current PIN'
                 maxLength={6}
               />
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2'>
                 New PIN
               </label>
               <input
@@ -103,14 +102,14 @@ const SecuritySettings = () => {
                 onChange={(e) =>
                   setPinForm((prev) => ({ ...prev, newPIN: e.target.value }))
                 }
-                className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center'
+                className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                 placeholder='Enter new 6-digit PIN'
                 maxLength={6}
               />
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2'>
                 Confirm New PIN
               </label>
               <input
@@ -122,7 +121,7 @@ const SecuritySettings = () => {
                     confirmPIN: e.target.value,
                   }))
                 }
-                className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center'
+                className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
                 placeholder='Confirm new PIN'
                 maxLength={6}
               />
@@ -136,7 +135,7 @@ const SecuritySettings = () => {
                 !pinForm.newPIN ||
                 !pinForm.confirmPIN
               }
-              className='w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50'
+              className='w-full bg-green-600 dark:bg-green-700 text-white py-3 rounded-lg hover:bg-green-700 dark:hover:bg-green-800 transition-colors disabled:opacity-50'
             >
               {isProcessing ? 'Changing PIN...' : 'Change PIN'}
             </button>
@@ -145,14 +144,14 @@ const SecuritySettings = () => {
       </div>
 
       {/* Security Tips */}
-      <div className='bg-yellow-50 border border-yellow-200 rounded-lg p-4'>
+      <div className='bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-4'>
         <div className='flex items-start space-x-3'>
           <span className='text-yellow-500 text-lg'>💡</span>
           <div>
-            <h4 className='text-sm font-medium text-yellow-900'>
+            <h4 className='text-sm font-medium text-yellow-900 dark:text-yellow-200'>
               Security Tips
             </h4>
-            <ul className='text-xs text-yellow-700 mt-1 space-y-1 list-disc'>
+            <ul className='text-xs text-yellow-700 dark:text-yellow-300 mt-1 space-y-1 list-disc'>
               <li> Use a strong, unique password for your account</li>
               <li> Never share your PIN with anyone</li>
             </ul>

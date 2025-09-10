@@ -42,14 +42,14 @@ const CashIn: React.FC = () => {
   };
 
   return (
-    <div className='p-4 md:p-6 bg-gray-50 min-h-screen'>
+    <div className='p-4 md:p-6 bg-gray-50 dark:bg-gray-900 min-h-screen'>
       <div className='max-w-2xl mx-auto'>
         {/* Header */}
         <div className='mb-6'>
-          <h1 className='text-2xl md:text-3xl font-bold text-gray-900'>
+          <h1 className='text-2xl md:text-3xl font-bold text-gray-900 dark:text-white'>
             Cash In
           </h1>
-          <p className='text-gray-600 mt-1'>Add money to customer account</p>
+          <p className='text-gray-600 dark:text-gray-400 mt-1'>Add money to customer account</p>
         </div>
 
         {/* Progress Steps */}
@@ -60,21 +60,21 @@ const CashIn: React.FC = () => {
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     index === 0 && currentStep === 'search'
-                      ? 'bg-blue-500 text-white'
+                      ? 'bg-blue-500 dark:bg-blue-600 text-white'
                       : index === 1 && currentStep === 'form'
-                      ? 'bg-blue-500 text-white'
+                      ? 'bg-blue-500 dark:bg-blue-600 text-white'
                       : index === 2 && currentStep === 'confirmation'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-200 text-gray-600'
+                      ? 'bg-blue-500 dark:bg-blue-600 text-white'
+                      : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
                   }`}
                 >
                   {index + 1}
                 </div>
-                <span className='ml-2 text-sm font-medium text-gray-700'>
+                <span className='ml-2 text-sm font-medium text-gray-700 dark:text-gray-200'>
                   {step}
                 </span>
                 {index < 2 && (
-                  <div className='w-8 h-0.5 bg-gray-300 ml-4'></div>
+                  <div className='w-8 h-0.5 bg-gray-300 dark:bg-gray-600 ml-4'></div>
                 )}
               </div>
             ))}
@@ -82,7 +82,7 @@ const CashIn: React.FC = () => {
         </div>
 
         {/* Step Content */}
-        <div className='bg-white rounded-xl shadow-sm border border-gray-100'>
+        <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700'>
           {currentStep === 'search' && (
             <UserSearch onUserSelect={handleUserSelect} />
           )}

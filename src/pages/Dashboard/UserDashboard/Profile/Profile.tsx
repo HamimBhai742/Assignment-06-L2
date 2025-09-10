@@ -27,12 +27,12 @@ const Profile = () => {
    ];
 
   return (
-    <div className='space-y-6'>
+    <div className='space-y-6 dark:bg-gray-900 min-h-screen'>
       {/* Header */}
       <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
         <div>
-          <h1 className='text-2xl font-bold text-gray-900'>Profile Settings</h1>
-          <p className='text-gray-600 mt-1'>
+          <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>Profile Settings</h1>
+          <p className='text-gray-600 dark:text-gray-400 mt-1'>
             Manage your account information and preferences
           </p>
         </div>
@@ -42,15 +42,15 @@ const Profile = () => {
             <span
               className={`px-3 py-1 rounded-full font-medium ${
                 userProfile?.data?.isActive
-                  ? 'bg-green-100 text-green-700'
-                  : 'bg-yellow-100 text-yellow-700'
+                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                  : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
               }`}
             >
               {userProfile?.data?.isActive
                 ? '✅ Verified'
                 : '⏳ Pending Verification'}
             </span>
-            <span className='px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-medium capitalize'>
+            <span className='px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full font-medium capitalize'>
               {userProfile?.data?.status} Level
             </span>
           </div>
@@ -58,9 +58,9 @@ const Profile = () => {
       </div>
 
       {/* Profile Header Card */}
-      <div className='bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-white'>
+      <div className='bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-2xl p-6 text-white'>
         <div className='flex items-center space-x-6'>
-          <div className='w-20 h-20 bg-white/20 rounded-full flex items-center justify-center'>
+          <div className='w-20 h-20 bg-white/20 dark:bg-white/10 rounded-full flex items-center justify-center'>
             <span className='text-3xl'>👤</span>
           </div>
 
@@ -69,7 +69,7 @@ const Profile = () => {
             {/* <p className='text-blue-100 mb-2'>
 
             </p> */}
-            <div className='flex items-center space-x-4 text-sm mt-2 text-blue-100'>
+            <div className='flex items-center space-x-4 text-sm mt-2 text-blue-100 dark:text-blue-200'>
               <span>📱 {userProfile?.data?.phone}</span>
               <span>
                 📅 Joined{' '}
@@ -78,15 +78,15 @@ const Profile = () => {
             </div>
           </div>
 
-          <button className='px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors'>
+          <button className='px-4 py-2 bg-white/20 dark:bg-white/10 hover:bg-white/30 dark:hover:bg-white/20 rounded-lg transition-colors'>
             📷 Change Photo
           </button>
         </div>
       </div>
 
       {/* Tab Navigation */}
-      <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
-        <div className='border-b border-gray-200'>
+      <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden'>
+        <div className='border-b border-gray-200 dark:border-gray-700'>
           <nav className='flex space-x-8 px-6'>
             {tabs.map((tab) => (
               <button
@@ -94,8 +94,8 @@ const Profile = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === tab.id
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <span className='mr-2'>{tab.icon}</span>

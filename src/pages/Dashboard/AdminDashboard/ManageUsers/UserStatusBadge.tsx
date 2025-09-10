@@ -5,14 +5,14 @@ interface UserStatusBadgeProps {
 const UserStatusBadge = ({ status }: UserStatusBadgeProps) => {
   const statusConfig = {
     active: {
-      bg: 'bg-green-100',
-      text: 'text-green-800',
+      bg: 'bg-green-100 dark:bg-green-900',
+      text: 'text-green-800 dark:text-green-200',
       dot: 'bg-green-500',
       label: 'Active',
     },
     blocked: {
-      bg: 'bg-red-100',
-      text: 'text-red-800',
+      bg: 'bg-red-100 dark:bg-red-900',
+      text: 'text-red-800 dark:text-red-200',
       dot: 'bg-red-500',
       label: 'Blocked',
     },
