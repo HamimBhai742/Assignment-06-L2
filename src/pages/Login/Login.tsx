@@ -77,31 +77,31 @@ const Login = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4'>
+    <div className='min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4'>
       <div className='w-full max-w-md'>
         {/* Header */}
         <div className='text-center mb-8'>
           <div className='bg-gradient-to-r from-blue-600 to-purple-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4'>
             <span className='text-2xl text-white'>💳</span>
           </div>
-          <h1 className='text-3xl font-bold  text-gray-900 mb-2'>
+          <h1 className='text-3xl font-bold text-gray-900 dark:text-white mb-2'>
             Welcome Back
           </h1>
-          <p className='text-gray-600'>Sign in to your PayWallet account</p>
+          <p className='text-gray-600 dark:text-gray-300'>Sign in to your PayWallet account</p>
         </div>
 
         {/* Login Form */}
-        <div className='bg-white rounded-2xl shadow-xl p-6 border border-gray-100'>
+        <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-100 dark:border-gray-700'>
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                 Phone Number
               </label>
               <input
                 type='text'
                 value={formData.phone}
                 onChange={(e) => updateFormData('phone', e.target.value)}
-                className='w-full  px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
+                className='w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
                 placeholder='Enter your phone number'
                 maxLength={11}
               />
@@ -111,7 +111,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-2'>
+              <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                 PIN
               </label>
               <div className='relative'>
@@ -119,14 +119,14 @@ const Login = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={(e) => updateFormData('password', e.target.value)}
-                  className='w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors'
+                  className='w-full px-4 py-3 pr-12 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
                   placeholder='Enter your 6-digit pin'
                   maxLength={6}
                 />
                 <button
                   type='button'
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700'
+                  className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                 >
                   {showPassword ? '🙈' : '👁️'}
                 </button>
@@ -145,18 +145,18 @@ const Login = () => {
                   onChange={(e) =>
                     updateFormData('rememberMe', e.target.checked)
                   }
-                  className='w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
+                  className='w-4 h-4 text-blue-600 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-500 dark:bg-gray-700'
                 />
                 <label
                   htmlFor='remember'
-                  className='ml-2 text-sm text-gray-600'
+                  className='ml-2 text-sm text-gray-600 dark:text-gray-300'
                 >
                   Remember me
                 </label>
               </div>
               <Link
                 to='/forgot-password'
-                className='text-sm text-blue-600 hover:underline'
+                className='text-sm text-blue-600 dark:text-blue-400 hover:underline'
               >
                 Forgot password?
               </Link>
@@ -173,11 +173,11 @@ const Login = () => {
         </div>
         {/* Register Link */}
         <div className='text-center mt-6'>
-          <p className='text-gray-600'>
+          <p className='text-gray-600 dark:text-gray-300'>
             Don't have an account?{' '}
             <Link
               to='/register'
-              className='text-blue-600 hover:underline font-semibold'
+              className='text-blue-600 dark:text-blue-400 hover:underline font-semibold'
             >
               Create Account
             </Link>
@@ -185,14 +185,14 @@ const Login = () => {
         </div>
 
         {/* Security Notice */}
-        <div className='mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200'>
+        <div className='mt-6 p-4 bg-blue-50 dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-gray-700'>
           <div className='flex items-start space-x-3'>
-            <span className='text-blue-500 text-lg'>🔒</span>
+            <span className='text-blue-500 dark:text-blue-400 text-lg'>🔒</span>
             <div>
-              <h4 className='text-sm font-medium text-blue-900'>
+              <h4 className='text-sm font-medium text-blue-900 dark:text-blue-100'>
                 Secure Login
               </h4>
-              <p className='text-xs text-blue-700 mt-1'>
+              <p className='text-xs text-blue-700 dark:text-blue-300 mt-1'>
                 Your login is protected with 256-bit SSL encryption and
                 multi-factor authentication.
               </p>
