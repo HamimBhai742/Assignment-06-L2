@@ -51,23 +51,23 @@ const ContactInqueryFoorm = () => {
     }, 3000);
   };
   return (
-    <section className='py-20 bg-gray-50'>
+    <section className='py-20 bg-gray-50 dark:bg-gray-900'>
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center mb-12'>
-          <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-4'>
+          <h2 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4'>
             Send us a Message
           </h2>
-          <p className='text-xl text-gray-600'>
+          <p className='text-xl text-gray-600 dark:text-gray-300'>
             Fill out the form below and we'll get back to you within 24 hours
           </p>
         </div>
 
-        <div className='bg-white rounded-2xl shadow-xl p-8 md:p-12 min-h-[600px]'>
+        <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 min-h-[600px]'>
           {isSubmitted ? (
             <div className='text-center py-12'>
-              <div className='w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center'>
+              <div className='w-20 h-20 mx-auto mb-6 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center'>
                 <svg
-                  className='w-10 h-10 text-green-600'
+                  className='w-10 h-10 text-green-600 dark:text-green-400'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -80,15 +80,15 @@ const ContactInqueryFoorm = () => {
                   />
                 </svg>
               </div>
-              <h3 className='text-2xl font-bold text-gray-900 mb-4'>
+              <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-4'>
                 Message Sent Successfully!
               </h3>
-              <p className='text-gray-600 mb-6'>
+              <p className='text-gray-600 dark:text-gray-300 mb-6'>
                 Thank you for contacting us. We've received your message and
                 will respond within 24 hours.
               </p>
-              <div className='bg-blue-50 rounded-lg p-4'>
-                <p className='text-sm text-blue-800'>
+              <div className='bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4'>
+                <p className='text-sm text-blue-800 dark:text-blue-300'>
                   <strong>Ticket ID:</strong> PW-
                   {Date.now().toString().slice(-6)}
                 </p>
@@ -99,7 +99,7 @@ const ContactInqueryFoorm = () => {
               {/* Personal Information */}
               <div className='grid md:grid-cols-2 gap-6'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                     Full Name *
                   </label>
                   <input
@@ -107,8 +107,8 @@ const ContactInqueryFoorm = () => {
                     name='name'
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                      errors.name ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                      errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder='Enter your full name'
                   />
@@ -118,7 +118,7 @@ const ContactInqueryFoorm = () => {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                     Email Address *
                   </label>
                   <input
@@ -126,8 +126,8 @@ const ContactInqueryFoorm = () => {
                     name='email'
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                      errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder='Enter your email address'
                   />
@@ -139,7 +139,7 @@ const ContactInqueryFoorm = () => {
 
               <div className='grid md:grid-cols-2 gap-6'>
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                     Phone Number *
                   </label>
                   <input
@@ -147,8 +147,8 @@ const ContactInqueryFoorm = () => {
                     name='phone'
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                      errors.phone ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                      errors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder='+880 1234 567890'
                   />
@@ -158,15 +158,15 @@ const ContactInqueryFoorm = () => {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                     Inquiry Category *
                   </label>
                   <select
                     name='category'
                     value={formData.category}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                      errors.category ? 'border-red-500' : 'border-gray-300'
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                      errors.category ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                   >
                     <option value=''>Select a category</option>
@@ -187,7 +187,7 @@ const ContactInqueryFoorm = () => {
               </div>
 
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                   Subject *
                 </label>
                 <input
@@ -195,8 +195,8 @@ const ContactInqueryFoorm = () => {
                   name='subject'
                   value={formData.subject}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                    errors.subject ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                    errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                   }`}
                   placeholder='Brief description of your inquiry'
                 />
@@ -206,7 +206,7 @@ const ContactInqueryFoorm = () => {
               </div>
 
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                   Priority Level
                 </label>
                 <div className='flex space-x-4'>
@@ -253,7 +253,7 @@ const ContactInqueryFoorm = () => {
               </div>
 
               <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                   Message *
                 </label>
                 <textarea
@@ -261,15 +261,15 @@ const ContactInqueryFoorm = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none ${
-                    errors.message ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 ${
+                    errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                   }`}
                   placeholder='Please provide detailed information about your inquiry...'
                 />
                 {errors.message && (
                   <p className='text-red-500 text-sm mt-1'>{errors.message}</p>
                 )}
-                <p className='text-sm text-gray-500 mt-1'>
+                <p className='text-sm text-gray-500 dark:text-gray-400 mt-1'>
                   {formData.message.length}/500 characters
                 </p>
               </div>
