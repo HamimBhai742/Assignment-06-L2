@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 
 const HeroBanner = () => {
   const [stats, setStats] = useState({
@@ -83,12 +84,18 @@ const HeroBanner = () => {
 
           {/* CTA Buttons */}
           <div className='flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8'>
-            <button className='px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg'>
+            <Link
+              to='/login'
+              className='px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold rounded-full hover:from-yellow-500 hover:to-orange-600 transform hover:scale-105 transition-all duration-300 shadow-lg'
+            >
               Sign In
-            </button>
-            <button className='px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300'>
+            </Link>
+            <Link
+              to='/register'
+              className='px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300'
+            >
               Create Account
-            </button>
+            </Link>
           </div>
 
           {/* Stats */}

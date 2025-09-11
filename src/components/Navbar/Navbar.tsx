@@ -60,7 +60,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className='hidden md:block'>
+          <div className='hidden lg:block'>
             <div className='ml-10 flex items-baseline space-x-8'>
               {navLinks.map((link) =>
                 link.href.startsWith('/') ? (
@@ -93,52 +93,54 @@ const Navbar = () => {
               )}
             </div>
           </div>
-
           {/* Auth Buttons */}
-          {data || isLoading ? (
-            <div className='hidden md:flex items-center space-x-4'>
-              <Link
-                to={
-                  data?.role === Role.USER
-                    ? '/dashboard'
-                    : `/${data?.role?.toLowerCase()}-dashboard`
-                }
-                className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
-              >
-                Dashboard
-              </Link>
-              <button onClick={handleLogout}>
+
+          <div className='flex items-center space-x-4 '>
+           <div className='hidden lg:block hover:cursor-pointer'>
+             <ModeToggle />
+           </div>
+            {data || isLoading ? (
+              <div className='hidden lg:flex items-center space-x-3'>
                 <Link
-                  to='/'
+                  to={
+                    data?.role === Role.USER
+                      ? '/dashboard'
+                      : `/${data?.role?.toLowerCase()}-dashboard`
+                  }
+                  className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
+                >
+                  Dashboard
+                </Link>
+                <button onClick={handleLogout}>
+                  <Link
+                    to='/'
+                    className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
+                  >
+                    Sign Out
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              <div className='hidden lg:flex items-center space-x-4'>
+                <Link
+                  to='/login'
+                  className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to='/register'
                   className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
                 >
-                  Sign Out
+                  Get Started
                 </Link>
-              </button>
-            </div>
-          ) : (
-            <div className='hidden md:flex items-center space-x-4'>
-              <Link
-                to='/login'
-                className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
-              >
-                Sign In
-              </Link>
-              <Link
-                to='/register'
-                className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
-              >
-                Get Started
-              </Link>
-            </div>
-          )}
-
-          <div>
-            <ModeToggle />
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
-          <div className='md:hidden'>
+          <div className='lg:hidden flex items-center gap-3'>
+            <ModeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md transition-colors duration-300 ${
@@ -173,7 +175,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className='md:hidden'>
+          <div className='lg:hidden'>
             <div
               className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-all duration-300 ${
                 isScrolled ? 'bg-white/95' : 'bg-black/20'
@@ -231,9 +233,6 @@ const Navbar = () => {
                 >
                   Get Started
                 </Link>
-                <div>
-                  <ModeToggle />
-                </div>
               </div>
             </div>
           </div>
