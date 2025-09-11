@@ -44,7 +44,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-purple-700  shadow-xl' : 'bg-purple-700'
+        isScrolled ? 'bg-purple-700 dark:bg-gray-900 shadow-xl' : 'bg-purple-700 dark:bg-gray-900'
       }`}
     >
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -53,7 +53,7 @@ const Navbar = () => {
           <div className='flex-shrink-0'>
             <Link
               to='/'
-              className={`text-2xl font-bold transition-colors duration-300 text-white`}
+              className={`text-2xl font-bold transition-colors duration-300 text-white dark:text-white`}
             >
               PayWallet
             </Link>
@@ -69,10 +69,10 @@ const Navbar = () => {
                     to={link.href}
                     className={`px-3 py-2 text-sm font-medium transition-colors duration-300 hover:scale-105 ${
                       isScrolled
-                        ? 'text-white hover:text-blue-300'
-                        : 'text-white hover:text-blue-300'
+                        ? 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
+                        : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
                     } ${
-                      location.pathname === link.href ? 'text-blue-600' : ''
+                      location.pathname === link.href ? 'text-blue-600 dark:text-blue-400' : ''
                     }`}
                   >
                     {link.name}
@@ -83,8 +83,8 @@ const Navbar = () => {
                     href={link.href}
                     className={`px-3 py-2 text-sm font-medium transition-colors duration-300 hover:scale-105 ${
                       isScrolled
-                        ? 'text-gray-700 hover:text-blue-600'
-                        : 'text-white hover:text-blue-300'
+                        ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400'
+                        : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
                     }`}
                   >
                     {link.name}
@@ -107,14 +107,14 @@ const Navbar = () => {
                       ? '/dashboard'
                       : `/${data?.role?.toLowerCase()}-dashboard`
                   }
-                  className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
+                  className='px-4 py-2 text-sm font-medium text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 transition-colors'
                 >
                   Dashboard
                 </Link>
                 <button onClick={handleLogout}>
                   <Link
                     to='/'
-                    className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
+                    className='px-4 py-2 text-sm font-medium bg-white dark:bg-gray-700 text-purple-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors'
                   >
                     Sign Out
                   </Link>
@@ -124,13 +124,13 @@ const Navbar = () => {
               <div className='hidden lg:flex items-center space-x-4'>
                 <Link
                   to='/login'
-                  className='px-4 py-2 text-sm font-medium text-white hover:text-blue-300 transition-colors'
+                  className='px-4 py-2 text-sm font-medium text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 transition-colors'
                 >
                   Sign In
                 </Link>
                 <Link
                   to='/register'
-                  className='px-4 py-2 text-sm font-medium bg-white text-purple-700 rounded-lg hover:bg-blue-50 transition-colors'
+                  className='px-4 py-2 text-sm font-medium bg-white dark:bg-gray-700 text-purple-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors'
                 >
                   Get Started
                 </Link>
@@ -144,7 +144,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md transition-colors duration-300 ${
-                isScrolled ? 'text-gray-700' : 'text-white'
+                isScrolled ? 'text-gray-700 dark:text-gray-200' : 'text-white dark:text-gray-200'
               }`}
             >
               <svg
@@ -178,7 +178,7 @@ const Navbar = () => {
           <div className='lg:hidden'>
             <div
               className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-all duration-300 ${
-                isScrolled ? 'bg-white/95' : 'bg-black/20'
+                isScrolled ? 'bg-white/95 dark:bg-gray-800/95' : 'bg-black/20 dark:bg-gray-800/80'
               } backdrop-blur-md rounded-lg mt-2`}
             >
               {navLinks.map((link) =>
@@ -188,10 +188,10 @@ const Navbar = () => {
                     to={link.href}
                     className={`block px-3 py-2 text-base font-medium transition-colors duration-300 ${
                       isScrolled
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                        : 'text-white hover:text-blue-300 hover:bg-white/10'
+                        ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 hover:bg-white/10 dark:hover:bg-gray-700/50'
                     } rounded-md ${
-                      location.pathname === link.href ? 'text-blue-600' : ''
+                      location.pathname === link.href ? 'text-blue-600 dark:text-blue-400' : ''
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -203,8 +203,8 @@ const Navbar = () => {
                     href={link.href}
                     className={`block px-3 py-2 text-base font-medium transition-colors duration-300 ${
                       isScrolled
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                        : 'text-white hover:text-blue-300 hover:bg-white/10'
+                        ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 hover:bg-white/10 dark:hover:bg-gray-700/50'
                     } rounded-md`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -214,13 +214,13 @@ const Navbar = () => {
               )}
 
               {/* Mobile Auth Links */}
-              <div className='border-t border-white/20 pt-3 mt-3 space-y-2'>
+              <div className='border-t border-white/20 dark:border-gray-600/50 pt-3 mt-3 space-y-2'>
                 <Link
                   to='/login'
                   className={`block px-3 py-2 text-base font-medium transition-colors duration-300 ${
                     isScrolled
-                      ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                      : 'text-white hover:text-blue-300 hover:bg-white/10'
+                      ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                      : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 hover:bg-white/10 dark:hover:bg-gray-700/50'
                   } rounded-md`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -228,7 +228,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to='/register'
-                  className='block px-3 py-2 text-base font-medium bg-white text-purple-700 rounded-md hover:bg-blue-50 transition-colors'
+                  className='block px-3 py-2 text-base font-medium bg-white dark:bg-gray-700 text-purple-700 dark:text-gray-200 rounded-md hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors'
                   onClick={() => setIsOpen(false)}
                 >
                   Get Started
