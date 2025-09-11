@@ -1,11 +1,11 @@
 const ContactSupport = () => {
   return (
-    <section className='py-20 bg-white'>
+    <section className='py-20 bg-white dark:bg-gray-900'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid lg:grid-cols-2 gap-12'>
           {/* FAQ Section */}
           <div>
-            <h3 className='text-2xl font-bold text-gray-900 mb-8'>
+            <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-8'>
               Frequently Asked Questions
             </h3>
             <div className='space-y-4'>
@@ -27,9 +27,9 @@ const ContactSupport = () => {
                   a: 'Yes, we use bank-level security and are regulated by Bangladesh Bank.',
                 },
               ].map((faq, index) => (
-                <div key={index} className='bg-gray-50 rounded-lg p-6'>
-                  <h4 className='font-semibold text-gray-900 mb-2'>{faq.q}</h4>
-                  <p className='text-gray-600 text-sm'>{faq.a}</p>
+                <div key={index} className='bg-gray-50 dark:bg-gray-800 rounded-lg p-6'>
+                  <h4 className='font-semibold text-gray-900 dark:text-white mb-2'>{faq.q}</h4>
+                  <p className='text-gray-600 dark:text-gray-300 text-sm'>{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -37,17 +37,17 @@ const ContactSupport = () => {
 
           {/* Contact Information */}
           <div>
-            <h3 className='text-2xl font-bold text-gray-900 mb-8'>
+            <h3 className='text-2xl font-bold text-gray-900 dark:text-white mb-8'>
               Other Ways to Reach Us
             </h3>
             <div className='space-y-6'>
               <div className='flex items-start space-x-4'>
-                <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center'>
+                <div className='w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center'>
                   <span className='text-xl'>🏢</span>
                 </div>
                 <div>
-                  <h4 className='font-semibold text-gray-900'>Head Office</h4>
-                  <p className='text-gray-600 text-sm'>
+                  <h4 className='font-semibold text-gray-900 dark:text-white'>Head Office</h4>
+                  <p className='text-gray-600 dark:text-gray-300 text-sm'>
                     PayWallet Tower, Gulshan-1
                     <br />
                     Dhaka-1212, Bangladesh
@@ -56,14 +56,14 @@ const ContactSupport = () => {
               </div>
 
               <div className='flex items-start space-x-4'>
-                <div className='w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center'>
+                <div className='w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center'>
                   <span className='text-xl'>⏰</span>
                 </div>
                 <div>
-                  <h4 className='font-semibold text-gray-900'>
+                  <h4 className='font-semibold text-gray-900 dark:text-white'>
                     Business Hours
                   </h4>
-                  <p className='text-gray-600 text-sm'>
+                  <p className='text-gray-600 dark:text-gray-300 text-sm'>
                     Monday - Friday: 9:00 AM - 6:00 PM
                     <br />
                     Saturday: 10:00 AM - 4:00 PM
@@ -74,16 +74,16 @@ const ContactSupport = () => {
               </div>
 
               <div className='flex items-start space-x-4'>
-                <div className='w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center'>
+                <div className='w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center'>
                   <span className='text-xl'>🌐</span>
                 </div>
                 <div>
-                  <h4 className='font-semibold text-gray-900'>Social Media</h4>
+                  <h4 className='font-semibold text-gray-900 dark:text-white'>Social Media</h4>
                   <div className='flex space-x-3 mt-2'>
                     {['Facebook', 'Twitter', 'LinkedIn'].map((social) => (
                       <button
                         key={social}
-                        className='text-blue-600 hover:text-blue-700 text-sm'
+                        className='text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm'
                       >
                         {social}
                       </button>

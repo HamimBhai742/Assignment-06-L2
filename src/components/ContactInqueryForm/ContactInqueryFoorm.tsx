@@ -214,17 +214,17 @@ const ContactInqueryFoorm = () => {
                     {
                       value: 'low',
                       label: 'Low',
-                      color: 'text-green-600 border-green-300',
+                      color: 'text-green-600 dark:text-green-400 border-green-300 dark:border-green-600',
                     },
                     {
                       value: 'medium',
                       label: 'Medium',
-                      color: 'text-yellow-600 border-yellow-300',
+                      color: 'text-yellow-600 dark:text-yellow-400 border-yellow-300 dark:border-yellow-600',
                     },
                     {
                       value: 'high',
                       label: 'High',
-                      color: 'text-red-600 border-red-300',
+                      color: 'text-red-600 dark:text-red-400 border-red-300 dark:border-red-600',
                     },
                   ].map((priority) => (
                     <label key={priority.value} className='flex items-center'>
@@ -241,7 +241,7 @@ const ContactInqueryFoorm = () => {
                           priority.color
                         } ${
                           formData.priority === priority.value
-                            ? 'bg-opacity-20'
+                            ? 'bg-opacity-20 dark:bg-opacity-30'
                             : ''
                         }`}
                       >

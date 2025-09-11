@@ -1,10 +1,15 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 html {
   scroll-behavior: smooth;
+}
+
+.active {
+  color: rgb(red, green, blue);
+  font-weight: 600;
 }
 
 body {

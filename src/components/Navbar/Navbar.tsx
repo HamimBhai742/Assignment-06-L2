@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router';
+import { Link, NavLink, useLocation } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { authApi, useLogoutMutation } from '../../redux/api/authApi';
@@ -64,24 +64,24 @@ const Navbar = () => {
             <div className='ml-10 flex items-baseline space-x-8'>
               {navLinks.map((link) =>
                 link.href.startsWith('/') ? (
-                  <Link
+                  <NavLink
                     key={link.name}
                     to={link.href}
                     className={`px-3 py-2 text-sm font-medium transition-colors duration-300 hover:scale-105 ${
-                      isScrolled
+                      location.pathname === link.href 
+                        ? 'text-blue-400 dark:text-blue-300 font-semibold' 
+                        : isScrolled
                         ? 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
                         : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
-                    } ${
-                      location.pathname === link.href ? 'text-blue-600 dark:text-blue-400' : ''
                     }`}
                   >
                     {link.name}
-                  </Link>
+                  </NavLink>
                 ) : (
                   <a
                     key={link.name}
                     href={link.href}
-                    className={`px-3 py-2 text-sm font-medium transition-colors duration-300 hover:scale-105 ${
+                    className={`px-3 py-2  font-medium transition-colors duration-300 hover:scale-105 ${
                       isScrolled
                         ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400'
                         : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
@@ -186,12 +186,12 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`block px-3 py-2 text-base font-medium transition-colors duration-300 ${
-                      isScrolled
+                    className={`block px-3 py-2 text-base font-medium transition-colors duration-300 rounded-md ${
+                      location.pathname === link.href 
+                        ? 'text-blue-400 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 font-semibold' 
+                        : isScrolled
                         ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                         : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 hover:bg-white/10 dark:hover:bg-gray-700/50'
-                    } rounded-md ${
-                      location.pathname === link.href ? 'text-blue-600 dark:text-blue-400' : ''
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
