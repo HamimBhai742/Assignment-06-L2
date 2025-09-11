@@ -17,7 +17,6 @@ import Profile from '../pages/Dashboard/UserDashboard/Profile/Profile';
 import AgentOverview from '../pages/Dashboard/AgentDashboard/AgentOverview/Overview';
 import CashIn from '../pages/Dashboard/AgentDashboard/CashIn/CashIn';
 import CashOut from '../pages/Dashboard/AgentDashboard/CashOut/CashOut';
-import TestAgentDashboard from '../pages/TestAgentDashboard';
 import ProtecedRoutes from './ProtecedRoutes';
 import AgentTransactions from '../pages/Dashboard/AgentDashboard/AgentTransactions/AgentTransactions';
 import AgentProfile from '../pages/Dashboard/AgentDashboard/AgentProfile/AgentProfile';
@@ -94,18 +93,6 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/register',
-    Component: Register,
-  },
-  {
-    path: '/login',
-    Component: Login,
-  },
-  {
-    path: '/test-agent',
-    Component: TestAgentDashboard,
-  },
-  {
     path: '/agent-dashboard',
     element: (
       <ProtecedRoutes>
@@ -168,5 +155,13 @@ export const router = createBrowserRouter([
         Component: AdminProfile,
       },
     ],
+  },
+  {
+    path: '/register',
+    Component: Register,
+  },
+  {
+    path: '/login',
+    Component: Login,
   },
 ]);

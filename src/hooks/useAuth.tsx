@@ -1,4 +1,4 @@
-import { useCheckLoginQuery } from '../redux/api/authApi';
+import { useCheckLoginQuery } from '@/redux/api/authApi';
 
 const useAuth = () => {
   const { data, isLoading, error } = useCheckLoginQuery(undefined);

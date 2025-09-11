@@ -55,6 +55,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Auth'],
     }),
+    loginUsingRefreshToken: builder.mutation<AuthResponse, void>({
+      query: () => ({
+        url: '/auth/refresh-token',
+        method: 'POST',
+        credentials: 'include',
+      }),
+      invalidatesTags: ['Auth'],
+    }),
     checkLogin: builder.query<LoginResponse, void>({
       query: () => '/auth/check',
       providesTags: ['Auth'],
@@ -82,4 +90,5 @@ export const {
   useLogoutMutation,
   useCheckLoginQuery,
   useMatchPINMutation,
+  useLoginUsingRefreshTokenMutation,
 } = authApi;

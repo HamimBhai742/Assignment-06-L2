@@ -197,9 +197,9 @@ const DashboardLayout = () => {
               <button className='p-2 text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 rounded-full'>
                 <span className='text-xl'>🔔</span>
               </button>
-              <button className='p-2 border-none text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 rounded-full'>
+              {/* <button className='p-2 border-none text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 rounded-full'> */}
                <ModeToggle/>
-              </button>
+              {/* </button> */}
             </div>
           </div>
         </header>

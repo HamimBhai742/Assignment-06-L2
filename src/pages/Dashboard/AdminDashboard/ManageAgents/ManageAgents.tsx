@@ -128,7 +128,7 @@ const ManageAgents = () => {
 
       {/* Results */}
       <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden'>
-        {agents.length === 0 ? (
+        {agents?.length === 0 ? (
           <div className='text-center py-8 sm:py-12 px-4'>
             <UserGroupIcon className='h-10 w-10 sm:h-12 sm:w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4' />
             <h3 className='text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 mb-2'>
