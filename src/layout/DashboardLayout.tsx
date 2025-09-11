@@ -7,6 +7,7 @@ import { useMyProfileQuery } from '../redux/api/userApi';
 import { ArrowRightEndOnRectangleIcon } from '@heroicons/react/24/outline';
 import { authApi, useLogoutMutation } from '../redux/api/authApi';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 import { useAppDispatch } from '../redux/hook/hooks';
 import { ModeToggle } from '@/components/mode-toggle';
 
@@ -49,15 +50,37 @@ const DashboardLayout = () => {
   ];
   const dispatch = useAppDispatch();
   const handleLogout = async () => {
-    try {
-      const res = await logOut();
-      if (res.data) {
-        toast.success(res.data.message);
-        dispatch(authApi.util.resetApiState());
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Sign Out!',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then(async (result: { isConfirmed: any }) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await logOut();
+          if (res.data) {
+            Swal.fire({
+              title: 'Sing Out!',
+              text: res?.data?.message,
+              icon: 'success',
+            });
+            dispatch(authApi.util.resetApiState());
+          }
+        } catch (error) {
+          Swal.fire({
+            title: 'Sing Out!',
+            text: 'Failed to logout',
+            icon: 'error',
+          });
+          toast.error('Failed to logout');
+        }
       }
-    } catch (error) {
-      toast.error('Failed to logout');
-    }
+    });
   };
 
   return (
@@ -71,7 +94,10 @@ const DashboardLayout = () => {
       >
         {/* Logo */}
         <div className='flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700'>
-          <Link to='/' className='text-xl font-bold text-purple-600 dark:text-purple-400'>
+          <Link
+            to='/'
+            className='text-xl font-bold text-purple-600 dark:text-purple-400'
+          >
             PayWallet
           </Link>
           <button
@@ -164,7 +190,11 @@ const DashboardLayout = () => {
             </div>
           </div>
           <button onClick={handleLogout}>
-            <ArrowRightEndOnRectangleIcon width={30} height={30} className="text-gray-600 dark:text-gray-300" />
+            <ArrowRightEndOnRectangleIcon
+              width={30}
+              height={30}
+              className='text-gray-600 dark:text-gray-300'
+            />
           </button>
         </div>
       </div>
@@ -198,7 +228,7 @@ const DashboardLayout = () => {
                 <span className='text-xl'>🔔</span>
               </button>
               {/* <button className='p-2 border-none text-gray-400 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-100 rounded-full'> */}
-               <ModeToggle/>
+              <ModeToggle />
               {/* </button> */}
             </div>
           </div>
@@ -213,7 +243,6 @@ const DashboardLayout = () => {
       </div>
 
       {/* Overlay for mobile */}
-
     </div>
   );
 };

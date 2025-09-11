@@ -15,6 +15,7 @@ const Navbar = () => {
   const { data, isLoading } = useAuth();
   const [logOut] = useLogoutMutation();
   const dispatch = useAppDispatch();
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -68,8 +69,8 @@ const Navbar = () => {
                     key={link.name}
                     to={link.href}
                     className={`px-3 py-2 text-sm font-medium transition-colors duration-300 hover:scale-105 ${
-                      location.pathname === link.href 
-                        ? 'text-blue-400 dark:text-blue-300 font-semibold' 
+                      location.pathname === link.href
+                        ? 'text-blue-400 dark:text-blue-300 font-semibold'
                         : isScrolled
                         ? 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
                         : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400'
@@ -187,8 +188,8 @@ const Navbar = () => {
                     key={link.name}
                     to={link.href}
                     className={`block px-3 py-2 text-base font-medium transition-colors duration-300 rounded-md ${
-                      location.pathname === link.href 
-                        ? 'text-blue-400 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 font-semibold' 
+                      location.pathname === link.href
+                        ? 'text-blue-400 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 font-semibold'
                         : isScrolled
                         ? 'text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                         : 'text-white dark:text-gray-200 hover:text-blue-300 dark:hover:text-blue-400 hover:bg-white/10 dark:hover:bg-gray-700/50'

@@ -1,69 +1,79 @@
-# React + TypeScript + Vite
+# 💳 PayWallet — (React + Redux Toolkit + RTK Query)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 🌐 https://assignment-06-nine.vercel.app
 
-Currently, two official plugins are available:
+## 📖 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+PayWallet is a secure, role-based, and user-friendly frontend application designed for a Digital Wallet System (similar to bKash or Nagad). It empowers Users, Agents, and Admins to manage wallets, perform financial transactions, and monitor activities seamlessly.
 
-## Expanding the ESLint configuration
+- Admins can view all users, block or unblock accounts, manage agents by approving or suspending them, and monitor every transaction across the system.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Agents are responsible for handling cash-in and cash-out operations, enabling smooth money flow for users.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Users can easily deposit, withdraw, and send money to others, making financial management simple and efficient.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+The project is built with **React.js**, **Redux Toolkit**, and **RTK Query**, consuming a backend API to deliver real-time wallet operations.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚡ Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🌍 Public Landing Pages
+- Responsive **Home Page** with hero banner, sticky navbar, smooth transitions, and skeleton loaders
+- **About Page** — service story, mission, team details
+- **Features Page** — key features with visuals
+- **Contact Page** — inquiry form (simulated)
+- **FAQ Page** — common Q&A
+- Optional **Pricing Page**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 🔐 Authentication
+- JWT-based **Login & Registration**
+- Role-based redirection (**User / Agent / Admin**)
+- Persisted authentication state across refresh
+- Logout functionality
+
+### 👤 User Dashboard
+- Wallet balance overview with quick actions
+- Deposit, Withdraw, and Send Money
+- Transaction history with pagination & filters
+- Profile management (update info, change password)
+
+### 🏪 Agent Dashboard
+- Cash-in/out summary & activity overview
+- Add/Withdraw money for users
+- View agent-handled transactions
+- Profile management
+
+### 🛡️ Admin Dashboard
+- System overview: users, agents, transaction stats
+- Manage users (block/unblock) & agents (approve/suspend)
+- View all transactions with advanced filters
+- Search bars, multi-filters, and pagination
+- Profile management
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js + React Router
+- Redux Toolkit + RTK Query
+- TypeScript
+- Tailwind CSS
+
+### Backend
+- Node.js + Express.js
+- MongoDB + Mongoose
+- JWT + bcrypt (authentication)
+
+
+## 🚀 Getting Started
+
+### Installation
+```bash
+# Clone repository
+git clone https://github.com/HamimBhai742/Assignment-06-L2.git
+cd Assignment-06-L2
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env.local
