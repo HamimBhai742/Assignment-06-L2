@@ -6,6 +6,8 @@ import About from '../pages/About/About';
 import Features from '../pages/Features/Features';
 import Contact from '../pages/Contact/Contact';
 import FAQ from '../pages/FAQ/FAQ';
+import Privacy from '../pages/Privacy/Privacy';
+import Terms from '../pages/Terms/Terms';
 import Register from '../pages/Register/Register';
 import Login from '../pages/Login/Login';
 import Overview from '../pages/Dashboard/UserDashboard/Overview/Overview';
@@ -28,6 +30,7 @@ import AdminProfile from '../pages/Dashboard/AdminDashboard/Profile/Profile';
 import AdminProtectedRoute from './AdminProtected';
 import AgentProtectedRoute from './AgentProtected';
 import UserProtectedRoute from './UserProtected';
+import Compliance from '@/pages/Compliance/Compliance';
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +57,18 @@ export const router = createBrowserRouter([
         path: 'faq',
         Component: FAQ,
       },
+      {
+        path: 'privacy&policy',
+        Component: Privacy,
+      },
+      {
+        path: 'terms',
+        Component: Terms,
+      },
+      {
+        path: 'compliance',
+        Component: Compliance,
+      }
     ],
   },
   {

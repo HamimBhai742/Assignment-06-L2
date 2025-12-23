@@ -15,12 +15,12 @@ const Navbar = () => {
   const { data, isLoading } = useAuth();
   const [logOut] = useLogoutMutation();
   const dispatch = useAppDispatch();
-  
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -45,7 +45,9 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-purple-700 dark:bg-gray-900 shadow-xl' : 'bg-purple-700 dark:bg-gray-900'
+        isScrolled
+          ? 'bg-purple-700/95 dark:bg-gray-900/95 shadow-xl backdrop-blur-md'
+          : 'bg-purple-700 dark:bg-gray-900'
       }`}
     >
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
