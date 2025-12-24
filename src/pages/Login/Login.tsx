@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useLoginMutation } from '../../redux/api/authApi';
 import toast from 'react-hot-toast';
+import { ImSpinner3 } from 'react-icons/im';
 
 interface LoginData {
   phone: string;
@@ -43,6 +44,21 @@ const Login = () => {
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const demoCredentials = {
+    admin: { phone: '01926313093', password: '658742' },
+    agent: { phone: '01963511812', password: '313093' },
+    user: { phone: '01402586230', password: '658742' },
+  };
+
+  const fillDemoCredentials = (role: 'admin' | 'agent' | 'user') => {
+    setFormData((prev) => ({
+      ...prev,
+      phone: demoCredentials[role].phone,
+      password: demoCredentials[role].password,
+    }));
+    setErrors({});
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -87,7 +103,39 @@ const Login = () => {
           <h1 className='text-3xl font-bold text-gray-900 dark:text-white mb-2'>
             Welcome Back
           </h1>
-          <p className='text-gray-600 dark:text-gray-300'>Sign in to your PayWallet account</p>
+          <p className='text-gray-600 dark:text-gray-300'>
+            Sign in to your PayWallet account
+          </p>
+        </div>
+
+        {/* Demo Credentials */}
+        <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 border border-gray-100 dark:border-gray-700 mb-4'>
+          <h3 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
+            Demo Credentials
+          </h3>
+          <div className='grid grid-cols-3 gap-2'>
+            <button
+              type='button'
+              onClick={() => fillDemoCredentials('admin')}
+              className='px-3 py-2 text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors'
+            >
+              Admin
+            </button>
+            <button
+              type='button'
+              onClick={() => fillDemoCredentials('agent')}
+              className='px-3 py-2 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors'
+            >
+              Agent
+            </button>
+            <button
+              type='button'
+              onClick={() => fillDemoCredentials('user')}
+              className='px-3 py-2 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors'
+            >
+              User
+            </button>
+          </div>
         </div>
 
         {/* Login Form */}
@@ -167,7 +215,13 @@ const Login = () => {
               disabled={isLoading}
               className='w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed'
             >
-              {isLoading ? 'Signing In...' : 'Sign In'}
+              {isLoading ? (
+                <span className='flex items-center justify-center gap-2'>
+                  <ImSpinner3 className='animate-spin' /> Signing In...
+                </span>
+              ) : (
+                'Sign In'
+              )}
             </button>
           </form>
         </div>

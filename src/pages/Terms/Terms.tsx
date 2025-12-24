@@ -2,7 +2,7 @@ const Terms = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
-      <div className="bg-blue-600 dark:bg-blue-800">
+      <div className="bg-blue-600 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="text-center animate-fade-in">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 animate-slide-up">
@@ -20,7 +20,7 @@ const Terms = () => {
 
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        
+
         {/* Acceptance */}
         <section className="mb-12 animate-fade-in-up">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
@@ -28,8 +28,8 @@ const Terms = () => {
           </h2>
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              By accessing or using PayWallet services, you agree to be bound by these Terms of Service. 
-              If you do not agree to these terms, please do not use our services. These terms apply to all users, 
+              By accessing or using PayWallet services, you agree to be bound by these Terms of Service.
+              If you do not agree to these terms, please do not use our services. These terms apply to all users,
               including agents and merchants.
             </p>
           </div>
@@ -143,8 +143,8 @@ const Terms = () => {
           </h2>
           <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-6 rounded-lg">
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              PayWallet's liability is limited to the amount of the specific transaction in question. 
-              We are not liable for indirect, incidental, or consequential damages. Our maximum liability 
+              PayWallet's liability is limited to the amount of the specific transaction in question.
+              We are not liable for indirect, incidental, or consequential damages. Our maximum liability
               shall not exceed ৳10,000 for any single incident.
             </p>
           </div>

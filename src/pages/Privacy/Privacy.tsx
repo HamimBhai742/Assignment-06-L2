@@ -2,7 +2,7 @@ const Privacy = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-800 dark:to-blue-800">
+      <div className="bg-gradient-to-r from-purple-600 to-blue-600 dark:from-gray-800 dark:to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -21,7 +21,7 @@ const Privacy = () => {
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="prose prose-lg dark:prose-invert max-w-none">
-          
+
           {/* Information We Collect */}
           <section className="mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-6">
@@ -205,7 +205,7 @@ const Privacy = () => {
             </h2>
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-6 rounded-lg">
               <p className="text-gray-700 dark:text-gray-300">
-                We may update this Privacy Policy periodically. We'll notify you of significant changes via email or app notification. 
+                We may update this Privacy Policy periodically. We'll notify you of significant changes via email or app notification.
                 Your continued use of PayWallet after changes constitutes acceptance of the updated policy.
               </p>
             </div>

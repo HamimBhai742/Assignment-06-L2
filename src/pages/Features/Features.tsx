@@ -22,7 +22,7 @@ const Features = () => {
       : allFeatures.filter((feature) => feature.category === activeCategory);
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen bg-accent-gray-50 dark:bg-gray-900'>
       <FeatureHeroSection />
 
       {/* Feature Categories */}
@@ -117,7 +117,9 @@ const Features = () => {
               ))
             ) : (
               <div>
-                <h2 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center'>This features has comming soon......</h2>
+                <h2 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center'>
+                  This features has comming soon......
+                </h2>
               </div>
             )}
           </div>
@@ -125,22 +127,24 @@ const Features = () => {
       </section>
 
       {/* Call to Action */}
-      <section className='py-20 bg-gradient-to-r from-blue-600 to-purple-600'>
-        <div className='max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8'>
-          <h2 className='text-3xl md:text-4xl font-bold text-white mb-6'>
-            Ready to Experience These Features?
-          </h2>
-          <p className='text-xl text-blue-100 mb-8'>
-            Join millions of users who trust PayWallet for their daily financial
-            needs
-          </p>
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-            <button className='bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors'>
-              Download App
-            </button>
-            <button className='border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-colors'>
-              Learn More
-            </button>
+      <section className='py-10'>
+        <div className='max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8'>
+          <div className='py-16 bg-blue-600 dark:bg-gray-800 rounded-lg'>
+            <h2 className='text-3xl md:text-4xl font-bold text-white mb-6'>
+              Ready to Experience These Features?
+            </h2>
+            <p className='text-xl text-blue-100 mb-8'>
+              Join millions of users who trust PayWallet for their daily
+              financial needs
+            </p>
+            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+              <button className='bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors'>
+                Download App
+              </button>
+              <button className='border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-colors'>
+                Learn More
+              </button>
+            </div>
           </div>
         </div>
       </section>

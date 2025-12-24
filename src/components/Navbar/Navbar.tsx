@@ -30,6 +30,7 @@ const Navbar = () => {
     { name: 'Features', href: '/features' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Blog', href: '/blogs' },
   ];
   const handleLogout = async () => {
     try {
@@ -99,9 +100,9 @@ const Navbar = () => {
           {/* Auth Buttons */}
 
           <div className='flex items-center space-x-4 '>
-           <div className='hidden lg:block hover:cursor-pointer'>
-             <ModeToggle />
-           </div>
+            <div className='hidden lg:block hover:cursor-pointer'>
+              <ModeToggle />
+            </div>
             {data || isLoading ? (
               <div className='hidden lg:flex items-center space-x-3'>
                 <Link
@@ -147,7 +148,9 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md transition-colors duration-300 ${
-                isScrolled ? 'text-gray-700 dark:text-gray-200' : 'text-white dark:text-gray-200'
+                isScrolled
+                  ? 'text-gray-700 dark:text-gray-200'
+                  : 'text-white dark:text-gray-200'
               }`}
             >
               <svg
@@ -181,7 +184,9 @@ const Navbar = () => {
           <div className='lg:hidden'>
             <div
               className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-all duration-300 ${
-                isScrolled ? 'bg-white/95 dark:bg-gray-800/95' : 'bg-black/20 dark:bg-gray-800/80'
+                isScrolled
+                  ? 'bg-white/95 dark:bg-gray-800/95'
+                  : 'bg-black/20 dark:bg-gray-800/80'
               } backdrop-blur-md rounded-lg mt-2`}
             >
               {navLinks.map((link) =>

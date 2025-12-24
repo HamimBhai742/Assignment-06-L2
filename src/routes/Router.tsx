@@ -31,6 +31,9 @@ import AdminProtectedRoute from './AdminProtected';
 import AgentProtectedRoute from './AgentProtected';
 import UserProtectedRoute from './UserProtected';
 import Compliance from '@/pages/Compliance/Compliance';
+import ForgotPassword from '@/pages/ForgotPassword/ForgotPassword';
+import Blogs from '@/pages/Blogs/Blogs';
+import BlogDetails from '@/pages/Blogs/BlogDetails';
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +71,14 @@ export const router = createBrowserRouter([
       {
         path: 'compliance',
         Component: Compliance,
+      },
+      {
+        path: 'blogs',
+        Component: Blogs,
+      },
+      {
+        path: 'blog/:slug',
+        Component: BlogDetails,
       }
     ],
   },
@@ -178,5 +189,9 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     Component: Login,
+  },
+  {
+    path: '/forgot-password',
+    Component: ForgotPassword,
   },
 ]);
