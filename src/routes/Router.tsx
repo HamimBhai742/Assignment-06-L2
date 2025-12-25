@@ -34,6 +34,8 @@ import Compliance from '@/pages/Compliance/Compliance';
 import ForgotPassword from '@/pages/ForgotPassword/ForgotPassword';
 import Blogs from '@/pages/Blogs/Blogs';
 import BlogDetails from '@/pages/Blogs/BlogDetails';
+import ManageBlogs from '@/pages/ManageBlogs/ManageBlogs';
+import UserReviews from '@/pages/Dashboard/UserDashboard/Reviews/UserReviews';
 
 export const router = createBrowserRouter([
   {
@@ -79,7 +81,7 @@ export const router = createBrowserRouter([
       {
         path: 'blog/:slug',
         Component: BlogDetails,
-      }
+      },
     ],
   },
   {
@@ -115,6 +117,10 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         Component: Profile,
+      },
+      {
+        path: 'review',
+        Component: UserReviews,
       },
     ],
   },
@@ -179,6 +185,10 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         Component: AdminProfile,
+      },
+      {
+        path: 'manage-blogs',
+        Component: ManageBlogs,
       },
     ],
   },

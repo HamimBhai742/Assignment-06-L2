@@ -24,8 +24,7 @@ const DashboardLayout = () => {
     { name: 'Withdraw Money', href: '/dashboard/withdraw', icon: '💸' },
     { name: 'Send Money', href: '/dashboard/send', icon: '📤' },
     { name: 'Transactions', href: '/dashboard/transactions', icon: '📋' },
-    // { name: 'Cards', href: '/dashboard/cards', icon: '💳' },
-    // { name: 'Bills', href: '/dashboard/bills', icon: '🧾' },
+    { name: 'Reviews', href: '/dashboard/review', icon: '⭐' },
     { name: 'Profile', href: '/dashboard/profile', icon: '👤' },
   ];
 
@@ -41,6 +40,8 @@ const DashboardLayout = () => {
     { name: 'Overview', href: '/admin-dashboard', icon: '📊' },
     { name: 'Manage Users', href: '/admin-dashboard/users', icon: '👥' },
     { name: 'Manage Agents', href: '/admin-dashboard/agents', icon: '🏪' },
+    { name: 'Manage Blog', href: '/admin-dashboard/manage-blogs', icon: '📝' },
+
     {
       name: 'All Transactions',
       href: '/admin-dashboard/all-transactions',
