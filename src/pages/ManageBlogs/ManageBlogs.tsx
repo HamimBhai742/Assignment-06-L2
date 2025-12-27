@@ -8,6 +8,7 @@ import {
 import { ImSpinner9 } from 'react-icons/im';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import BlogPostSkeleton from '../Blogs/BlogPostSkeleton';
 
 interface Blog {
   _id: string;
@@ -25,7 +26,23 @@ interface Blog {
 }
 
 const ManageBlogs = () => {
-  const { data: blogs, isLoading } = useGetAllBlogsQuery(undefined);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
+  const categories = [
+    'All',
+    'Technology',
+    'Security',
+    'Tutorial',
+    'Finance',
+    'Education',
+  ];
+  console.log(selectedCategory, searchTerm);
+  const { data: blogs, isLoading } = useGetAllBlogsQuery(
+    { search: searchTerm, category: selectedCategory },
+    {
+      refetchOnFocus: true,
+    }
+  );
   const [createBlog, { isLoading: isCreating }] = useCreateBlogMutation();
   const [updateBlog, { isLoading: isUpdating }] = useUpdateBlogMutation();
   const [deleteBlog] = useDeleteBlogMutation();
@@ -54,7 +71,7 @@ const ManageBlogs = () => {
           id: editingBlog._id,
           ...formData,
         });
-        console.log(editingBlog, formData, formDatas,imageFile);
+        console.log(editingBlog, formData, formDatas, imageFile);
         if (data) {
           setIsModalOpen(false);
           toast.success(data.message);
@@ -145,9 +162,6 @@ const ManageBlogs = () => {
     setIsModalOpen(true);
   };
 
-  if (isLoading)
-    return <div className='flex justify-center p-8'>Loading...</div>;
-
   return (
     <div className='p-6 max-w-7xl mx-auto'>
       <div className='flex justify-between items-center mb-6'>
@@ -159,109 +173,145 @@ const ManageBlogs = () => {
           Create Blog
         </button>
       </div>
+      {/* Search and Filter Section */}
+      <div className='mb-12 animate-fadeInUp animation-delay-400'>
+        <div className='flex flex-col md:flex-row gap-6 items-center justify-between'>
+          {/* Search Bar */}
+          <div className='relative flex-1 max-w-md'>
+            <input
+              type='text'
+              placeholder='Search articles...'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className='w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
+            />
+            <span className='absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl'>
+              🔍
+            </span>
+          </div>
 
+          {/* Category Filter */}
+          <div className='flex flex-wrap gap-2'>
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all transform hover:scale-105 ${
+                  selectedCategory === category
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
       <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-        {blogs?.data?.map((blog: Blog) => (
-          <div
-            key={blog._id}
-            className='bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden group'
-          >
-            {blog.image && (
-              <div className='h-48 overflow-hidden'>
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
-                />
-              </div>
-            )}
-            <div className='p-6'>
-              <div className='flex items-center gap-2 mb-3'>
-                <span className='px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full'>
-                  {blog.category}
-                </span>
-                <span className='text-xs text-gray-500 dark:text-gray-400'>
-                  {blog.readTime}
-                </span>
-              </div>
-
-              <h3 className='font-bold text-lg text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors'>
-                {blog.title}
-              </h3>
-
-              <p className='text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2'>
-                {blog.excerpt}
-              </p>
-
-              <div className='flex flex-wrap gap-1 mb-4'>
-                {blog.tags?.slice(0, 3).map((tag, index) => (
-                  <span
-                    key={index}
-                    className='px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded'
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className='flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700'>
-                <div className='flex items-center gap-2'>
-                  <div className='w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs'>
-                    {blog.author.charAt(0).toUpperCase()}
+        {isLoading
+          ? [...Array(6)].map((_, i) => <BlogPostSkeleton key={i} />)
+          : blogs?.data?.map((blog: Blog) => (
+              <div
+                key={blog._id}
+                className='bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden group'
+              >
+                {blog.image && (
+                  <div className='h-48 overflow-hidden'>
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                    />
                   </div>
-                  <div>
-                    <p className='text-sm font-medium text-gray-900 dark:text-white'>
-                      {blog.author}
-                    </p>
-                    <p className='text-xs text-gray-500 dark:text-gray-400'>
-                      {new Date(blog.createdAt).toLocaleDateString()}
-                    </p>
+                )}
+                <div className='p-6'>
+                  <div className='flex items-center gap-2 mb-3'>
+                    <span className='px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full'>
+                      {blog.category}
+                    </span>
+                    <span className='text-xs text-gray-500 dark:text-gray-400'>
+                      {blog.readTime}
+                    </span>
+                  </div>
+
+                  <h3 className='font-bold text-lg text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors'>
+                    {blog.title}
+                  </h3>
+
+                  <p className='text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2'>
+                    {blog.excerpt}
+                  </p>
+
+                  <div className='flex flex-wrap gap-1 mb-4'>
+                    {blog.tags?.slice(0, 3).map((tag, index) => (
+                      <span
+                        key={index}
+                        className='px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded'
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className='flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700'>
+                    <div className='flex items-center gap-2'>
+                      <div className='w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs'>
+                        {blog.author.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className='text-sm font-medium text-gray-900 dark:text-white'>
+                          {blog.author}
+                        </p>
+                        <p className='text-xs text-gray-500 dark:text-gray-400'>
+                          {new Date(blog.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='flex gap-2 pt-4 justify-between items-center'>
+                    <button
+                      onClick={() => handleEdit(blog)}
+                      className='flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors'
+                    >
+                      <svg
+                        className='w-4 h-4'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+                        />
+                      </svg>
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(blog._id)}
+                      className='flex items-center gap-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors'
+                    >
+                      <svg
+                        className='w-4 h-4'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
+                        />
+                      </svg>
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
-              <div className='flex gap-2 pt-4 justify-between items-center'>
-                <button
-                  onClick={() => handleEdit(blog)}
-                  className='flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors'
-                >
-                  <svg
-                    className='w-4 h-4'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
-                    />
-                  </svg>
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(blog._id)}
-                  className='flex items-center gap-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors'
-                >
-                  <svg
-                    className='w-4 h-4'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
-                    />
-                  </svg>
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+            ))}
       </div>
 
       {isModalOpen && (

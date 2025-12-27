@@ -16,7 +16,12 @@ export interface BlogPost {
   tags: string[];
 }
 const Blogs = () => {
-  const { data, isLoading } = useGetAllBlogsQuery(undefined);
+  const { data, isLoading } = useGetAllBlogsQuery(
+    { search: '', category: 'All' },
+    {
+      refetchOnFocus: true,
+    }
+  );
   const blogs = data?.data?.slice(0, 3);
   console.log(blogs);
   return (
