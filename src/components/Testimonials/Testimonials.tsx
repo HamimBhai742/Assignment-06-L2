@@ -1,5 +1,7 @@
 import { useGetAllReviewsQuery } from '@/redux/api/reviewApi';
+import { useGetAllStatsQuery } from '@/redux/api/statsApi';
 import { useState, useEffect } from 'react';
+import TestimonialsSectionSkeleton from './TestimonalSkeleton';
 
 interface Testimonial {
   _id: string;
@@ -18,80 +20,14 @@ const Testimonials = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const { data, isLoading } = useGetAllReviewsQuery(undefined);
+  const { data: stats, isLoading: statsLoading } =
+    useGetAllStatsQuery(undefined);
+  console.log(stats);
   useEffect(() => {
     if (data) {
       setTestimonials(data.data);
     }
   }, [data]);
-  console.log(testimonials);
-  // const testimonials: Testimonial[] = [
-  //   {
-  //     id: 1,
-  //     name: 'Rashida Begum',
-  //     role: 'Business Owner',
-  //     company: 'Begum Enterprises',
-  //     text: 'PayWallet transformed our payment processing. Revenue increased 40% with instant digital transactions.',
-  //     rating: 5,
-  //     avatar: 'RB',
-  //     location: 'Dhaka',
-  //     color: 'from-pink-500 to-rose-500',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Mohammad Rahman',
-  //     role: 'Software Engineer',
-  //     company: 'Tech Solutions Ltd',
-  //     text: 'Seamless API integration and robust security. Perfect for our fintech applications.',
-  //     rating: 5,
-  //     avatar: 'MR',
-  //     location: 'Chittagong',
-  //     color: 'from-blue-500 to-cyan-500',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Fatima Khan',
-  //     role: 'Financial Advisor',
-  //     company: 'Khan Financial',
-  //     text: 'Exceptional client onboarding experience. The analytics dashboard provides valuable insights.',
-  //     rating: 5,
-  //     avatar: 'FK',
-  //     location: 'Sylhet',
-  //     color: 'from-purple-500 to-indigo-500',
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Ahmed Hassan',
-  //     role: 'Product Manager',
-  //     company: 'Digital Innovations',
-  //     text: 'Outstanding user experience design. Our customer satisfaction scores improved significantly.',
-  //     rating: 5,
-  //     avatar: 'AH',
-  //     location: 'Rajshahi',
-  //     color: 'from-emerald-500 to-teal-500',
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'Nasreen Akter',
-  //     role: 'Operations Director',
-  //     company: 'Retail Solutions',
-  //     text: 'Streamlined our entire payment workflow. The support team is incredibly responsive.',
-  //     rating: 5,
-  //     avatar: 'NA',
-  //     location: 'Khulna',
-  //     color: 'from-orange-500 to-amber-500',
-  //   },
-  //   {
-  //     id: 6,
-  //     name: 'Karim Uddin',
-  //     role: 'Fleet Manager',
-  //     company: 'Transport Co.',
-  //     text: 'Digital payments revolutionized our driver compensation system. Highly recommended.',
-  //     rating: 5,
-  //     avatar: 'KU',
-  //     location: 'Barisal',
-  //     color: 'from-violet-500 to-purple-500',
-  //   },
-  // ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -109,18 +45,18 @@ const Testimonials = () => {
     }
     return visible;
   };
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <TestimonialsSectionSkeleton />;
   return (
-    <section className='py-24 relative overflow-hidden'>
+    <section className='relative overflow-hidden'>
       {/* Animated Background */}
       <div className='absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900'>
         <div className='absolute top-0 left-0 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse'></div>
         <div className='absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-r from-pink-400/20 to-orange-400/20 rounded-full blur-3xl animate-pulse delay-1000'></div>
       </div>
 
-      <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='relative py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
-        <div className='text-center mb-20'>
+        <div className='text-center mb-10'>
           <div className='inline-flex items-center justify-center w-16 h-16 bg-white/20 dark:bg-black/20 backdrop-blur-xl rounded-2xl border border-white/30 dark:border-white/10 mb-8 shadow-2xl'>
             <div className='w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center'>
               <svg
@@ -142,7 +78,7 @@ const Testimonials = () => {
         </div>
 
         {/* Testimonials Slider */}
-        <div className='relative max-w-6xl mx-auto mb-20'>
+        <div className='relative max-w-6xl mx-auto mb-10'>
           <div className='flex items-center justify-center h-[520px] relative'>
             {getVisibleTestimonials().map((testimonial) => {
               const isCenter = testimonial.position === 1;
@@ -187,7 +123,7 @@ const Testimonials = () => {
                       <div className='relative z-10 flex items-center justify-between'>
                         <div className='flex items-center space-x-4'>
                           <div
-                            className={`w-16 h-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 dark:from-white dark:via-blue-100 dark:to-white  rounded-2xl flex items-center justify-center  font-bold text-lg shadow-xl relative`}
+                            className={`w-16 h-16 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900   rounded-2xl flex items-center justify-center  font-bold text-lg shadow-xl relative`}
                           >
                             <div className='absolute inset-0 bg-white/20 rounded-2xl'></div>
                             <span className='relative z-10'>
@@ -243,7 +179,7 @@ const Testimonials = () => {
         </div>
 
         {/* Navigation */}
-        <div className='flex justify-center space-x-3 mb-20'>
+        <div className='flex justify-center space-x-2 mb-10'>
           {testimonials.map((_, index) => (
             <button
               key={index}
@@ -258,43 +194,59 @@ const Testimonials = () => {
         </div>
 
         {/* Stats */}
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
-          {[
-            {
-              number: '15K+',
-              label: 'Enterprise Clients',
-              gradient: 'from-blue-500 to-cyan-500',
-            },
-            {
-              number: '99.9%',
-              label: 'System Uptime',
-              gradient: 'from-emerald-500 to-teal-500',
-            },
-            {
-              number: '4.9★',
-              label: 'Customer Rating',
-              gradient: 'from-yellow-500 to-orange-500',
-            },
-            {
-              number: '24/7',
-              label: 'Expert Support',
-              gradient: 'from-purple-500 to-pink-500',
-            },
-          ].map((stat, index) => (
-            <div key={index} className='relative group'>
-              <div className='bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-2xl p-6 border border-white/20 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group-hover:scale-105'>
-                <div
-                  className={`text-4xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2`}
-                >
-                  {stat.number}
-                </div>
-                <div className='text-slate-600 dark:text-slate-300 text-sm font-medium'>
-                  {stat.label}
+        {statsLoading ? (
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+            {[1, 2, 3, 4].map((_, index) => (
+              <div key={index} className='relative animate-pulse'>
+                <div className='bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-2xl p-6 border border-white/20 dark:border-white/10 shadow-xl text-center'>
+                  {/* Number skeleton */}
+                  <div className='h-10 w-24 mx-auto mb-3 rounded-lg bg-gray-300/60 dark:bg-gray-700/60'></div>
+
+                  {/* Label skeleton */}
+                  <div className='h-4 w-32 mx-auto rounded bg-gray-200/60 dark:bg-gray-600/60'></div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-6'>
+            {[
+              {
+                number: `${stats?.data?.totalUsers}+`,
+                label: 'Enterprise Clients',
+                gradient: 'from-blue-500 to-cyan-500',
+              },
+              {
+                number: `${stats?.data?.downTime}`,
+                label: 'System Uptime',
+                gradient: 'from-emerald-500 to-teal-500',
+              },
+              {
+                number: `${stats?.data?.avgRating}★`,
+                label: 'Customer Rating',
+                gradient: 'from-yellow-500 to-orange-500',
+              },
+              {
+                number: '24/7',
+                label: 'Expert Support',
+                gradient: 'from-purple-500 to-pink-500',
+              },
+            ].map((stat, index) => (
+              <div key={index} className='relative group'>
+                <div className='bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-2xl p-6 border border-white/20 dark:border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 text-center group-hover:scale-105'>
+                  <div
+                    className={`text-4xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-2`}
+                  >
+                    {stat.number}
+                  </div>
+                  <div className='text-slate-600 dark:text-slate-300 text-sm font-medium'>
+                    {stat.label}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

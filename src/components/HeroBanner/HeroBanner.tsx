@@ -1,16 +1,17 @@
+import { useGetAllStatsQuery } from '@/redux/api/statsApi';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
+import { format } from '../Statistics/format';
 
 const HeroBanner = () => {
+  const { data, isLoading } = useGetAllStatsQuery(undefined);
   const [stats, setStats] = useState({
     users: 0,
     transactions: 0,
-    countries: 0,
   });
-
   useEffect(() => {
     const animateStats = () => {
-      const targets = { users: 50, transactions: 2000, countries: 15 };
+      const targets = data?.data;
       const duration = 2000;
       const steps = 60;
       const stepTime = duration / steps;
@@ -20,9 +21,8 @@ const HeroBanner = () => {
         step++;
         const progress = step / steps;
         setStats({
-          users: Math.floor(targets.users * progress),
-          transactions: Math.floor(targets.transactions * progress),
-          countries: Math.floor(targets.countries * progress),
+          users: Math.floor(targets?.totalUsers * progress),
+          transactions: Math.floor(targets?.totalTransactionAmount * progress),
         });
 
         if (step >= steps) clearInterval(timer);
@@ -30,7 +30,7 @@ const HeroBanner = () => {
     };
 
     animateStats();
-  }, []);
+  }, [data]);
 
   return (
     <section className='relative min-h-screen bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden'>
@@ -70,15 +70,21 @@ const HeroBanner = () => {
           <div className='flex flex-wrap gap-4 mb-8 justify-center lg:justify-start'>
             <div className='flex items-center space-x-2 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-full'>
               <span className='text-green-400 dark:text-green-300'>✓</span>
-              <span className='text-white dark:text-gray-200 text-sm'>Instant Transfer</span>
+              <span className='text-white dark:text-gray-200 text-sm'>
+                Instant Transfer
+              </span>
             </div>
             <div className='flex items-center space-x-2 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-full'>
               <span className='text-green-400 dark:text-green-300'>✓</span>
-              <span className='text-white dark:text-gray-200 text-sm'>High Level Security</span>
+              <span className='text-white dark:text-gray-200 text-sm'>
+                High Level Security
+              </span>
             </div>
             <div className='flex items-center space-x-2 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-full'>
               <span className='text-green-400 dark:text-green-300'>✓</span>
-              <span className='text-white dark:text-gray-200 text-sm'>24/7 Support</span>
+              <span className='text-white dark:text-gray-200 text-sm'>
+                24/7 Support
+              </span>
             </div>
           </div>
 
@@ -99,26 +105,35 @@ const HeroBanner = () => {
           </div>
 
           {/* Stats */}
-          <div className='grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0'>
-            <div className='text-center'>
-              <div className='text-2xl md:text-3xl font-bold text-yellow-400 dark:text-yellow-300'>
-                {stats.users}M+
-              </div>
-              <div className='text-blue-200 dark:text-gray-400 text-sm'>Users</div>
+          {isLoading ? (
+            <div className='grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0'>
+              {[1, 2].map((_, i) => (
+                <div key={i} className='text-center animate-pulse'>
+                  <div className='h-8 md:h-10 w-20 mx-auto rounded bg-gray-300 dark:bg-gray-700 mb-2'></div>
+                  <div className='h-4 w-16 mx-auto rounded bg-gray-200 dark:bg-gray-600'></div>
+                </div>
+              ))}
             </div>
-            <div className='text-center'>
-              <div className='text-2xl md:text-3xl font-bold text-green-400 dark:text-green-300'>
-                ৳{stats.transactions}B+
+          ) : (
+            <div className='grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0'>
+              <div className='text-center'>
+                <div className='text-2xl md:text-3xl font-bold text-yellow-400 dark:text-yellow-300'>
+                  {format(stats?.users)}+
+                </div>
+                <div className='text-blue-200 dark:text-gray-400 text-sm'>
+                  Users
+                </div>
               </div>
-              <div className='text-blue-200 dark:text-gray-400 text-sm'>Transactions</div>
-            </div>
-            <div className='text-center'>
-              <div className='text-2xl md:text-3xl font-bold text-orange-400 dark:text-orange-300'>
-                {stats.countries}+
+              <div className='text-center'>
+                <div className='text-2xl md:text-3xl font-bold text-green-400 dark:text-green-300'>
+                  ৳ {format(stats?.transactions)}
+                </div>
+                <div className='text-blue-200 dark:text-gray-400 text-sm'>
+                  Transactions
+                </div>
               </div>
-              <div className='text-blue-200 dark:text-gray-400 text-sm'>Countries</div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Visual Element - Mobile Phone Mockup */}
@@ -134,7 +149,9 @@ const HeroBanner = () => {
                   <div className='text-sm font-semibold text-gray-900 dark:text-gray-100'>
                     Payment Sent
                   </div>
-                  <div className='text-xs text-gray-500 dark:text-gray-400'>৳2,500 to Hamim</div>
+                  <div className='text-xs text-gray-500 dark:text-gray-400'>
+                    ৳2,500 to Hamim
+                  </div>
                 </div>
               </div>
             </div>
@@ -232,7 +249,9 @@ const HeroBanner = () => {
                   <div className='text-sm font-semibold text-gray-900 dark:text-gray-100'>
                     commission Earned
                   </div>
-                  <div className='text-xs text-gray-500 dark:text-gray-400'>৳50 on cash out</div>
+                  <div className='text-xs text-gray-500 dark:text-gray-400'>
+                    ৳50 on cash out
+                  </div>
                 </div>
               </div>
             </div>

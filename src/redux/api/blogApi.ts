@@ -11,8 +11,17 @@ export const blogApi = baseApi.injectEndpoints({
       invalidatesTags: ['Blog'],
     }),
     getAllBlogs: builder.query({
-      query: () => ({
-        url: '/blog/all',
+      query: ({ search, category }: { search: string; category: string }) => ({
+        url: `/blog/all?${search ? `search=${search}` : ''}&${
+          category === 'All' ? '' : `category=${category}`
+        }`,
+        method: 'GET',
+      }),
+      providesTags: ['Blog'],
+    }),
+    getSingleBlog: builder.query({
+      query: (slug) => ({
+        url: `/blog/${slug}`,
         method: 'GET',
       }),
       providesTags: ['Blog'],
@@ -40,4 +49,5 @@ export const {
   useGetAllBlogsQuery,
   useUpdateBlogMutation,
   useDeleteBlogMutation,
+  useGetSingleBlogQuery,
 } = blogApi;

@@ -1,8 +1,6 @@
-import React from 'react';
-
 const Categories = () => {
   return (
-    <section className='py-16 bg-white dark:bg-gray-900'>
+    <section className='pb-8 bg-white dark:bg-gray-900'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='text-center mb-12 animate-fade-in-up'>
           <h2 className='text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4'>
